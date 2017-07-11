@@ -1,0 +1,11 @@
+{
+  "generator-fullstack-backbone": {
+    "appName": "OnePebbleApp",
+    "entryIndex": "index.html",
+    "serverRouteName": "api",
+    "includeSequelize": true,
+    "includeRequireJS": false,
+    "includeModernizr": false,
+    "cssUILib": "sassMaterialize"
+  }
+}
