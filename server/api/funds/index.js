@@ -5,6 +5,6 @@ var controller = require('./funds.controller');
 var router = express.Router();
 
 router.get('/',    controller.index);
-router.get('/:id',    controller.getById);
+router.get('/company/:id', controller.getByCompany);
 
 module.exports = router;

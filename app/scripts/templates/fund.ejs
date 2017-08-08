@@ -1,138 +1,166 @@
-<div class="background-1">
-    <div class="container">
-        <div class="row">
-            <div class="col s12 valign-wrapper" style="height: 400px">
-                <div class="ticker-container card-panel">
-                    <header class="ticker center-align">Ticker</header>
-                    <h4 class="card-title"><%= fund.symbol %></h4>
-                </div>
-                <h2 class="fund-name left-align"><%= fund.name %></h2>
+<nav class="subpage">
+    <div class="nav-wrapper">
+    </div>
+</nav>
+<div class="background-<%= Math.floor(Math.random() * 3) + 1 %> bg-image">
+    <div class="container fund">
+        <div class="row header-row">
+            <div class="col s12 valign-wrapper center-align" style="height: 220px">
+                <h3 class="fund-name center-align"><%= fund.fund %></h3>
             </div>
         </div>
 
-        <div class="card small sticky-action">
+        <div class="row category-filter">
+            <div class="col s12">
 
-            <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="images/office.jpg">
-                <span class="card-title">Card Title</span>
             </div>
+        </div>
+
+        <div class="card sticky-action">
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4"><%= fund.name %> <%= fund.symbol %><i
-                        class="material-icons right">more_vert</i></span>
-                <p><a href="#">This is a link</a></p>
-            </div>
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i
-                        class="material-icons right">close</i></span>
-
-                <ul>
-                    <li><%= fund.asset_type %></li>
-                    <li><%= fund.series_name %></li>
-                    <li><%= fund.startDate %></li>
-                    <li><%= fund.fundFamily %></li>
-                    <li><%= fund.net_assets %></li>
-                </ul>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s12 m3">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="images/sample-1.jpg">
-                        <h5 class="center-align"><%= fund.name %></h5>
-                        <span class="card-title"><%= fund.symbol %></span>
+                <h5>Fund Metrics</h5>
+                <div class="row">
+                    <% _.each(fund.categoryData, function(data, index, list) { %>
+                    <div class="col s6 m4 l2 center-align">
+                        <i class="material-icons icons <%= index + ' ' + data.level %>"><%= index %></i>
+                        <p class="fund-metrics"><%= data.name %></p>
+                        <div class="tip center-align" data-tip="<%= data.description %>">
+                            <i class="material-icons">info</i>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <ul>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.series_name %></li>
-                            <li><%= fund.startDate %></li>
-                            <li><%= fund.fundFamily %></li>
-                            <li><%= fund.net_assets %></li>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.asset_type %></li>
-                        </ul>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m3">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="images/sample-1.jpg">
-                        <h5 class="center-align"><%= fund.name %></h5>
-                        <span class="card-title"><%= fund.symbol %></span>
-                    </div>
-                    <div class="card-content">
-                        <ul>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.series_name %></li>
-                            <li><%= fund.startDate %></li>
-                            <li><%= fund.fundFamily %></li>
-                            <li><%= fund.net_assets %></li>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.asset_type %></li>
-                        </ul>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m3">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="images/sample-1.jpg">
-                        <h5 class="center-align"><%= fund.name %></h5>
-                        <span class="card-title"><%= fund.symbol %></span>
-                    </div>
-                    <div class="card-content">
-                        <ul>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.series_name %></li>
-                            <li><%= fund.startDate %></li>
-                            <li><%= fund.fundFamily %></li>
-                            <li><%= fund.net_assets %></li>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.asset_type %></li>
-                        </ul>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m3">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="images/sample-1.jpg">
-                        <h5 class="center-align"><%= fund.name %></h5>
-                        <span class="card-title"><%= fund.symbol %></span>
-                    </div>
-                    <div class="card-content">
-                        <ul>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.series_name %></li>
-                            <li><%= fund.startDate %></li>
-                            <li><%= fund.fundFamily %></li>
-                            <li><%= fund.net_assets %></li>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.asset_type %></li>
-                            <li><%= fund.asset_type %></li>
-                        </ul>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+                    <% }) %>
                 </div>
             </div>
         </div>
+
+        <!--<div class="card sticky-action">-->
+            <!--<div class="card-content">-->
+                <!--<h5>Fund Basis</h5>-->
+                <!--<h6><%= fund.fundBasics.segment %></h6>-->
+                <!--<table class="responsive-table">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th>Expense Ratio</th>-->
+                        <!--<th>Asset Under Management</th>-->
+                        <!--<th>Spread Pct</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td><%= fund.fundBasics.expenseRatio.value * .01 + "%" %></td>-->
+                        <!--<td><%= fund.fundBasics.aum.value%></td>-->
+                        <!--<td><%= fund.fundBasics.spreadPct.value %></td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="card sticky-action">-->
+            <!--<div class="card-content">-->
+                <!--<h5>Performance</h5>-->
+                <!--<table class="responsive-table centered">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th>Price Trade 1 Month</th>-->
+                        <!--<th>Price Trade 3 Month</th>-->
+                        <!--<th>Price Trade 1 Year</th>-->
+                        <!--<th>Price Trade 3 Year Annualized</th>-->
+                        <!--<th>Price Trade 5 Year Annualized</th>-->
+                        <!--<th>Price Trade 10 Year Annualized</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td><%= fund.performance.priceTr1Mo.value %></td>-->
+                        <!--<td><%= fund.performance.priceTr3Mo.value %></td>-->
+                        <!--<td><%= fund.performance.priceTr1Yr.value %></td>-->
+                        <!--<td><%= fund.performance.priceTr3YrAnnualized.value %></td>-->
+                        <!--<td><%= fund.performance.priceTr5YrAnnualized.value %></td>-->
+                        <!--<td><%= fund.performance.priceTr10YrAnnualized.value %></td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="card sticky-action">-->
+            <!--<div class="card-content">-->
+                <!--<h5>Classification</h5>-->
+                <!--<table class="responsive-table centered">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th>Asset Class</th>-->
+                        <!--<th>Category</th>-->
+                        <!--<th>Focus</th>-->
+                        <!--<th>Strategy</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+
+                        <!--<td><%= fund.classification.assetClass %></td>-->
+                        <!--<td><%= fund.classification.category %></td>-->
+                        <!--<td><%= fund.classification.focus %></td>-->
+                        <!--<td><%= fund.classification.strategy %></td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="row category-filter">
+            <div class="col s12">
+                <h4 class="section-title">Alternate Funds</h4>
+            </div>
+            <div class="col s12">
+                <h5 class="section-description">Find similar funds to this ETF.</h5>
+            </div>
+        </div>
+
+        <ul class="row">
+
+            <li class="col s12 m6 l4">
+                <div class="card hoverable" data-id="ACSI">
+                    <h3 class="card-title ticker background-2">ACSI</h3>
+                    <div class="card-content center-align">
+                        <h5 class="fund-name">American Customer Satisfaction Core Alpha ETF</h5>
+                        <h5 class="fund-type left-align"><i class="material-icons">pie_chart_outlined</i> Equity: U.S. - Large Cap</h5>
+                        <h6 class="asset-class">Class: Developed Markets</h6>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Look inside fund</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="col s12 m6 l4">
+                <div class="card hoverable" data-id="ALFA">
+                    <h3 class="card-title ticker background-1">ALFA</h3>
+                    <div class="card-content center-align">
+                        <h5 class="fund-name">AlphaClone Alternative Alpha ETF</h5>
+                        <h5 class="fund-type left-align"><i class="material-icons">pie_chart_outlined</i> Equity: U.S.  -  Total Market</h5>
+                        <h6 class="asset-class">Class: Developed Markets</h6>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Look inside fund</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="col s12 m6 l4">
+                <div class="card hoverable" data-id="BFOR">
+                    <h3 class="card-title ticker background-2">BFOR</h3>
+                    <div class="card-content center-align">
+                        <h5 class="fund-name">ALPS Barron's 400 ETF</h5>
+                        <h5 class="fund-type left-align"><i class="material-icons">pie_chart_outlined</i> Equity: U.S.  -  Total Market</h5>
+                        <h6 class="asset-class">Class: Developed Markets</h6>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Look inside fund</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

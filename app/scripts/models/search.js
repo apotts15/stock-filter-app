@@ -18,7 +18,7 @@ OnePebbleApp.Models = OnePebbleApp.Models || {};
         },
 
         parse: function (response, options) {
-            console.log('parse', response)
+            console.log('parse', response);
             return response;
         }
     });

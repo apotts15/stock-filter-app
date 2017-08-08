@@ -1,150 +1,396 @@
 /**
  * Created by apottenger on 7/12/17.
  */
+var _ = require('underscore');
+var mongoose = require('mongoose');
+var Fund = mongoose.model('Fund');
 
-exports.index = function(req, res){
-    res.json({success:true,msg:["get index"]});
-};
-exports.getById = function(req, res){
-    res.json(
-        {
-            "_id": "iqyKcrXHkDPxxAoBk",
-            "allocation": {
-                "asset_class": [{
-                    "kind": "stocks",
-                    "weight": 0.9936,
-                    "label": "Stocks"
-                }, {
-                    "kind": "bonds",
-                    "weight": 0,
-                    "label": "Bonds"
-                }, {
-                    "kind": "cash",
-                    "weight": 0.0016,
-                    "label": "Cash"
-                }, {
-                    "kind": "other",
-                    "weight": 0.0048,
-                    "label": "Other"
-                }],
-                "regional": [{
-                    "kind": "americas",
-                    "weight": 0.9753999999999998,
-                    "label": "Americas"
-                }, {
-                    "kind": "europe",
-                    "weight": 0.019399999999999994,
-                    "label": "Europe"
-                }, {
-                    "kind": "asia",
-                    "weight": 0.005199999999999999,
-                    "label": "Asia"
-                }]
-            },
-            "asset_class": "stocks",
-            "fund_type": "U.S. Mid-Cap Blend",
-            "highlights": {
-                "real_15yr": 2.53905396566619,
-                "gains_3yr": 0.343977730844838,
-                "real_5yr": 0.778218384728507,
-                "gains_ytd": 0.0777794788872113,
-                "gains_15yr": 2.53884153319233,
-                "expense_net": 0.0009,
-                "yield_1yr": 0.0157195363302234,
-                "stddev_5yr": 0.13947522568495,
-                "gains_1yr": 0.0326484903477766,
-                "gains_6mo": 0.197330263153361,
-                "real_3yr": 0.344381166249552,
-                "real_ytd": 0.0782646980013117,
-                "stddev_3yr": 0.120233420564884,
-                "stddev_15yr": 0.17021842382653,
-                "real_10yr": 1.26982510781395,
-                "stddev_10yr": 0.178937293147266,
-                "gains_10yr": 1.26962074077193,
-                "gains_5yr": 0.777898190128442,
-                "real_1yr": 0.0335787111878456,
-                "gains_1mo": 0.0811141720232629,
-                "stddev_1yr": 0.150747582151753
-            },
-            "name": "Vanguard Mid-Cap Index ETF",
-            "net_assets": 44030000000,
-            "security_classes": [{
-                "class_name": "Institutional Class",
-                "symbol": "VMCIX"
-            },
-                {
-                    "class_name": "Admiral Class",
-                    "symbol": "VIMAX"
-                }, {
-                    "class_name": "Investor Class",
-                    "symbol": "VIMSX"
-                }, {
-                    "class_name": "Institutional Plus Class",
-                    "symbol": "VMCPX"
-                }, {
-                    "class_name": "ETF",
-                    "symbol": "VO"
-                }, {
-                    "class_name": "Signal Class",
-                    "symbol": "VMISX"
-                }],
-            "series_name": "Vanguard Mid-Cap Index Fund",
-            "symbol": "VO",
-            "canonicalSymbol": "VIMSX",
-            "startDate": "1999-01-04T00:00:00.000Z",
-            "fundFamily": "Vanguard",
-            "inceptionDate": "2004-01-26T00:00:00.000Z",
-            "gun": {
-                "metrics": {
-                    "region": "US Stocks",
-                    "weight": 0.9753999999999998
-                },
-                "gunWeights": {
-                    "all": 0,
-                    "maker": 0,
-                    "seller": 0
-                },
-                "analyzedWeights": 0.9898,
-                "gunHoldings": [],
-                "top5Holdings": [{
-                    "name": "ROSS STORES INC",
-                    "symbol": "ROST",
-                    "weight": 0.0070999999999999995,
-                    "date": "2015-12-31T00:00:00.000Z",
-                    "marketValue": 469346000,
-                    "owner": []
-                }, {
-                    "name": "FISERV INC",
-                    "symbol": "FISV",
-                    "weight": 0.0068000000000000005,
-                    "date": "2015-12-31T00:00:00.000Z",
-                    "marketValue": 446773000,
-                    "owner": []
-                }, {
-                    "name": "ELECTRONIC ARTS INC",
-                    "symbol": "EA",
-                    "weight": 0.0066,
-                    "date": "2015-12-31T00:00:00.000Z",
-                    "marketValue": 433704000,
-                    "owner": []
-                }, {
-                    "name": "ROPER INDUSTRIES INC",
-                    "symbol": "ROP",
-                    "weight": 0.0062,
-                    "date": "2015-12-31T00:00:00.000Z",
-                    "marketValue": 408939000,
-                    "owner": []
-                }, {
-                    "name": "EQUINIX INC",
-                    "symbol": "EQIX",
-                    "weight": 0.0060999999999999995,
-                    "date": "2015-12-31T00:00:00.000Z",
-                    "marketValue": 398017000,
-                    "owner": []
-                }]
+exports.getBySymbol = function(req, res) {
+
+    console.log('req.params.id', req.params.id);
+
+    Fund.get(req.params.id, function (err, results) {
+        if (err){
+            console.log('error', err);
+        } else {
+            if (!results) {
+                res.send([]);
+            } else {
+
+                results.categoryData = categorize(results);
+                console.log('categoryDescriptions ', results.categoryData);
+                res.send(results);
             }
+        }
+    });
+};
 
+var moneyFormat = function(labelValue) {
+    // Nine Zeroes for Billions
+    var number =  Math.abs(Number(labelValue)) >= 1.0e+9
+
+        ? Math.abs(Number(labelValue)) / 1.0e+9 + "B"
+        // Six Zeroes for Millions
+        : Math.abs(Number(labelValue)) >= 1.0e+6
+
+            ? Math.abs(Number(labelValue)) / 1.0e+6 + "M"
+            // Three Zeroes for Thousands
+            : Math.abs(Number(labelValue)) >= 1.0e+3
+
+                ? Math.abs(Number(labelValue)) / 1.0e+3 + "K"
+
+                : Math.abs(Number(labelValue));
+    var num =  parseFloat(number).toPrecision(2);
+    if (num.indexOf('+') !== -1){
+         num = parseFloat(number).toPrecision(3);
+     }
+    return num + number.replace(/[^B|M|K]/g,"");
+};
+
+var percentFormat = function(percent, reverse) {
+    var multiplier = reverse ? .01 : 100;
+    return (percent * multiplier).toFixed(2) + '%';
+};
+
+
+
+var doLeveling = function(cat, metric) {
+    var leveling = {
+        1: 'very-low',
+        2: 'low',
+        3: 'medium',
+        4: 'high',
+        5: 'very-high'
+    };
+    var ruleSet;
+    var levelScore;
+
+    _.each(leveling, function(item){
+        ruleSet = categories.categories[cat][item].rules;
+        // >= min && <= max
+
+        if (!ruleSet.min) {
+            if (metric <= ruleSet.max) {
+                levelScore = item;
+            }
         }
 
-    );
+        if (!ruleSet.max) {
+            if (metric >= ruleSet.min) {
+                levelScore = item;
+            }
+        }
+
+        if (metric >= ruleSet.min && metric <= ruleSet.max) {
+            levelScore = item;
+        }
+    });
+
+    if (!levelScore) {
+        levelScore = 'unknown';
+    }
+
+    return levelScore;
+};
+
+var categorize = function(data) {
+    var leveling = {
+        1: 'very-low',
+        2: 'low',
+        3: 'medium',
+        4: 'high',
+        5: 'very-high'
+    };
+
+    var metrics = {
+        fundSize: data.fundBasics.aum.value,
+        dividend: data.fundamentals.dividendYield.value,
+        returns: data.performance.priceTr5YrAnnualized.value,
+        risk: data.fundBasics.spreadPct.value,
+        expense: data.fundBasics.expenseRatio.value
+    };
+
+    var formatUnit = function(metric, unit) {
+        var formattedString = metric;
+        if (unit === 'money') {
+            formattedString = moneyFormat(metric)
+        } else if (unit === 'percent') {
+            formattedString = percentFormat(metric)
+        } else if (unit === 'reversePercent') {
+            formattedString = percentFormat(metric, true)
+        }
+        return formattedString;
+    };
+
+    var formatString = function(string, metric) {
+        return string.replace(/{}/i, metric);
+    };
+
+    var formatDescription = function(cat, unit) {
+        return formatString(categories.categories[cat][doLeveling(cat, metrics[cat])].description, formatUnit(metrics[cat], unit));
+    };
+
+    var leveling = {
+        fundSize: doLeveling('fundSize', metrics['fundSize']),
+        dividend: doLeveling('dividend', metrics['dividend']),
+        returns: doLeveling('returns', metrics['returns']),
+        risk: doLeveling('risk', metrics['risk']),
+        expense: doLeveling('expense', metrics['expense'])
+    };
+
+    var descriptions = {
+        region: {
+            description: categories.categories.region.description,
+            name: categories.categories.region.name
+        },
+        fundSize: {
+            description: formatDescription('fundSize', 'money'),
+            name: categories.categories.fundSize[leveling.fundSize].name,
+            level: leveling.fundSize
+        },
+        dividend: {
+            description: formatDescription('dividend', 'percent'),
+            name: categories.categories.dividend[leveling.dividend].name,
+            level: leveling.dividend
+        },
+        returns: {
+            description: formatDescription('returns', 'percent'),
+            name: categories.categories.returns[leveling.returns].name,
+            level: leveling.returns
+        },
+        risk: {
+            description: formatDescription('risk', 'percent'),
+            name: categories.categories.risk[leveling.risk].name,
+            level: leveling.risk
+        },
+        expense: {
+            description: formatDescription('expense', 'reversePercent'),
+            name: categories.categories.expense[leveling.expense].name,
+            level: leveling.expense
+        }
+    };
+
+    return descriptions;
+};
+// t[Math.round((t.length -1) *.6)]
+//"rule": "<129 >=85"
+var categories = {
+    "categories": {
+        "region": {
+            "name": "US Stocks",
+            "description": "Primarily North American stocks."
+        },
+        "fundSize": {
+            "very-high": {
+                "name": "Very Big Fund",
+                "description": "Fund holds {} in assets, larger than 80% of all funds.",
+                "rules": {
+                    "max": null,
+                    "min": 1111881808
+                }
+            },
+            "high": {
+                "name": "Big Fund",
+                "description": "Fund holds {} in assets, larger than 60% of all funds.",
+                "rules": {
+                    "max": 1111881807,
+                    "min": 252517087
+                }
+
+            },
+            "medium": {
+                "name": "Medium Fund",
+                "description": "Fund holds {} in assets, in the middle 20% of all funds.",
+                "rules": {
+                    "max": 252517086,
+                    "min": 61229740
+                }
+            },
+            "low": {
+                "name": "Low Fund",
+                "description": "Fund holds {} in assets, lower than 60% of all funds.",
+                "rules": {
+                    "max": 61229739,
+                    "min": 11563500
+                }
+            },
+            "very-low": {
+                "name": "Very Low Fund",
+                "description": "Fund holds {} in assets, lower than 80% of all funds.",
+                "rules": {
+                    "max": 11563499,
+                    "min": null
+                }
+            }
+        },
+        "returns": {
+            "very-high": {
+                "name": "Very High 5Y Return",
+                "description": " Fund has annualized 5Y returns of {}, higher than 80% of all funds.",
+                "rules": {
+                    "max": null,
+                    "min": 0.161686
+                }
+            },
+            "high": {
+                "name": "High 5Y Return",
+                "description": "Fund has annualized 5Y returns of {}, higher than 60% of all funds.",
+                "rules": {
+                    "max": 0.161685,
+                    "min": 0.14433
+                }
+            },
+            "medium": {
+                "name": "Medium 5Y Return",
+                "description": "Fund has annualized 5Y returns of {}, in the middle 20% of all funds.",
+                "rules": {
+                    "max": 0.14432,
+                    "min": 0.086795
+                }
+            },
+            "low": {
+                "name": "Low 5Y Return",
+                "description": "Fund has annualized 5Y returns of {}, lower than 60% of all funds.",
+                "rules": {
+                    "max": 0.086794,
+                    "min": 0.004832
+                }
+            },
+            "very-low": {
+                "name": "Very Low 5Y Return",
+                "description": "Fund has annualized 5Y returns of {}, lower than 80% of all funds.",
+                "rules": {
+                    "max": 0.004831,
+                    "min": null
+                }
+            }
+        },
+        "risk": {
+            "very-high": {
+                "name": "Very High Risk",
+                "description": "Standard deviation of monthly risk is {}, higher than 80% of all funds.",
+                "rules": {
+                    "max": null,
+                    "min": 0.004079
+                }
+            },
+            "high": {
+                "name": "High Risk",
+                "description": "Standard deviation of monthly risk is {}, higher than 60% of all funds.",
+                "rules": {
+                    "max": 0.004078,
+                    "min": 0.002374
+                }
+            },
+            "medium": {
+                "name": "Medium Risk",
+                "description": "Standard deviation of monthly risk is {}, in the middle 20% of all funds.",
+                "rules": {
+                    "max": 0.002373,
+                    "min": 0.001385
+                }
+            },
+            "low": {
+                "name": "Low Risk",
+                "description": "Standard deviation of monthly risk is {}, lower than 60% of all funds.",
+                "rules": {
+                    "max": 0.001384,
+                    "min": 0.000571
+                }
+            },
+            "very-low": {
+                "name": "Very Low 5Y Risk",
+                "description": "Standard deviation of monthly risk is {}, lower than 80% of all funds.",
+                "rules": {
+                    "max": 0.00056,
+                    "min": null
+                }
+            }
+        },
+        "expense": {
+            "very-high": {
+                "name": "Very High Expense",
+                "description": "Annual expense ratio is {}, higher than 80% of all funds.",
+                "rules": {
+                    "max": null,
+                    "min": 129
+                }
+            },
+            "high": {
+                "name": "High Expense",
+                "description": "Annual expense ratio is {}, higher than 60% of all funds.",
+                "rules": {
+                    "max": 128,
+                    "min": 85
+                }
+                //"rule": "<129 >=85"
+            },
+            "medium": {
+                "name": "Medium Expense",
+                "description": "Annual expense ratio is {}, in the middle 20% of all funds.",
+                "rules": {
+                    "max": 84,
+                    "min": 53
+                }
+            },
+            "low": {
+                "name": "Low Expense",
+                "description": "Annual expense ratio is {}, lower than 60% of all funds.",
+                "rules": {
+                    "max": 52,
+                    "min": 25
+                }
+            },
+            "very-low": {
+                "name": "Very Low Expense",
+                "description": "Annual expense ratio is {}, lower than 80% of all funds.",
+                "rules": {
+                    "max": 24,
+                    "min": null
+                }
+            }
+        },
+        "dividend": {
+            "very-high": {
+                "name": "Very High Dividend",
+                "description": "Annual dividend yield is {}, higher than 80% of all funds.",
+                "rules": {
+                    "max": null,
+                    "min": 0.031228
+                }
+            },
+            "high": {
+                "name": "High Dividend",
+                "description": "Annual dividend yield is {}, higher than 60% of all funds.",
+                "rules": {
+                    "max": 0.031227,
+                    "min": 0.01966
+                }
+            },
+            "medium": {
+                "name": "Medium Dividend",
+                "description": "Annual dividend yield is {}, in the middle 20% of all funds.",
+                "rules": {
+                    "max": 0.01965,
+                    "min": 0.014384
+                }
+            },
+            "low": {
+                "name": "Low Dividend",
+                "description": "Annual dividend yield is {}, lower than 60% of all funds.",
+                "rules": {
+                    "max": 0.014383,
+                    "min": 0.009239
+                }
+            },
+            "very-low": {
+                "name": "Very Low Dividend",
+                "description": "Annual dividend yield is {}, lower than 80% of all funds.",
+                "rules": {
+                    "max": 0.009238,
+                    "min": null
+                }
+            }
+        }
+    }
 };

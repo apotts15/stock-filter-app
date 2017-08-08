@@ -6,18 +6,25 @@ var Schema = mongoose.Schema;
 var SearchSchema = new Schema({
     _id: Schema.Types.ObjectId,
     name:  { type: String, required: true, trim: true},
-    symbol: { type: String, required: true, trim: true},
-    series_name: { type: String, trim: true },
-    fund_type: { type: String, trim: true },
-    asset_class: { type: String, trim: true },
-    gunWeights: {
-        all: Number,
-        maker: Number,
-        seller: Number
-    },
-    gunHoldings: { type: String, trim: true },
-    analyzedWeights: { type: Number }
+    ticker: { type: String, required: true, trim: true}
 });
+
+//
+// var SearchSchema = new Schema({
+//     _id: Schema.Types.ObjectId,
+//     name:  { type: String, required: true, trim: true},
+//     symbol: { type: String, required: true, trim: true},
+//     series_name: { type: String, trim: true },
+//     fund_type: { type: String, trim: true },
+//     asset_class: { type: String, trim: true },
+//     gunWeights: {
+//         all: Number,
+//         maker: Number,
+//         seller: Number
+//     },
+//     gunHoldings: { type: String, trim: true },
+//     analyzedWeights: { type: Number }
+// });
 
 //
 //
@@ -84,14 +91,31 @@ var SearchSchema = new Schema({
 SearchSchema.methods = {
 };
 SearchSchema.statics = {
-    get: function (area_id, cb) {
-        this.findOne({ _id : area_id })
-            .exec(cb);
+    get: function (id, cb) {
+        //console.log('Searches model get some');
+
+        var re = new RegExp(id, 'gi');
+        var tickerQuery = { 'ticker': re };
+        var fundQuery = { 'fund': re };
+        var query = {$or: [ tickerQuery, fundQuery ]};
+        // console.log(query);
+        // console.log('query');
+
+        this.find(query, function(err, item) {
+            console.log(err);
+        }).limit(30).exec(cb);
+
+        //
+        // console.log('model Fund get, id: ', id.toString());
+        //
+        // //this.findOne({ _id : "59683ebd8467c034d22b3995" })
+        // this.findOne()
+        //     .exec(cb);
     },
     getAll: function (cb) {
-        console.log('model getAll');
+        console.log('Searches model getAll');
         this.find()
-            .sort({'name': -1}) // sort by date
+            .sort({'fund': -1}) // sort by date
             .exec(cb);
     //}
     },

@@ -11,39 +11,87 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         className: '',
         ENTER_KEY: 13,
         events: {
-            'keypress': 'keyAction',
+            'keyup': 'keyAction',
+            "click .close": "clearSearch",
             'click': 'clickAction'
         },
 
         keyAction: function(e) {
+            this.showDD();
+            var $target = $(e.target);
             if (e.which === this.ENTER_KEY) {
                 console.log('I hit enter!');
                 if (e && e.target && e.target.value) {
                     this.goToFund(e.target.value);
                 }
+            } else {
+                if($target && $target.hasClass('autocomplete') ) {
+                    if ($target) {
+                        this.typeahead($target.val());
+                    }
+                }
             }
         },
 
         clickAction: function(e) {
-            console.log('I clicked a dd!');
             var $target = $(e.target);
-            if ($target && $target .parent()[0].tagName === 'LI') {
-                this.goToFund();
+
+            var type = this.getType(e);
+
+            if ($target && $target.parent() && $target.parent()[0] && $target.parent()[0].tagName === 'LI') {
+                if (type === 'etf') {
+                    this.goToFund();
+                } else {
+                    this.goToFundList();
+                }
             }
+            //this.hideDD();
         },
-        getId: function() {
-            return $('.autocomplete').val();
+
+        getType: function(e) {
+            var $parent = $(e.target).parent();
+            var $img = $parent.find('img');
+            var type = null;
+
+            if ($img && $img[0]) {
+                type = $img[0].src.split('/').pop().split('.png')[0];
+            }
+
+            console.log(type);
+            return type;
         },
+
+        getSymbol: function() {
+            var $autocompleteVal = $('.autocomplete').val();
+            var symbol = $autocompleteVal.split(" - ");
+
+            if (symbol.length !== 0){
+                symbol = symbol[0];
+
+            } else {
+                return
+            }
+            return symbol;
+        },
+
         goToFund: function() {
-            Backbone.history.navigate('fund/' + this.getId(), {trigger:true});
+            var symbol = this.getSymbol();
+
+            Backbone.history.navigate('fund/' + symbol, {trigger:true});
         },
 
-        initialize: function (collection) {
+        goToFundList: function() {
+            var symbol = this.getSymbol();
 
+            Backbone.history.navigate('funds/company/' + symbol, {trigger:true});
+        },
+
+        initialize: function (obj) {
+            this.enableBrand = obj.enableBrand;
         },
 
         render: function () {
-            this.$el.html(this.template());
+            this.$el.html(this.template({ enableBrand: this.enableBrand }));
             this.trigger("render", "render done!");
 
             this.typeahead();
@@ -51,29 +99,52 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             return this;
         },
 
-        typeahead: function() {
+        typeahead: function(id) {
             //console.log('typing!');
-             //Autocomplete
+            //Autocomplete
+            var fundsArr;
+            if(window.fundArray) {
+                fundsArr = window.fundArray;
+            }
+            var that = this;
             $.ajax({
                 type: 'GET',
-                //url: 'https://restcountries.eu/rest/v2/all?fields=name',
-                url: '/search/vo',
+                url: '/search/' + id,
                 success: function(response) {
-                    //debugger;
-                    var fundArray = response;
-                    var funds = {};
-                    for (var i = 0; i < fundArray.length; i++) {
-                        //console.log(countryArray[i].name);
-                        funds[fundArray[i].name] = null; //fundArray[i].flag or null
+
+                    if (!fundsArr) {
+                        fundsArr = response;
                     }
-                    var autocomplete = $('input.autocomplete').autocomplete({
-                        data: funds,
+                    var stocks = {};
+                    for (var i = 0; i < fundsArr.length; i++) {
+                        //console.log(countryArray[i].name);
+                        stocks[fundsArr[i].ticker + " - " + fundsArr[i].name] = "/images/" + fundsArr[i].type + ".png";
+                    }
+
+                    $('.autocomplete-content:not(:last)').remove();
+                    $('input.autocomplete').autocomplete({
+                        data: stocks,
                         limit: 30 // The max amount of results that can be shown at once. Default: Infinity.
                     });
-
+                    // remove duplicated
+                    //
                 }
             });
         },
+
+        clearSearch: function () {
+            $('input.autocomplete').val('');
+            this.hideDD();
+        },
+
+        showDD: function() {
+            $('.dropdown-content').show();
+        },
+
+        hideDD: function() {
+          $('.dropdown-content').hide();
+        },
+
         remove: function () {
             this.undelegateEvents();
         }

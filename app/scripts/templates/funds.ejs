@@ -1,0 +1,329 @@
+<nav class="subpage">
+    <div class="nav-wrapper">
+    </div>
+</nav>
+<div class="bg-image background-<%= Math.floor(Math.random() * 3) + 1 %>">
+    <div class="listview">
+        <div class="row header-row">
+            <div class="col s12 valign-wrapper" style="height: 310px">
+                <!--div class="ticker-container card-panel">
+                    <header class="ticker center-align">Ticker</header>
+                    <h4 class="card-title">APPL</h4>
+                </div-->
+                <h2 class="fund-name center">Funds investing in <span class="company-search"><%= searchId %></span></h2>
+            </div>
+        </div>
+        <div class="row tiddy-bottom">
+            <div class="col s12 m4 l3 filter-col"> <!-- Note that "m4 l3" was added -->
+                <div class="row filter-title">
+                    <div class="col s6"><h4>Filter</h4></div>
+                    <div class="col s6"><a class="waves-effect waves-light btn right-align clear-all-filters">Clear All Filters</a></div>
+                </div>
+
+                <form>
+                    <h5>Fund Size</h5>
+                    <div class="ranger">
+                        <div id="fund-size-slider"></div>
+                        <span class="range-val left" id="fund-size-lower"></span>
+                        <span class="range-val right" id="fund-size-upper"></span>
+                    </div>
+
+                    <h5>Expenses</h5>
+                    <div class="ranger">
+                        <div id="expense-slider"></div>
+                        <span class="range-val left" id="expense-lower"></span>
+                        <span class="range-val right" id="expense-upper"></span>
+                    </div>
+
+                    <h5>5Y Returns</h5>
+                    <div class="ranger">
+                        <div id="returns-slider"></div>
+                        <span class="range-val left" id="returns-lower"></span>
+                        <span class="range-val right" id="returns-upper"></span>
+                    </div>
+
+                    <h5>Dividends</h5>
+                    <div class="ranger">
+                        <div id="dividend-slider"></div>
+                        <span class="range-val left" id="dividend-lower"></span>
+                        <span class="range-val right" id="dividend-upper"></span>
+                    </div>
+
+                    <h5>Category</h5>
+                    <div class="input-field category-select">
+                        <select id="category-dd">
+                            <option value="all" selected>All</option>
+                            <option value="Size and Style">Size and Style</option>
+                            <option value="Broad Market">Broad Market</option>
+                            <option value="U.S. Government">U.S. Government</option>
+                            <option value="Sector">Sector</option>
+                            <option value="Asset Allocation">Asset Allocation</option>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Taxable Municipals">Taxable Municipals</option>
+                            <option value="Government/Credit">Government/Credit</option>
+                            <option value="Tactical Tools">Tactical Tools</option>
+                            <option value="Absolute Returns">Absolute Returns</option>
+                            <option value="Municipals">Municipals</option>
+                            <option value="High Dividend Yield">High Dividend Yield</option>
+                        </select>
+                    </div>
+
+                    <h5>Focus</h5>
+                    <div class="input-field">
+                        <select id="focus-dd">
+                            <option value="all" selected>All</option>
+                            <option value="Large Cap">Large Cap</option>
+                            <option value="Total Market">Total Market</option>
+                            <option value="Investment Grade">Investment Grade</option>
+                            <option value="Broad Market">Broad Market</option>
+                            <option value="Agencies">Agencies</option>
+                            <option value="Industrials">Industrials</option>
+                            <option value="Energy">Energy</option>
+                            <option value="Target Outcome">Target Outcome</option>
+                            <option value="High Yield">High Yield</option>
+                            <option value="Health Care">Health Care</option>
+                            <option value="Financials">Financials</option>
+                            <option value="Treasury">Treasury</option>
+                            <option value="Spreads">Spreads</option>
+                            <option value="Long/Short">Long/Short</option>
+                            <option value="Small Cap">Small Cap</option>
+                            <option value="Consumer Cyclicals">Consumer Cyclicals</option>
+                            <option value="Asset-backed">Asset-backed</option>
+                            <option value="Consumer Non-cyclicals">Consumer Non-cyclicals</option>
+                            <option value="Convertibles">Convertibles</option>
+                            <option value="Mid Cap">Mid Cap</option>
+                            <option value="High Dividend Yield">High Dividend Yield</option>
+                            <option value="Real Estate">Real Estate</option>
+                            <option value="Preferred Stock">Preferred Stock</option>
+                            <option value="Telecommunications">Telecommunications</option>
+                            <option value="Micro Cap">Micro Cap</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Theme">Theme</option>
+                            <option value="Basic Materials">Basic Materials</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Agency MBS">Agency MBS</option>
+                            <option value="Global Macro">Global Macro</option>
+                            <option value="TIPS">TIPS</option>
+                            <option value="Extended Market">Extended Market</option>
+                            <option value="Volatility">Volatility</option>
+                            <option value="VRDO">VRDO</option>
+                        </select>
+                    </div>
+
+
+                    <h5>Niche</h5>
+                    <div class="input-field">
+                        <select id="niche-dd">
+                            <option value="all" selected>All</option>
+                            <option value="Broad-based">Broad-based</option>
+                            <option value="Broad Maturities">Broad Maturities</option>
+                            <option value="MLPs">MLPs</option>
+                            <option value="Income">Income</option>
+                            <option value="Short-Term">Short-Term</option>
+                            <option value="Biotech">Biotech</option>
+                            <option value="Private Equity">Private Equity</option>
+                            <option value="Capital Appreciation">Capital Appreciation</option>
+                            <option value="Ultra-Short Term">Ultra-Short Term</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Floating Rate">Floating Rate</option>
+                            <option value="Long-Term">Long-Term</option>
+                            <option value="Long/Short Volatility">Long/Short Volatility</option>
+                            <option value="Long/Short Equity">Long/Short Equity</option>
+                            <option value="Homebuilding">Homebuilding</option>
+                            <option value="Aerospace & Defense">Aerospace & Defense</option>
+                            <option value="Banks">Banks</option>
+                            <option value="Oil & Gas Exploration & Production">Oil & Gas Exploration & Production</option>
+                            <option value="Value">Value</option>
+                            <option value="Growth">Growth</option>
+                            <option value="Natural Gas">Natural Gas</option>
+                            <option value="Internet">Internet</option>
+                            <option value="Water">Water</option>
+                            <option value="Yield Curve">Yield Curve</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Food and Beverage">Food and Beverage</option>
+                            <option value="Pharmaceuticals">Pharmaceuticals</option>
+                            <option value="Semiconductors">Semiconductors</option>
+                            <option value="Oil & Gas">Oil & Gas</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Tactical Asset Allocation">Tactical Asset Allocation</option>
+                            <option value="Banking and Investment Services">Banking and Investment Services</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Oil & Gas Equipment & Services">Oil & Gas Equipment & Services</option>
+                            <option value="Health Care Providers & Services">Health Care Providers & Services</option>
+                            <option value="Health Care Equipment & Supplies">Health Care Equipment & Supplies</option>
+                            <option value="S&P 500 Short-Term">S&P 500 Short-Term</option>
+                            <option value="Financial Services">Financial Services</option>
+                            <option value="Restaurants & Bars">Restaurants & Bars</option>
+                            <option value="Mortgages">Mortgages</option>
+                            <option value="Infrastructure">Infrastructure</option>
+                            <option value="Media & Publishing">Media & Publishing</option>
+                            <option value="Leisure & Recreation">Leisure & Recreation</option>
+                            <option value="Construction & Engineering">Construction & Engineering</option>
+                            <option value="Software">Software</option>
+                            <option value="Renewable Energy">Renewable Energy</option>
+                            <option value="Inflation">Inflation</option>
+                            <option value="S&P 500 Mid-Term">S&P 500 Mid-Term</option>
+                            <option value="Metals & Mining">Metals & Mining</option>
+                            <option value="Technology Equipment">Technology Equipment</option>
+                            <option value="Trend-Following">Trend-Following</option>
+                        </select>
+                    </div>
+
+                    <!--<h5>Risks</h5>-->
+                    <!--<div class="ranger">-->
+                        <!--<div id="risks-slider"></div>-->
+                        <!--<span class="range-val left" id="risks-lower"></span>-->
+                        <!--<span class="range-val right" id="risks-upper"></span>-->
+                    <!--</div>-->
+
+                    <h5>Brand</h5>
+                    <div class="input-field">
+                        <select id="brand-dd">
+                            <option value="all" selected>All</option>
+                            <option value="ACSI Funds">ACSI Funds</option>
+                            <option value="Global X">Global X</option>
+                            <option value="iShares">iShares</option>
+                            <option value="IndexIQ">IndexIQ</option>
+                            <option value="WisdomTree">WisdomTree</option>
+                            <option value="First Trust">First Trust</option>
+                            <option value="AlphaClone">AlphaClone</option>
+                            <option value="JPMorgan">JPMorgan</option>
+                            <option value="Credit Suisse">Credit Suisse</option>
+                            <option value="Alerian">Alerian</option>
+                            <option value="Amplify">Amplify</option>
+                            <option value="ETRACS">ETRACS</option>
+                            <option value="InfraCap">InfraCap</option>
+                            <option value="VanEck">VanEck</option>
+                            <option value="ArrowShares">ArrowShares</option>
+                            <option value="Barclays Capital">Barclays Capital</option>
+                            <option value="PowerShares">PowerShares</option>
+                            <option value="BioShares">BioShares</option>
+                            <option value="Aptus">Aptus</option>
+                            <option value="ALPS">ALPS</option>
+                            <option value="ProShares">ProShares</option>
+                            <option value="SPDR">SPDR</option>
+                            <option value="Vanguard">Vanguard</option>
+                            <option value="BMO">BMO</option>
+                            <option value="FlexShares">FlexShares</option>
+                            <option value="Guggenheim">Guggenheim</option>
+                            <option value="VelocityShares">VelocityShares</option>
+                            <option value="QuantShares">QuantShares</option>
+                            <option value="Principal">Principal</option>
+                            <option value="Exponential">Exponential</option>
+                            <option value="iPath">iPath</option>
+                            <option value="Pacer">Pacer</option>
+                            <option value="Cambria">Cambria</option>
+                            <option value="VictoryShares">VictoryShares</option>
+                            <option value="Direxion">Direxion</option>
+                            <option value="Loncar">Loncar</option>
+                            <option value="PIMCO">PIMCO</option>
+                            <option value="Virtus">Virtus</option>
+                            <option value="AdvisorShares">AdvisorShares</option>
+                            <option value="Deutsche X-trackers">Deutsche X-trackers</option>
+                            <option value="Reality Shares">Reality Shares</option>
+                            <option value="Diamond Hill">Diamond Hill</option>
+                            <option value="C-Tracks">C-Tracks</option>
+                            <option value="ELEMENTS">ELEMENTS</option>
+                            <option value="Davis">Davis</option>
+                            <option value="TMW Funds">TMW Funds</option>
+                            <option value="Elkhorn">Elkhorn</option>
+                            <option value="Oppenheimer">Oppenheimer</option>
+                            <option value="Columbia">Columbia</option>
+                            <option value="Etho">Etho</option>
+                            <option value="UBS">UBS</option>
+                            <option value="Fidelity">Fidelity</option>
+                            <option value="FormulaFolios">FormulaFolios</option>
+                            <option value="WeatherStorm">WeatherStorm</option>
+                            <option value="Franklin">Franklin</option>
+                            <option value="Schwab">Schwab</option>
+                            <option value="Goldman Sachs">Goldman Sachs</option>
+                            <option value="Hartford">Hartford</option>
+                            <option value="Horizons">Horizons</option>
+                            <option value="Hull">Hull</option>
+                            <option value="Strategy Shares">Strategy Shares</option>
+                            <option value="Inspire">Inspire</option>
+                            <option value="SerenityShares">SerenityShares</option>
+                            <option value="Renaissance">Renaissance</option>
+                            <option value="John Hancock">John Hancock</option>
+                            <option value="Janus Henderson">Janus Henderson</option>
+                            <option value="Legg Mason">Legg Mason</option>
+                            <option value="USCF Advisers">USCF Advisers</option>
+                            <option value="Morgan Stanley">Morgan Stanley</option>
+                            <option value="LocalShares">LocalShares</option>
+                            <option value="NuShares">NuShares</option>
+                            <option value="O'Shares">O'Shares</option>
+                            <option value="iSectors">iSectors</option>
+                            <option value="Alpha Architect">Alpha Architect</option>
+                            <option value="RiverFront">RiverFront</option>
+                            <option value="Sit">Sit</option>
+                            <option value="Highland">Highland</option>
+                            <option value="TETF">TETF</option>
+                            <option value="Tortoise">Tortoise</option>
+                            <option value="TrimTabs">TrimTabs</option>
+                            <option value="Tuttle">Tuttle</option>
+                            <option value="Reaves">Reaves</option>
+                            <option value="Vident">Vident</option>
+                            <option value="REX">REX</option>
+                            <option value="WBI Shares">WBI Shares</option>
+                            <option value="QuantX">QuantX</option>
+                        </select>
+                    </div>
+
+                </form>
+
+
+                <!-- Grey navigation panel
+
+                      This content will be:
+                  3-columns-wide on large screens,
+                  4-columns-wide on medium screens,
+                  12-columns-wide on small screens  -->
+
+            </div>
+
+            <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
+                <div class="row">
+                    <div class="col s6">
+                        <h5><%= funds.length %> Funds Found</h5>
+                    </div>
+                    <div class="col s6 right-align">
+                        <ul class="pagination tiddy-bottom">
+                            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                            <li class="active"><a href="#!">1</a></li>
+                            <li class="waves-effect"><a href="#!">2</a></li>
+                            <li class="waves-effect"><a href="#!">3</a></li>
+                            <li class="waves-effect"><a href="#!">4</a></li>
+                            <li class="waves-effect"><a href="#!">5</a></li>
+                            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="row">
+                    <% _.each(funds, function(fund, i) { %>
+                    <li class="col s12 m6 l4">
+                        <div class="card hoverable" data-id="<%= fund.ticker %>">
+                            <h3 class="card-title ticker background-<%= Math.floor(Math.random() * 3) + 1 %>"><%= fund.ticker %></h3>
+                            <div class="card-content center-align">
+                                <h5 class="fund-name"><%= fund.fund %></h5>
+                                <h5 class="fund-percent center-align">
+                                    <a class="waves-effect waves-light btn  indigo darken-4"><%= (Math.random() * (3.120 - 0.0200) + 0.0200).toFixed(4) + '%' %></h5></a>
+
+                                <h5 class="fund-type center-align">
+                                    <!--<i class="material-icons"><% //= iconSet[fund.fund_type] || iconSet['default'] %></i> <% //= fund.fundBasics.segment %>-->
+                                    <%= fund.fundBasics.segment %>
+                                </h5>
+                                <h6 class="asset-class"><%= fund.economicDevelopment %></h6>
+                            </div>
+                            <!--<div class="card-action">-->
+                                <!--<a href="#">Look inside fund</a>-->
+                            <!--</div>-->
+                        </div>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -7,7 +7,6 @@ var express = require('express');
 var controller = require('./fund.controller');
 var router = express.Router();
 
-router.get('/',    controller.index);
-router.get('/:id',    controller.getById);
+router.get('/:id', controller.getBySymbol);
 
 module.exports = router;

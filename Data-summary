@@ -1,0 +1,65 @@
+Fund Basics
+Symbol | The symbol for a fund as traded on the exchange
+Fund Name | ETF fund name
+Issuer | A company that produces and manages ETFs.
+Expense Ratio | The net annual fee a fund holder pays to the issuer.
+Assets Under Management | The market value of total assets that a fund has accumulated and now manages on behalf of investors.
+Spread % | The difference between the highest price a market participant is willing to pay to buy an ETF and the lowest price at which a market participant is willing to sell an ETF, averaged over the past 60 days, as a percent.
+Segment | The precise market to which the fund provides exposure. ETF.com assigns each fund to a segment according to a rules-based process
+
+Performance
+1 Month | Total Return of the fund's NAV
+3 Month | Total Return of the fund's NAV
+1 Year | Total Return of the fund's NAV
+5 Year | Total Return of the fund's NAV
+10 Year | Total Return of the fund's NAV
+As of | Date
+
+Analysis
+Issuer | A company that produces and manages ETFs.
+Segment | The precise market to which the fund provides exposure. ETF.com assigns each fund to a segment according to a rules-based process
+Analyst Pick | In each segment ETF.com analysts use their discretion to choose the "best" ETF for a typical retail investor with a medium-term holding period.
+Letter Grade | The ETF.com Letter Grade objectively measures a fund's Efficiency and Tradability so you know how well a fund delivers on its core promise. It is scored from an A to an F, based on a rigorous quantitative methodology that considers all aspects of fund expenses, structure, risks, and liquidity
+Efficiency Score | The ETF.com Efficiency Score describes how well a fund delivers on its promises to investors in the areas of costs, tracking, and risks. Some of the factors in the composite score include expense ratios, goodness of fit to benchmark, tracking difference, and a breadth of risk measurements from structural risks to tax risks and fund closure risk.
+Tradability Score | The ETF.com Tradability Score accounts for the expense and uncertainty that an investor might encounter when buying or selling a fund in the open market. It accounts for on-screen liquidity at retail levels as well as block liquidity at institutional levels, and considers both fundlevel metrics and those of the underlying holdings.
+Fit Score | The ETF.com Fit Score measures how well a fund's exposures match those of a neutral benchmark chosen to be most representative of the ETF.com segment.
+
+Fundamentals
+Dividend Yield | The ratio of dividends paid by the fund over past 12 months divided by fund's share price
+Equity
+P/E | Weighted average ratio of prices of a fund's stocks  to trailing earnings of underlying stocks
+P/B | Weighted average ratio of prices of a fund's stocks  to the book value of underlying equity
+Credit
+Duration | A measure of interest rate risk. Estimates change in value to the portfolio based on a 1% parallel shift in the yield curve.
+Credit Quality | A weighted, properly aggregated measure of the credit quality of the fund's underlying fixed income holdings
+YTM | The weighted average yield if all securities in the portfolio were held to maturity. It assumes that interest would be reinvested at the YTM rate.
+
+Classification
+Asset Class | The type of securities to which the ETF provides exposure
+Strategy | The plan or set of rules used to achieve the ETF goals.
+Region | The third level of geographical categorization in the ETF Classification System.
+Geography | The location of the market to which the ETF provides exposure
+Focus | The second level of categorization in the ETF Classification System. Essentially, a subcategory of "Category"
+Niche | The third level of categorization in the ETF Classification System. Essentially, a subcategory of "Focus"
+Inverse | ETFs that aim to provide a negative multiple of the returns of the underlying index on a periodic basis.
+Leveraged | ETFs that aim to provide a multiple of the returns of the underlying index on a periodic basis.
+Etn | A type of exchange-traded product backed by the credit of the issuing bank rather than by a pool of assets
+Underlying Index | The index that the fund is designed to track
+Index Provider | The firm that manages the underlying index.
+Selection Criteria | The rules an index providers uses in selecting which securities are included in the index
+Weighting Scheme | The rules an index provider uses in weighting the constituents in the index
+Active per Sec | The Securities Exchange Commission classifies the fund as actively managed as opposed to passive
+
+Tax
+Legal Structure | The organizational structure of the fund or ETN.
+MAX LT Capital Gains Rate | The maximum long term and short term U.S. tax rates applicable to a realized capital gain
+Max ST Capital Gains Rate | The maximum long term and short term U.S. tax rates applicable to a realized capital gain
+Tax Reporting | Lists the tax forms an investor should expect to receive if investing in the fund
+
+ESG
+MSCI ESG Quality Score | MSCI ESG Fund Quality Score (0-10).
+ESG Score Peer Rank | MSCI ESG Fund Quality Score – Peer Percentile Rank (1-100).
+ESG Score Global Rank | MSCI ESG Fund Quality Score – Global Percentile Rank (1-100).
+Weighted Average Carbon Intensity | Tons CO2e/$M sales.
+Sustainable Impact Exposure | Revenue Exposure to Sustainable Impact Solutions (%).
+SRI Screening Criteria Exposure | SRI (socially responsible investment) screening criteria includes company involvement in alcohol, tobacco, weapons, and other business activities.
