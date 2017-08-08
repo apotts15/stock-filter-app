@@ -5,7 +5,7 @@
 'use strict';
 
 // Set default node environment to development
-//process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var path = require('path');
 var express = require('express');
 var session = require('express-session');
@@ -16,18 +16,15 @@ var fs = require('fs');
 var join = require('path').join;
 
 var redis = require("redis"),
-    // redisCli = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
-    // redisCliSess = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
-    redisCli = redis.createClient('15185', 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', {detect_buffers: true}),
-    redisCliSess = redis.createClient('15185', 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', {detect_buffers: true}),
+    redisCli = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
+    redisCliSess = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
     redisStore = require('connect-redis')(session);
 
 mongoose.Promise = global.Promise;
 
 var connectMongo = function () {
     console.log('config.db.mongo.uri',config.db.mongo.uri);
-    //mongoose.connect(config.db.mongo.uri, config.db.mongo.options);
-    mongoose.connect('mongodb://apotts15:Palooza15@ds111262.mlab.com:11262/heroku_hhl5zbl1');
+    mongoose.connect(config.db.mongo.uri, config.db.mongo.options);
 };
 
 connectMongo();
