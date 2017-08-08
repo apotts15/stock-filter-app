@@ -16,15 +16,18 @@ var fs = require('fs');
 var join = require('path').join;
 
 var redis = require("redis"),
-    redisCli = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
-    redisCliSess = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
+    // redisCli = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
+    // redisCliSess = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
+    redisCli = redis.createClient('15185', 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', config.redis.options),
+    redisCliSess = redis.createClient('15185', 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', config.redis.options),
     redisStore = require('connect-redis')(session);
 
 mongoose.Promise = global.Promise;
 
 var connectMongo = function () {
     console.log('config.db.mongo.uri',config.db.mongo.uri);
-    mongoose.connect(config.db.mongo.uri, config.db.mongo.options);
+    //mongoose.connect(config.db.mongo.uri, config.db.mongo.options);
+    mongoose.connect('mongodb://apotts15:Palooza15@ds111262.mlab.com:11262/heroku_hhl5zbl1');
 };
 
 connectMongo();
