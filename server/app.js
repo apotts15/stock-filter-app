@@ -5,7 +5,7 @@
 'use strict';
 
 // Set default node environment to development
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+//process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var path = require('path');
 var express = require('express');
 var session = require('express-session');
@@ -18,8 +18,8 @@ var join = require('path').join;
 var redis = require("redis"),
     // redisCli = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
     // redisCliSess = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
-    redisCli = redis.createClient('15185', 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', config.redis.options),
-    redisCliSess = redis.createClient('15185', 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', config.redis.options),
+    redisCli = redis.createClient('15185', 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', {detect_buffers: true}),
+    redisCliSess = redis.createClient('15185', 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', {detect_buffers: true}),
     redisStore = require('connect-redis')(session);
 
 mongoose.Promise = global.Promise;
