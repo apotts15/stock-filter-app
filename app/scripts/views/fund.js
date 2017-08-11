@@ -12,12 +12,24 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         className: '',
         events: {
             "dblclick" : "clickit",
-            "click body" : "clickit",
-            "click .ticker-container" : "clickit"
+            "click .card" : "goToFund"
         },
 
-        clickit: function () {
-         // alert('click the wat');
+        goToFund: function(e) {
+            var ticker = this.getTicker(e);
+            if (!ticker) {
+                return false;
+            }
+            Backbone.history.navigate('fund/' + ticker, {trigger:true});
+        },
+
+        getTicker: function(e) {
+            var ticker = $(e.currentTarget).data('id');
+
+            if (!ticker){
+                return false;
+            }
+            return ticker;
         },
 
         initialize: function (attr) {

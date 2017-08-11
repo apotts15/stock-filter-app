@@ -14,11 +14,11 @@ var async = require('async');
 var config = require('./config/environment');
 var fs = require('fs');
 var join = require('path').join;
-
-var redis = require("redis"),
-    redisCli = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
-    redisCliSess = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
-    redisStore = require('connect-redis')(session);
+//
+// var redis = require("redis"),
+//     redisCli = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
+//     redisCliSess = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
+//     redisStore = require('connect-redis')(session);
 
 mongoose.Promise = global.Promise;
 
@@ -88,14 +88,14 @@ db.once('open', function() {
 
 // Setup server
 var app = module.exports = express();
-app.use(session({
-    store: new redisStore({client:redisCliSess,ttl:18000,db:15}),
-    secret: 'ukyo.pu',
-    name: 'seed.sid',
-    cookie: {maxAge: 3600000, secure: false},
-    resave: false,
-    saveUninitialized: true
-}));
+// app.use(session({
+//     store: new redisStore({client:redisCliSess,ttl:18000,db:15}),
+//     secret: 'ukyo.pu',
+//     name: 'seed.sid',
+//     cookie: {maxAge: 3600000, secure: false},
+//     resave: false,
+//     saveUninitialized: true
+// }));
 require('./config/express')(app);
 fs.readdirSync(join(__dirname, 'models')).forEach(function (file) {
     if (~file.indexOf('.js')) require(join(__dirname, 'models', file));

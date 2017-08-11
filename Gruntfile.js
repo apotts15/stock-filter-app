@@ -183,11 +183,28 @@ module.exports = function (grunt) {
     },
     jst: {
         compile: {
-            files: {
-                '.tmp/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
+            options:
+                {
+                    templateSettings:
+                        {
+                            variable: 'data'
+                        }
+                },
+            dist: {
+                files: {
+                    '<%= yeoman.app %>/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
+                }
             }
+
         }
     },
+    // jst: {
+    //     compile: {
+    //         files: {
+    //             '.tmp/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
+    //         }
+    //     }
+    // },
     rev: {
         dist: {
             files: {
@@ -272,7 +289,7 @@ module.exports = function (grunt) {
 });
 
     grunt.registerTask('createDefaultTemplate', function () {
-        grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
+        grunt.file.write('<%= yeoman.dist %>/scripts/templates.js', 'this.JST = this.JST || {};');
     });
 
     grunt.registerTask('server', function (target) {
@@ -320,5 +337,5 @@ module.exports = function (grunt) {
     grunt.registerTask('upload', [
         'compress',
         'upload_file:test'
-    ]);
+    ])
 };

@@ -10,7 +10,7 @@
                     <header class="ticker center-align">Ticker</header>
                     <h4 class="card-title">APPL</h4>
                 </div-->
-                <h2 class="fund-name center">Funds investing in <span class="company-search"><%= searchId %></span></h2>
+                <h2 class="fund-name center">Funds investing in <span class="company-search"><%= data.searchId %></span></h2>
             </div>
         </div>
         <div class="row tiddy-bottom">
@@ -284,7 +284,7 @@
             <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
                 <div class="row">
                     <div class="col s6">
-                        <h5><%= funds.length %> Funds Found</h5>
+                        <h5><%= data.funds.length %> Funds Found</h5>
                     </div>
                     <div class="col s6 right-align">
                         <ul class="pagination tiddy-bottom">
@@ -299,7 +299,7 @@
                     </div>
                 </div>
                 <ul class="row">
-                    <% _.each(funds, function(fund, i) { %>
+                    <% _.each(data.funds, function(fund, i) { %>
                     <li class="col s12 m6 l4">
                         <div class="card hoverable" data-id="<%= fund.ticker %>">
                             <h3 class="card-title ticker background-<%= Math.floor(Math.random() * 3) + 1 %>"><%= fund.ticker %></h3>

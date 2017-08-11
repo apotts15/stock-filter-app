@@ -6,7 +6,7 @@
     <div class="container fund">
         <div class="row header-row">
             <div class="col s12 valign-wrapper center-align" style="height: 220px">
-                <h3 class="fund-name center-align"><%= fund.fund %></h3>
+                <h3 class="fund-name center-align"><%= data.fund.fund %></h3>
             </div>
         </div>
 
@@ -20,7 +20,7 @@
             <div class="card-content">
                 <h5>Fund Metrics</h5>
                 <div class="row">
-                    <% _.each(fund.categoryData, function(data, index, list) { %>
+                    <% _.each(data.fund.categoryData, function(data, index, list) { %>
                     <div class="col s6 m4 l2 center-align">
                         <i class="material-icons icons <%= index + ' ' + data.level %>"><%= index %></i>
                         <p class="fund-metrics"><%= data.name %></p>
@@ -32,82 +32,6 @@
                 </div>
             </div>
         </div>
-
-        <!--<div class="card sticky-action">-->
-            <!--<div class="card-content">-->
-                <!--<h5>Fund Basis</h5>-->
-                <!--<h6><%= fund.fundBasics.segment %></h6>-->
-                <!--<table class="responsive-table">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th>Expense Ratio</th>-->
-                        <!--<th>Asset Under Management</th>-->
-                        <!--<th>Spread Pct</th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
-
-                    <!--<tbody>-->
-                    <!--<tr>-->
-                        <!--<td><%= fund.fundBasics.expenseRatio.value * .01 + "%" %></td>-->
-                        <!--<td><%= fund.fundBasics.aum.value%></td>-->
-                        <!--<td><%= fund.fundBasics.spreadPct.value %></td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="card sticky-action">-->
-            <!--<div class="card-content">-->
-                <!--<h5>Performance</h5>-->
-                <!--<table class="responsive-table centered">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th>Price Trade 1 Month</th>-->
-                        <!--<th>Price Trade 3 Month</th>-->
-                        <!--<th>Price Trade 1 Year</th>-->
-                        <!--<th>Price Trade 3 Year Annualized</th>-->
-                        <!--<th>Price Trade 5 Year Annualized</th>-->
-                        <!--<th>Price Trade 10 Year Annualized</th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
-                    <!--<tr>-->
-                        <!--<td><%= fund.performance.priceTr1Mo.value %></td>-->
-                        <!--<td><%= fund.performance.priceTr3Mo.value %></td>-->
-                        <!--<td><%= fund.performance.priceTr1Yr.value %></td>-->
-                        <!--<td><%= fund.performance.priceTr3YrAnnualized.value %></td>-->
-                        <!--<td><%= fund.performance.priceTr5YrAnnualized.value %></td>-->
-                        <!--<td><%= fund.performance.priceTr10YrAnnualized.value %></td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="card sticky-action">-->
-            <!--<div class="card-content">-->
-                <!--<h5>Classification</h5>-->
-                <!--<table class="responsive-table centered">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th>Asset Class</th>-->
-                        <!--<th>Category</th>-->
-                        <!--<th>Focus</th>-->
-                        <!--<th>Strategy</th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
-                    <!--<tr>-->
-
-                        <!--<td><%= fund.classification.assetClass %></td>-->
-                        <!--<td><%= fund.classification.category %></td>-->
-                        <!--<td><%= fund.classification.focus %></td>-->
-                        <!--<td><%= fund.classification.strategy %></td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</div>-->
-        <!--</div>-->
 
         <div class="row category-filter">
             <div class="col s12">
