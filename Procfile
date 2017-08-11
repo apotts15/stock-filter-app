@@ -1,1 +1,1 @@
-pm2 stop pm2.json
+web: pm2 stop npm -- start
