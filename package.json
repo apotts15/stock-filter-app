@@ -62,10 +62,11 @@
     "load-grunt-tasks": "^0.6.0",
     "mocha": "^2.4.5",
     "supertest": "^1.2.0",
-    "time-grunt": "^1.0.0"
+    "time-grunt": "^1.0.0",
+      "pm2 ": "*"
   },
   "scripts": {
-    "start": "pm2 pm2.json",
+    "start": "pm2 start pm2.json",
     "test": "grunt test"
   },
   "engines": {
