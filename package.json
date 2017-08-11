@@ -63,12 +63,14 @@
     "mocha": "^2.4.5",
     "supertest": "^1.2.0",
     "time-grunt": "^1.0.0",
-      "pm2 ": "*"
+    "pm2 ": "*"
   },
   "scripts": {
+    "preinstall": "npm i -g pm2 && pm2 install pm2-logrotate",
     "start": "pm2 start pm2.json",
     "test": "grunt test"
   },
+
   "engines": {
     "node": "7.10.0"
   }
