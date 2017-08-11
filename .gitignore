@@ -3,9 +3,9 @@
 .sass-cache
 .DS_Store
 node_modules
-dist
+#dist
 test/temp
 app/bower_components
-server_dist
-server/config/environment/production.js
+#server_dist
+#server/config/environment/production.js
 archive

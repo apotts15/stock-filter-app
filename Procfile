@@ -1,1 +1,1 @@
-web: pm2 start server_dist/app.js
+web: npm start
