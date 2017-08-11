@@ -1,1 +1,1 @@
-web: node ./server_dist/app.js
+web: pm2 start apps.json
