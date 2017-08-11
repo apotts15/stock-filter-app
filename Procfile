@@ -1,1 +1,1 @@
-web: pm2 start apps.json
+web: pm2 start pm2.json
