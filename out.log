@@ -1947,3 +1947,13 @@ results []
 2017-08-13 : results []
 2017-08-13 : null
 2017-08-13 : results []
+2017-08-13 : params {}
+2017-08-13 : $andFilter [ { companies: { '$in': [Object] } } ]
+2017-08-13 : { '$and': [ { companies: [Object] } ] }
+2017-08-13 : params {}
+2017-08-13 : $andFilter [ { companies: { '$in': [Object] } } ]
+{ '$and': [ { companies: [Object] } ] }
+2017-08-13 : results []
+2017-08-13 : null
+2017-08-13 : results []
+2017-08-13 : null
