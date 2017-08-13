@@ -29,7 +29,6 @@ var connectMongo = function () {
 
 connectMongo();
 
-
 var createNewEntries = function(db, entries, callback) {
 
     // Get the collection and bulk api artefacts
