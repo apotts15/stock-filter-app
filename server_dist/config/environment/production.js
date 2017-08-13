@@ -15,6 +15,6 @@ module.exports = {
             detect_buffers: true
         }
     },
-    appPath:"../dist",
+    appPath:"dist",
     seedDB: true
 };

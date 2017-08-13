@@ -1945,3 +1945,5 @@ $andFilter [ { companies: { '$in': [Object] } },
 results []
 2017-08-13 : null
 2017-08-13 : results []
+2017-08-13 : null
+2017-08-13 : results []
