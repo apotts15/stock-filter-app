@@ -109,7 +109,7 @@ app.use(function (req, res) {
 
 var server = require('http').createServer(app);
 server.listen(config.port, config.ip, function () {
-    consol.log('Server PATH: ', path.join(config.root, config.appPath));
+    console.log('Server PATH: ', path.join(config.root, config.appPath));
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
