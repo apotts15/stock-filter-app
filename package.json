@@ -66,8 +66,7 @@
     "pm2 ": "*"
   },
   "scripts": {
-    "preinstall": "npm i -g pm2 && pm2 install pm2-logrotate",
-    "start": "pm2 start pm2.json",
+    "start": "node server_dist/app.js",
     "test": "grunt test"
   },
 

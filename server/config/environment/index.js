@@ -20,9 +20,7 @@ var all = {
     port: process.env.PORT || 9000,
     secrets:{
         session: 's-secret'
-    },
-    // Should we populate the DB with sample data?
-    seedDB: false
+    }
 };
 
 // Export the config object based on the NODE_ENV

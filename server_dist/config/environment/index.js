@@ -17,12 +17,10 @@ var all = {
     // Root path of server
     root: path.normalize(__dirname + '/../../..'),
     // Server port
-    port: 9000,
+    port: process.env.PORT || 9000,
     secrets:{
         session: 's-secret'
-    },
-    // Should we populate the DB with sample data?
-    seedDB: false
+    }
 };
 
 // Export the config object based on the NODE_ENV

@@ -147,10 +147,15 @@ app.use(function (req, res) {
 
 var server = require('http').createServer(app);
 
-server.listen(config.port, config.ip, function () {
-    console.log('Server PATH: ', path.join(config.root, config.appPath));
-    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+server.listen(process.env.PORT || config.port || 5000, function () {
+  console.log('Server PATH: ', path.join(config.root, config.appPath));
+  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
+
+// server.listen(config.port, config.ip, function () {
+//     console.log('Server PATH: ', path.join(config.root, config.appPath));
+//     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+// });
 
 // Expose app
 exports = module.exports = app;
