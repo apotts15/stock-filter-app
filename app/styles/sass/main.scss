@@ -24,6 +24,15 @@ main {
 @media only screen and (min-width: 601px) {
 
 }
+
+.h55 {
+    font-size: 1.3rem;
+}
+
+.light-grey {
+    color: #a3a3a3;
+}
+
 .row.filter-title .col {
     padding-left: 0;
 }
@@ -39,11 +48,28 @@ main {
         //border-top: 1px solid #aaaaaa;
     }
 }
+.gunstocks {
+    .card .ticker {
+        text-shadow: none;
+    }
+    .card .card-content.gun-full {
+        background-color: rgba(255, 170, 0, 0.64);
+    }
+
+    .card .card-content.gun-free {
+        background-color: #44ae53;
+    }
+}
+.bold {
+    font-weight: bold;
+}
 
 .fund-percent {
     padding: 5px;
     margin: 25px;
-    color: white;
+    .btn {
+        color: white;
+    }
 }
 .ranger {
     padding: 20px 0 40px 0;
@@ -294,7 +320,15 @@ nav .input-field label:active i {
 .listview .card {
     min-height: 340px;
 }
+.fund-ticker {
+    border: 1px solid #061d25;
+    color: #061d25;
+    background: white;
 
+    &:hover {
+        background-color: white;
+    }
+}
 .card {
     .ticker {
         position: relative;

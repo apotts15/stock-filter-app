@@ -126,7 +126,8 @@ OnePebbleApp.Models = OnePebbleApp.Models || {};
                 msciSriExclusionCriteriaPct: '',
                 msciEsgHasBadge: ''
             },
-            companies: []
+            companies: [],
+            gunStocks: []
         },
 
         validate: function (attrs, options) {
@@ -154,6 +155,7 @@ OnePebbleApp.Models = OnePebbleApp.Models || {};
                 tax: response.tax,
                 msciEsg: response.msciEsg,
                 companies: response.companies,
+                gunStocks: response.gunStocks,
                 categoryData: response.categoryData
             });
             return response;

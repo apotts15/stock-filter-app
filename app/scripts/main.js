@@ -7,6 +7,11 @@ window.OnePebbleApp = {
     Routers: {},
     init: function () {
         'use strict';
+
+        // cache search filters
+        if (!window.searchCache) {
+          window.searchCache = [];
+        }
     }
 };
 

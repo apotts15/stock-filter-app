@@ -24,10 +24,11 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         getTicker: function(e) {
-            var ticker = $(e.currentTarget).data('id');
+            var ticker = e && $(e.currentTarget).data('id');
 
             if (!ticker){
-                return false;
+                var url = window.location.href.split('#fund/');
+                ticker = url && url[1];
             }
             return ticker;
         },
@@ -49,7 +50,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
 
         render: function () {
-            this.$el.html(this.template({iconSet: this.iconSet, fund: this.model.toJSON()}));
+            this.$el.html(this.template({iconSet: this.iconSet, ticker: this.getTicker(), fund: this.model.toJSON()}));
             $('main').html(this.$el.html());
             $(window).scrollTop(0);
             this.typeahead();

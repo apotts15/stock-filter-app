@@ -14,11 +14,40 @@ var async = require('async');
 var config = require('./config/environment');
 var fs = require('fs');
 var join = require('path').join;
-//
-// var redis = require("redis"),
-//     redisCli = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
-//     redisCliSess = redis.createClient(config.redis.port, config.redis.host, config.redis.options),
-//     redisStore = require('connect-redis')(session);
+
+var redis = require("redis");
+//var redisClient = redis.createClient(config.redis.port, config.redis.host, config.redis.options);
+//var redisClient = redis.createClient({host: 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', port: 15185, detect_buffers: true });
+var redisClient = redis.createClient({host : 'localhost', port : 6379});
+var redisStore = require('connect-redis')(session);
+
+redisClient.on('ready', function() {
+    console.log("Redis is ready");
+});
+
+redisClient.on('connect', function() {
+    console.log('Redis connected');
+});
+
+redisClient.on('error', function(e) {
+    console.log("Redis Error", e);
+});
+
+redisClient.auth('sBCZoEk74k81cgvM', function(err,reply) {
+    console.log('Redis Password: ', reply);
+});
+
+redisClient.set("language", "nodejs", function(err,reply) {
+    console.log(err);
+    console.log(reply);
+});
+
+redisClient.hmset('frameworks', 'javascript', 'BackboneJS', 'css', 'Bootstrap', 'node', 'Express');
+
+redisClient.hgetall('frameworks', function(err, object) {
+    console.log('hgetall', object);
+});
+
 
 mongoose.Promise = global.Promise;
 
@@ -30,7 +59,6 @@ var connectMongo = function () {
 connectMongo();
 
 var createNewEntries = function(db, entries, callback) {
-
     // Get the collection and bulk api artefacts
     var collection = db.collection('funds'),
         bulk = collection.initializeOrderedBulkOp(), // Initialize the Ordered Batch
@@ -71,6 +99,7 @@ var entries = [];
 //     console.log('entries', entries)
 // });
 
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('disconnected', connectMongo);
 db.once('open', function() {
@@ -87,27 +116,37 @@ db.once('open', function() {
 
 // Setup server
 var app = module.exports = express();
-// app.use(session({
-//     store: new redisStore({client:redisCliSess,ttl:18000,db:15}),
-//     secret: 'ukyo.pu',
-//     name: 'seed.sid',
-//     cookie: {maxAge: 3600000, secure: false},
-//     resave: false,
-//     saveUninitialized: true
-// }));
+app.use(session({
+    store: new redisStore({
+        client: redisClient,
+        ttl: 18000,
+        db: 0
+    }),
+    secret: 'ukyo.pu',
+    name: 'seed.sid',
+    cookie: {maxAge: 3600000, secure: false},
+    resave: false,
+    saveUninitialized: true
+}));
+
 require('./config/express')(app);
+
 fs.readdirSync(join(__dirname, 'models')).forEach(function (file) {
-    if (~file.indexOf('.js')) require(join(__dirname, 'models', file));
+    if (~file.indexOf('.js')) {
+        require(join(__dirname, 'models', file))};
 });
+
 fs.readdirSync(join(__dirname, 'routes')).forEach(function (file) {
     if (~file.indexOf('.js')) require(join(__dirname, 'routes', file))(app);
 });
+
 app.use(function (req, res) {
     var stream404 = fs.createReadStream(path.join(config.root, config.appPath,"404.html"));
     stream404.pipe(res);
 });
 
 var server = require('http').createServer(app);
+
 server.listen(config.port, config.ip, function () {
     console.log('Server PATH: ', path.join(config.root, config.appPath));
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));

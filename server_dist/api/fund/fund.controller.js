@@ -16,9 +16,9 @@ exports.getBySymbol = function(req, res) {
             if (!results) {
                 res.send([]);
             } else {
-
                 results.categoryData = categorize(results);
-                console.log('categoryDescriptions ', results.categoryData);
+                results.gunStocks = filterGunStocks(results);
+                console.log('gunStocks', results.gunStocks);
                 res.send(results);
             }
         }
@@ -40,6 +40,7 @@ var moneyFormat = function(labelValue) {
                 ? Math.abs(Number(labelValue)) / 1.0e+3 + "K"
 
                 : Math.abs(Number(labelValue));
+
     var num =  parseFloat(number).toPrecision(2);
     if (num.indexOf('+') !== -1){
          num = parseFloat(number).toPrecision(3);
@@ -51,8 +52,6 @@ var percentFormat = function(percent, reverse) {
     var multiplier = reverse ? .01 : 100;
     return (percent * multiplier).toFixed(2) + '%';
 };
-
-
 
 var doLeveling = function(cat, metric) {
     var leveling = {
@@ -172,6 +171,32 @@ var categorize = function(data) {
 
     return descriptions;
 };
+
+var filterGunStocks = function(data) {
+    var companies = data.companies;
+
+    if(!companies) {
+        return null;
+    }
+
+    // Dick's Sporting Goods: DKS (NYSE)
+    // Smith & Wesson (American Outdoor Brands Corp): AOBC (NASDAQ)
+    // Vista Outdoors: VSTO (NYSE)
+    // Sportman's Warehouse: SPWH (NASDAQ)
+    // Cabela's: CAB (NYSE)
+    // Ruger: RGR (NYSE)
+    // Olin: OLN (NYSE)
+    // Walmart: WMT (NYSE)
+    // Big 5: BGFV (NASDAQ)
+
+    var gunStocks = ['DKS', 'AOBC', 'VSTO', 'SPWH', 'CAB', 'RGR', 'OLN', 'WMT', 'BGFV'];
+    var gunStockList = _.intersection(gunStocks, companies);
+
+    console.log('GUN STOCKS ', gunStockList);
+
+    return gunStockList;
+};
+
 // t[Math.round((t.length -1) *.6)]
 //"rule": "<129 >=85"
 var categories = {
@@ -299,7 +324,7 @@ var categories = {
                 }
             },
             "very-low": {
-                "name": "Very Low 5Y Risk",
+                "name": "Very Low Risk",
                 "description": "Standard deviation of monthly risk is {}, lower than 80% of all funds.",
                 "rules": {
                     "max": 0.00056,

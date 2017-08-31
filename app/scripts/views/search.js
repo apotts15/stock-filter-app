@@ -107,6 +107,11 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 fundsArr = window.fundArray;
             }
             var that = this;
+
+            if (!id) {
+              return false;
+            }
+
             $.ajax({
                 type: 'GET',
                 url: '/search/' + id,

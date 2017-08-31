@@ -117,6 +117,7 @@ var FundSchema = new Schema(
             msciEsgHasBadge: Boolean
     },
     companies: [],
+    gunStocks: [],
     categoryData: Schema.Types.Mixed
 });
 

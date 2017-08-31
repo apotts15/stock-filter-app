@@ -4,15 +4,52 @@
 </nav>
 <div class="background-<%= Math.floor(Math.random() * 3) + 1 %> bg-image">
     <div class="container fund">
-        <div class="row header-row">
-            <div class="col s12 valign-wrapper center-align" style="height: 220px">
-                <h3 class="fund-name center-align"><%= data.fund.fund %></h3>
+        <div class="row header-row" style="height: 220px">
+            <div class="col s12 center-align">
+                <div class="row">
+                    <!-- JST data.fund.fund -->
+                    <h3 class="fund-name center-align"><%= fund.fund %></h3>
+                </div>
+                <div class="row">
+                    <h5 class="btn center-align fund-ticker"><span class="bold"><%= ticker %></span></h5>
+                </div>
             </div>
         </div>
 
-        <div class="row category-filter">
-            <div class="col s12">
+        <div class="card gunstocks">
+            <div class="card-content">
+                <!-- JST data.fund.categoryData -->
+                <h5 class="bold"><%= fund.gunStocks.length === 1 ? fund.gunStocks.length + ' Gun Stock' : fund.gunStocks.length + ' Gun Stocks' %></h5>
+                <div class="row">
 
+                    <div class="col s6 m6 l3">
+                        <div class="card" data-id="<%= ticker %>">
+                            <div class="card-title ticker background-2" style="height: 100px">
+                                <h5 class="btn center-align fund-ticker"><span class="bold"><%= ticker %></span></h5>
+                            </div>
+                            <div class="card-content center-align <%= fund.gunStocks.length >= 1 ? 'gun-full' : 'gun-free' %>">
+
+                                <% if (fund.gunStocks.length >= 1) {  %>
+                                    <h4 class="center-align">
+                                        <span class="bold"><% var rando = (Math.random() * (3.120 - 0.0200) + 0.0200).toFixed(4) + '%'; %><%= rando %></span>
+                                    </h4>
+                                    <h5>in Gun Stocks</h5>
+                                <% } else { %>
+                                <h5><i class="material-icons medium">check</i></h5>
+                                <h5>Gun-Free Fund</h5>
+                                <% } %>
+
+                                <!--<div class="tip center-align" data-tip="Percentage of this fund going to Gun Stocks">-->
+                                    <!--<i class="material-icons">info</i>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s6 m6 l9">
+                        <h5><span class="bold">$47M+</span> is held in <%= fund.gunStocks.length %> and ammo maker/seller stocks, comprised of <span class="bold"><%= rando %></span> of the fund.</h5>
+                        <h5 class="h55 light-grey"><%= ticker %> holds similar percentage of gun stocks to the average US stock fund and also a similar percentage to other funds in the same category.</h5>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -20,7 +57,8 @@
             <div class="card-content">
                 <h5>Fund Metrics</h5>
                 <div class="row">
-                    <% _.each(data.fund.categoryData, function(data, index, list) { %>
+                    <!-- JST data.fund.categoryData -->
+                    <% _.each(fund.categoryData, function(data, index, list) { %>
                     <div class="col s6 m4 l2 center-align">
                         <i class="material-icons icons <%= index + ' ' + data.level %>"><%= index %></i>
                         <p class="fund-metrics"><%= data.name %></p>

@@ -24,7 +24,32 @@ exports.getById = function(req, res){
 };
 
 exports.getByCompany = function(req, res) {
-    console.log('params', req.query);
+    var filterGunStocks = function(data) {
+        var companies = data.companies;
+
+        if(!companies) {
+            return null;
+        }
+
+        // Dick's Sporting Goods: DKS (NYSE)
+        // Smith & Wesson (American Outdoor Brands Corp): AOBC (NASDAQ)
+        // Vista Outdoors: VSTO (NYSE)
+        // Sportman's Warehouse: SPWH (NASDAQ)
+        // Cabela's: CAB (NYSE)
+        // Ruger: RGR (NYSE)
+        // Olin: OLN (NYSE)
+        // Walmart: WMT (NYSE)
+        // Big 5: BGFV (NASDAQ)
+
+        var gunStocks = ['DKS', 'AOBC', 'VSTO', 'SPWH', 'CAB', 'RGR', 'OLN', 'WMT', 'BGFV'];
+        var gunStockList = _.intersection(gunStocks, companies);
+
+        console.log('GUN STOCKS ', gunStockList);
+
+        return gunStockList;
+    };
+
+    // console.log('params', req.query);
     var filterKeys = {
         'fundSize': 'fundBasics.aum.value',
         'dividend': 'fundamentals.dividendYield.value',
@@ -53,8 +78,8 @@ exports.getByCompany = function(req, res) {
     if (req.query) {
         _.each(req.query, function(value, key){
             var filter = {};
-            console.log('value', value);
-            console.log('key', key);
+            //console.log('value', value);
+            //console.log('key', key);
             var q = key.split('_');
             var filterKey = filterKeys[q[0]];
             var range = rangeKeys[q[1]];
@@ -77,7 +102,6 @@ exports.getByCompany = function(req, res) {
         });
 
         //'fundBasics.aum.value': { $gt: 28890, $lt: 28890000 } }
-        console.log('$andFilter', $andFilter);
         Fund.getByCompanyFilter($andFilter, function (err, results) {
             if (err){
                 console.log('error', err);
@@ -86,6 +110,8 @@ exports.getByCompany = function(req, res) {
                     res.send([]);
                 } else {
                     //console.log('results', results);
+                    results.gunStocks = filterGunStocks(results);
+                    console.log('gunStocks', results.gunStocks);
                     res.send(results);
                 }
             }
