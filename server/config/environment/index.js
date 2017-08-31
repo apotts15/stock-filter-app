@@ -17,7 +17,7 @@ var all = {
     // Root path of server
     root: path.normalize(__dirname + '/../../..'),
     // Server port
-    port: 9000,
+    port: process.env.PORT || 9000,
     secrets:{
         session: 's-secret'
     },
