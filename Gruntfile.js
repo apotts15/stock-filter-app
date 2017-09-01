@@ -191,23 +191,23 @@ module.exports = function (grunt) {
             }]
         }
     },
-    jst: {
-        compile: {
-            options:
-                {
-                    templateSettings:
-                        {
-                            variable: 'data'
-                        }
-                },
-            dist: {
-                files: {
-                    '<%= yeoman.app %>/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
-                }
-            }
-
-        }
-    },
+    // jst: {
+    //     compile: {
+    //         options:
+    //             {
+    //                 templateSettings:
+    //                     {
+    //                         variable: 'data'
+    //                     }
+    //             },
+    //         dist: {
+    //             files: {
+    //                 '<%= yeoman.app %>/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
+    //             }
+    //         }
+    //
+    //     }
+    // },
     // jst: {
     //     compile: {
     //         options:
@@ -225,13 +225,13 @@ module.exports = function (grunt) {
     //
     //     }
     // },
-    // jst: {
-    //     compile: {
-    //         files: {
-    //             '.tmp/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
-    //         }
-    //     }
-    // },
+    jst: {
+        compile: {
+            files: {
+                '.tmp/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
+            }
+        }
+    },
     rev: {
         dist: {
             files: {
