@@ -88,7 +88,7 @@ var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 
  if(data.enableBrand) { ;
-__p += '\n<a href="/" class="brand-logo waves-effect waves-light btn"><img width="120" src="/images/one-pebble-logo-white.png" alt="One Pebble" class="logo"></a>\n';
+__p += '\n<a href="/" class="brand-logo waves-effect waves-light btn"><img width="120" src="/images/OnePebble_Logo-white-horizontal.png" alt="One Pebble" class="logo"></a>\n';
  } ;
 __p += '\n<form>\n    <div class="input-field">\n            <input id="search" class="autocomplete" type="search" placeholder="Search for a company or ticker" required>\n            <label class="label-icon" for="search"><i class="material-icons">search</i></label>\n            <i class="material-icons close">close</i>\n    </div>\n</form>';
 return __p

@@ -107,11 +107,21 @@ module.exports = function (grunt) {
                 dest: '<%= yeoman.dist %>'
             }
         },
+        // usemin: {
+        //     html: ['<%= yeoman.dist %>/{,*/}*.html'],
+        //     css:['<%= yeoman.dist %>/styles/{,*/}*.css'],
+        //     options:{
+        //         dirs: ['<%= yeoman.dist %>']
+        //     }
+        // },
+
         usemin: {
             html: ['<%= yeoman.dist %>/{,*/}*.html'],
-            css:['<%= yeoman.dist %>/styles/{,*/}*.css'],
-            options:{
-                dirs: ['<%= yeoman.dist %>']
+            css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+            options: {
+                dirs: ['<%= yeoman.dist %>'],
+                basedir: '<%= yeoman.dist %>',
+                assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images']
             }
         },
         imagemin: {
@@ -153,7 +163,7 @@ module.exports = function (grunt) {
                 dest: '<%= yeoman.dist %>',
                 src: [
                     '*.{ico,txt}',
-                    'images/{,*/}*.{webp,gif}',
+                    'images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                     'styles/fonts/{,*/}*.*',
                     'scripts/vendor/{,*/}*.*',
                     'locales/{,*/}*.*',
@@ -181,23 +191,23 @@ module.exports = function (grunt) {
             }]
         }
     },
-    // jst: {
-    //     compile: {
-    //         options:
-    //             {
-    //                 templateSettings:
-    //                     {
-    //                         variable: 'data'
-    //                     }
-    //             },
-    //         dist: {
-    //             files: {
-    //                 '<%= yeoman.app %>/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
-    //             }
-    //         }
-    //
-    //     }
-    // },
+    jst: {
+        compile: {
+            options:
+                {
+                    templateSettings:
+                        {
+                            variable: 'data'
+                        }
+                },
+            dist: {
+                files: {
+                    '<%= yeoman.app %>/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
+                }
+            }
+
+        }
+    },
     // jst: {
     //     compile: {
     //         options:
@@ -215,13 +225,13 @@ module.exports = function (grunt) {
     //
     //     }
     // },
-    jst: {
-        compile: {
-            files: {
-                '.tmp/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
-            }
-        }
-    },
+    // jst: {
+    //     compile: {
+    //         files: {
+    //             '.tmp/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
+    //         }
+    //     }
+    // },
     rev: {
         dist: {
             files: {
@@ -248,7 +258,7 @@ module.exports = function (grunt) {
                 master: ['index.html']
             },
             src: [
-                'images/**/*.{jpg,png}',
+                'images/**/*.{png,jpg,jpeg,gif,webp}',
                 'scripts/*.js',
                 'styles/*.css'
             ],
