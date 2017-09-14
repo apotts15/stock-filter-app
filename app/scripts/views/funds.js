@@ -13,7 +13,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         events: {
             "click .close": "clearSearch",
             "click .card" : "goToFund",
-            "click body" : "clickit",
+            "click body" : "click",
             "click .ticker-container" : "clickit",
             "click .clear-all-filters": "clearAllFilters"
         },
@@ -23,8 +23,8 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             document.location.href = url[0];
         },
 
-        clickit: function () {
-         // alert('click the wat');
+        click: function () {
+            $('.button-collapse').sideNav('hide');
         },
 
         getTicker: function(e) {
@@ -84,6 +84,14 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             this.filter(this.collection.params);
 
             this.trigger("render", "render done!");
+            $('.button-collapse').sideNav({
+                    menuWidth: 400,
+                    edge: 'left', // Choose the horizontal origin
+                    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                    draggable: true // Choose whether you can drag to open on touch screens
+                }
+            );
+
             return this;
         },
 
@@ -433,7 +441,7 @@ console.log(values, key, range);
         typeahead: function() {
             var searchView = new OnePebbleApp.Views.Search({
                 el: $('.nav-wrapper'),
-                enableBrand: true
+                enableBrand: false
             });
             searchView.render();
         },

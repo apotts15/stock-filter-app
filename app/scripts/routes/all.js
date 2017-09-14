@@ -9,26 +9,65 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
     OnePebbleApp.Routers.All = Backbone.Router.extend({
         routes: {
             '': 'home',
+            '#': 'home',
+            '?*queryString': 'home',
+            '#?*queryString': 'home',
             'fund/': 'fund',
+            'search/': 'search',
             'fund/:id': 'fund',
             'funds/': 'funds',
             'funds/company/:id?*queryString' : 'funds',
-            'funds/company/:id': 'funds',
-            'doctor': 'main'
+            'funds/company/:id': 'funds'
+        },
 
+        initialize: function() {
         },
-        initialize: function () {
+
+        validateAuth: function() {
+            var authenticated = Cookies.get('OPAuth');
+            console.log('authenticated', authenticated);
+            if (authenticated) {
+                console.log('authenticated');
+                return true;
+            } else {
+                console.log('not authenticated');
+                return false;
+            }
         },
-        home: function() {
+
+        home: function(queryParam) {
+            if (this.validateAuth()) {
+                var qp = this.parseQueryString(queryParam);
+                var url = qp.redirectUrl ? decodeURIComponent(qp.redirectUrl) : 'search/';
+
+                Backbone.history.navigate(url, {trigger: true});
+            } else {
+                var loginView = new OnePebbleApp.Views.Login({
+                    el: $('.nav-wrapper')
+                });
+                loginView.render();
+            }
+        },
+
+        search: function() {
+            if(!this.validateAuth()) {
+
+                Backbone.history.navigate('/', {trigger: true});
+                return false;
+            }
+
             var searchView = new OnePebbleApp.Views.Search({
                 el: $('.nav-wrapper')
             });
             searchView.render();
         },
-        main: function () {
-            new OnePebbleApp.Views.Doctor();
-        },
+
         fund: function (fundId) {
+            if(!this.validateAuth()) {
+                Backbone.history.navigate('/', {trigger: true});
+                return false;
+            }
+
             var fund = new OnePebbleApp.Views.Fund({
                 id: fundId,
                 el: $('body')
@@ -36,11 +75,12 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
         },
 
         funds: function(fundId, queryString) {
-            var params = queryString ? this.parseQueryString(queryString) : '';
+            if (!this.validateAuth()) {
+                Backbone.history.navigate('/', {trigger: true});
+                return false;
+            }
 
-            // if (queryString) {
-            //     params = this.parseQueryString(queryString);
-            // }
+            var params = queryString ? this.parseQueryString(queryString) : '';
 
             var funds = new OnePebbleApp.Views.Funds({
                 el: $('body'),
@@ -49,11 +89,21 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
             });
         },
 
+        getQueryParams: function(removeQ) {
+            var qp = window.location.search;
+            qp = removeQ ? qp.split('?') && qp.split('?')[1] : qp;
+
+            return qp;
+        },
+
         parseQueryString: function(queryString){
             var params = {};
-            if(queryString){
+            var locationQP = this.getQueryParams(true);
+
+            var qp = queryString || locationQP;
+            if(qp){
                 _.each(
-                    _.map(decodeURI(queryString).split(/&/g),function(el,i){
+                    _.map(decodeURI(qp).split(/&/g),function(el,i){
                         var aux = el.split('='), o = {};
                         if(aux.length >= 1){
                             var val = undefined;
@@ -63,7 +113,7 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
                         }
                         return o;
                     }),
-                    function(o){
+                    function(o) {
                         _.extend(params,o);
                     }
                 );

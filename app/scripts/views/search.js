@@ -1,4 +1,4 @@
-/*global OnePebbleApp, Backbone, JST*/
+/* global OnePebbleApp, Backbone, JST */
 
 OnePebbleApp.Views = OnePebbleApp.Views || {};
 
@@ -25,7 +25,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                     this.goToFund(e.target.value);
                 }
             } else {
-                if($target && $target.hasClass('autocomplete') ) {
+                if ($target && $target.hasClass('autocomplete') ) {
                     if ($target) {
                         this.typeahead($target.val());
                     }
@@ -45,7 +45,6 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                     this.goToFundList();
                 }
             }
-            //this.hideDD();
         },
 
         getType: function(e) {

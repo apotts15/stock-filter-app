@@ -11,5 +11,4 @@ module.exports = function (app) {
     app.use('/fund',require('./../api/fund/index'));
     app.use('/funds',require('./../api/funds/index'));
     app.use('/search',require('./../api/searches/index'));
-    app.use('/doctors',require('./../api/doctors/index'));
 };
