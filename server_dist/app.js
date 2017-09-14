@@ -12,7 +12,7 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var async = require('async');
 var config = require('./config/environment');
-var fs = require('fs');s
+var fs = require('fs');
 var join = require('path').join;
 
 var redis = require("redis");

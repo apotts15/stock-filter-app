@@ -270,7 +270,7 @@
         <div class="col s12 cards-col"> <!-- Note that "m8 l9" was added -->
             <div class="col s12 cards-list-header">
                 <!-- JST data.funds.length -->
-                <h6><%= funds.length %> Funds Found</h6>
+                <h6><%= data.funds.length %> Funds Found</h6>
             </div>
             <!--<div class="col s6 right-align">
                 <ul class="pagination tiddy-bottom">
@@ -285,7 +285,7 @@
             </div>-->
             <ul class="card-list">
                 <!-- JST data.funds -->
-                <% _.each(funds, function(fund, i) { %>
+                <% _.each(data.funds, function(fund, i) { %>
                 <li class="card hoverable" data-id="<%= fund.ticker %>">
                     <h3 class="card-title ticker background-<%= Math.floor(Math.random() * 3) + 1 %>"><%= fund.ticker %></h3>
                     <div class="card-content center-align">
