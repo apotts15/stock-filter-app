@@ -270,7 +270,7 @@
         <div class="col s12 cards-col"> <!-- Note that "m8 l9" was added -->
             <div class="col s12 cards-list-header">
                 <!-- JST data.funds.length -->
-                <h6><%= data.funds.length %> Funds Found</h6>
+                <h6><%= funds.length %> Funds Found</h6>
             </div>
             <!--<div class="col s6 right-align">
                 <ul class="pagination tiddy-bottom">
@@ -285,23 +285,22 @@
             </div>-->
             <ul class="card-list">
                 <!-- JST data.funds -->
-                <% _.each(data.funds, function(fund, i) { %>
-                <li class="card hoverable" data-id="<%= fund.ticker %>">
-                    <h3 class="card-title ticker background-<%= Math.floor(Math.random() * 3) + 1 %>"><%= fund.ticker %></h3>
-                    <div class="card-content center-align">
-                        <h5 class="fund-name"><%= fund.fund %></h5>
-                        <h5 class="fund-percent center-align">
-                            <a class="waves-effect waves-light btn indigo darken-4"><%= (Math.random() * (3.120 - 0.0200) + 0.0200).toFixed(4) + '%' %></a></h5>
+                <% _.each(funds, function(fund, i) { %>
+                <li class="card-wrapper">
+                    <div class="card hoverable" data-id="<%= fund.ticker %>">
+                        <div class="card-bg background-<%= Math.floor(Math.random() * 6) + 1 %>">
+                            <h6 class="card-title ticker btn blue darken-1"><%= fund.ticker %></h6>
+                            <h5 class="fund-name"><%= fund.fund %></h5>
+                            <p class="fund-type center-align">
+                               <%= fund.fundBasics.segment %>
+                            </p>
+                        </div>
+                        <div class="card-content center-align <%= fund.gunStocks.length >= 1 ? 'gun-full' : 'gun-free' %>">
+                            <p><i class="material-icons medium">check</i><%= fund.analysis.fundClosureRisk %></p>
+                            <p><i class="material-icons show_chart">show_chart</i><%= fund.analysis.fundClosureRisk %> Risk</p>
 
-                        <h5 class="fund-type center-align">
-                            <!--<i class="material-icons"><% //= iconSet[fund.fund_type] || iconSet['default'] %></i> <% //= fund.fundBasics.segment %>-->
-                            <%= fund.fundBasics.segment %>
-                        </h5>
-                        <h6 class="asset-class"><%= fund.economicDevelopment %></h6>
+                        </div>
                     </div>
-                    <!--<div class="card-action">-->
-                        <!--<a href="#">Look inside fund</a>-->
-                    <!--</div>-->
                 </li>
                 <% }) %>
             </ul>

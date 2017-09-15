@@ -9,7 +9,11 @@ OnePebbleApp.Collections = OnePebbleApp.Collections || {};
             this.ticker = id;
         },
         url: function() {
-            return '/funds/company/' + this.ticker
+            var route = '/funds/';
+            if (this.ticker) {
+                route += 'company/' + this.ticker;
+            }
+            return route;
         },
         model: OnePebbleApp.Models.Fund
     });

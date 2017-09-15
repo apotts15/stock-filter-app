@@ -16,6 +16,8 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         enterPassword: function(e) {
+            $('#password').removeClass('invalid');
+            $('.password .op-input').removeClass('shake');
             var $target = $(e.target);
             // Password by "Enter"
             var enterPasswordAction = e.which === this.ENTER_KEY;
@@ -45,6 +47,8 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 this.setAuthCookie();
                 this.goToNext();
             } else {
+                $('#password').addClass('invalid').val('');
+                $('.password .op-input').addClass('shake');
                 console.log('The password does not match!');
             }
         },
@@ -93,17 +97,10 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         timerExpiration: function() {
             console.log('cookie expired');
-            var redirectUrl = encodeURIComponent(window.location.href);
-            window.location.href = window.location.origin + '/?redirectUrl=' + redirectUrl;
         },
 
         goToNext: function() {
-            //Backbone.history.navigate('funds/company/' + 'MSFT', {trigger: true});
-            var qp = this.parseQueryString();
-            var url = qp.redirectUrl ? decodeURIComponent(qp.redirectUrl) : '#search/';
-
-            window.location.href = url;
-            //Backbone.history.navigate('search/', {trigger: true});
+            Backbone.history.navigate('#funds/', {trigger: true});
             this.remove();
         },
 

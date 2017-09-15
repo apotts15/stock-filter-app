@@ -74,15 +74,21 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         goToFund: function() {
+            this.dimResults();
             var symbol = this.getSymbol();
 
             Backbone.history.navigate('fund/' + symbol, {trigger:true});
         },
 
         goToFundList: function() {
+            this.dimResults();
             var symbol = this.getSymbol();
 
             Backbone.history.navigate('funds/company/' + symbol, {trigger:true});
+        },
+
+        dimResults: function() {
+            $('.cards-col').css({opacity: .5});
         },
 
         initialize: function (obj) {

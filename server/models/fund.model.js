@@ -135,8 +135,7 @@ FundSchema.statics = {
 
     },
     getAll: function (cb) {
-        this.find()
-            .sort({'name': -1}) // sort by date
+        this.find({})
             .exec(cb);
     },
     getBySymbol: function (ticker, cb) {

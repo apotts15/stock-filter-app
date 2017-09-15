@@ -64,6 +64,10 @@ var doLeveling = function(cat, metric) {
     var ruleSet;
     var levelScore;
 
+    if (metric === null || metric === undefined || !metric) {
+        return 'no-data';
+    }
+
     _.each(leveling, function(item){
         ruleSet = categories.categories[cat][item].rules;
         // >= min && <= max
@@ -246,6 +250,14 @@ var categories = {
                     "max": 11563499,
                     "min": null
                 }
+            },
+            "no-data": {
+                "name": "Not enough info to",
+                "description": "No enough data to make a determination",
+                "rules": {
+                    "max": null,
+                    "min": null
+                }
             }
         },
         "returns": {
@@ -288,6 +300,14 @@ var categories = {
                     "max": 0.004831,
                     "min": null
                 }
+            },
+            "no-data": {
+                "name": "Not enough info to",
+                "description": "No enough data to make a determination",
+                "rules": {
+                    "max": null,
+                    "min": null
+                }
             }
         },
         "risk": {
@@ -328,6 +348,14 @@ var categories = {
                 "description": "Standard deviation of monthly risk is {}, lower than 80% of all funds.",
                 "rules": {
                     "max": 0.00056,
+                    "min": null
+                }
+            },
+            "no-data": {
+                "name": "Not enough info to",
+                "description": "No enough data to make a determination",
+                "rules": {
+                    "max": null,
                     "min": null
                 }
             }
@@ -373,6 +401,14 @@ var categories = {
                     "max": 24,
                     "min": null
                 }
+            },
+            "no-data": {
+                "name": "Not enough info to",
+                "description": "No enough data to make a determination",
+                "rules": {
+                    "max": null,
+                    "min": null
+                }
             }
         },
         "dividend": {
@@ -413,6 +449,14 @@ var categories = {
                 "description": "Annual dividend yield is {}, lower than 80% of all funds.",
                 "rules": {
                     "max": 0.009238,
+                    "min": null
+                }
+            },
+            "no-data": {
+                "name": "Not enough info to",
+                "description": "No enough data to make a determination",
+                "rules": {
+                    "max": null,
                     "min": null
                 }
             }

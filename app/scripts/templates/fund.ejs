@@ -23,31 +23,33 @@
                 <div class="row">
 
                     <div class="col s6 m6 l3">
-                        <div class="card" data-id="<%= ticker %>">
-                            <div class="card-title ticker background-2" style="height: 100px">
-                                <h5 class="btn center-align fund-ticker"><span class="bold"><%= ticker %></span></h5>
+                        <div class="card" data-id="<%= fund.ticker %>">
+                            <div class="card-bg background-<%= Math.floor(Math.random() * 6) + 1 %>">
+                                <h6 class="card-title ticker waves-effect waves-light btn blue darken-1"><%= fund.ticker %></h6>
                             </div>
                             <div class="card-content center-align <%= fund.gunStocks.length >= 1 ? 'gun-full' : 'gun-free' %>">
-
                                 <% if (fund.gunStocks.length >= 1) {  %>
-                                    <h4 class="center-align">
-                                        <span class="bold"><% var rando = (Math.random() * (3.120 - 0.0200) + 0.0200).toFixed(4) + '%'; %><%= rando %></span>
-                                    </h4>
-                                    <h5>in Gun Stocks</h5>
-                                <% } else { %>
+                                <h4 class="center-align">
+                                    <span class="bold"><% var rando = (Math.random() * (3.120 - 0.0200) + 0.0200).toFixed(4) + '%'; %><%= rando %></span>
+                                </h4>
+                                <h5>in Gun Stocks</h5>
+                                <% var infoText = 'Percentage of this fund going to Gun Stocks' } else { %>
                                 <h5><i class="material-icons medium">check</i></h5>
                                 <h5>Gun-Free Fund</h5>
-                                <% } %>
 
-                                <!--<div class="tip center-align" data-tip="Percentage of this fund going to Gun Stocks">-->
-                                    <!--<i class="material-icons">info</i>-->
-                                <!--</div>-->
+                                <% var infoText = 'None of the companies in this fund contribute to Gun Stocks' } %>
+                                <div class="tip center-align" data-tip="<%= infoText %>">
+                                    <i class="material-icons">info</i>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col s6 m6 l9">
                         <h5><span class="bold">$47M+</span> is held in <%= fund.gunStocks.length %> ammo maker/seller stocks, comprised of <span class="bold"><%= rando %></span> of the fund.</h5>
                         <h5 class="h55 light-grey"><%= ticker %> holds similar percentage of gun stocks to the average US stock fund and also a similar percentage to other funds in the same category.</h5>
+                    </div>
+                    <div class="col s6 m6 l3">
+                        <a class="waves-effect waves-light btn red darken-1" href="/#funds/">See Alternative Funds</a>
                     </div>
                 </div>
             </div>
@@ -80,49 +82,96 @@
             </div>
         </div>
 
-        <ul class="row">
+        <div class="cards-container no-padding">
+            <div class="cards-col">
+                <ul class="card-list">
+                    <!-- JST data.funds -->
 
-            <li class="col s12 m6 l4">
-                <div class="card hoverable" data-id="ACSI">
-                    <h3 class="card-title ticker background-2">ACSI</h3>
-                    <div class="card-content center-align">
-                        <h5 class="fund-name">American Customer Satisfaction Core Alpha ETF</h5>
-                        <h5 class="fund-type left-align"><i class="material-icons">pie_chart_outlined</i> Equity: U.S. - Large Cap</h5>
-                        <h6 class="asset-class">Class: Developed Markets</h6>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Look inside fund</a>
-                    </div>
-                </div>
-            </li>
+                    <li class="card-wrapper">
+                        <div class="card hoverable" data-id="ACSI">
+                            <div class="card-bg background-2">
+                                <h6 class="card-title ticker btn blue darken-1">ACSI</h6>
+                                <h5 class="fund-name">American Customer Satisfaction Core Alpha ETF</h5>
+                                <p class="fund-type center-align">
+                                    Equity: U.S. - Large Cap
+                                </p>
+                            </div>
+                            <div class="card-content center-align gun-free">
+                                <p><i class="material-icons medium">check</i>Medium</p>
+                                <p><i class="material-icons show_chart">show_chart</i>Medium Risk</p>
 
-            <li class="col s12 m6 l4">
-                <div class="card hoverable" data-id="ALFA">
-                    <h3 class="card-title ticker background-1">ALFA</h3>
-                    <div class="card-content center-align">
-                        <h5 class="fund-name">AlphaClone Alternative Alpha ETF</h5>
-                        <h5 class="fund-type left-align"><i class="material-icons">pie_chart_outlined</i> Equity: U.S.  -  Total Market</h5>
-                        <h6 class="asset-class">Class: Developed Markets</h6>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Look inside fund</a>
-                    </div>
-                </div>
-            </li>
+                            </div>
+                        </div>
+                    </li>
 
-            <li class="col s12 m6 l4">
-                <div class="card hoverable" data-id="BFOR">
-                    <h3 class="card-title ticker background-2">BFOR</h3>
-                    <div class="card-content center-align">
-                        <h5 class="fund-name">ALPS Barron's 400 ETF</h5>
-                        <h5 class="fund-type left-align"><i class="material-icons">pie_chart_outlined</i> Equity: U.S.  -  Total Market</h5>
-                        <h6 class="asset-class">Class: Developed Markets</h6>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Look inside fund</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
+                    <li class="card-wrapper">
+                        <div class="card hoverable" data-id="ACTX">
+                            <div class="card-bg background-6">
+                                <h6 class="card-title ticker btn blue darken-1">ACTX</h6>
+                                <h5 class="fund-name">Global X Guru Activist Index ETF</h5>
+                                <p class="fund-type center-align">
+                                    Equity: U.S. - Total Market
+                                </p>
+                            </div>
+                            <div class="card-content center-align gun-free">
+                                <p><i class="material-icons medium">check</i>High</p>
+                                <p><i class="material-icons show_chart">show_chart</i>High Risk</p>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="card-wrapper">
+                        <div class="card hoverable" data-id="AGG">
+                            <div class="card-bg background-3">
+                                <h6 class="card-title ticker btn blue darken-1">AGG</h6>
+                                <h5 class="fund-name">iShares Core U.S. Aggregate Bond ETF</h5>
+                                <p class="fund-type center-align">
+                                    Fixed Income: U.S. - Broad Market Investment Grade
+                                </p>
+                            </div>
+                            <div class="card-content center-align gun-free">
+                                <p><i class="material-icons medium">check</i>Low</p>
+                                <p><i class="material-icons show_chart">show_chart</i>Low Risk</p>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card-wrapper">
+                        <div class="card hoverable" data-id="AGGE">
+                            <div class="card-bg background-3">
+                                <h6 class="card-title ticker btn blue darken-1">AGGE</h6>
+                                <h5 class="fund-name">IQ Enhanced Core Bond U.S. ETF</h5>
+                                <p class="fund-type center-align">
+                                    Fixed Income: U.S. - Broad Market Investment Grade
+                                </p>
+                            </div>
+                            <div class="card-content center-align gun-free">
+                                <p><i class="material-icons medium">check</i>Low</p>
+                                <p><i class="material-icons show_chart">show_chart</i>Low Risk</p>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="card-wrapper">
+                        <div class="card hoverable" data-id="AGGP">
+                            <div class="card-bg background-4">
+                                <h6 class="card-title ticker btn blue darken-1">AGGP</h6>
+                                <h5 class="fund-name">IQ Enhanced Core Plus Bond U.S. ETF</h5>
+                                <p class="fund-type center-align">
+                                    Fixed Income: U.S. - Broad Market
+                                </p>
+                            </div>
+                            <div class="card-content center-align gun-free">
+                                <p><i class="material-icons medium">check</i>Low</p>
+                                <p><i class="material-icons show_chart">show_chart</i>Low Risk</p>
+
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>

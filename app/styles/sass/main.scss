@@ -1,3 +1,10 @@
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+
 /* fallback */
 @font-face {
   font-family: 'Material Icons';
@@ -24,7 +31,7 @@
 
 // global
 body {
-    background-color: #ddd;
+    background-color: #F2F2F2 !important;
     font-family: Avenir, Helvetica, Arial, sans serif;
 }
 h1 {
@@ -193,18 +200,24 @@ main {
 }
 
 .gunstocks {
-    .card .ticker {
-        text-shadow: none;
-        margin: 0;
-    }
-    .card .card-content.gun-full {
-        background-color: rgba(255, 170, 0, 0.64);
-    }
+    .card {
+        .ticker {
+            text-shadow: none;
+            margin: 0;
+        }
+        .card-content.gun-full {
+            background-color: rgba(255, 170, 0, 0.64);
+        }
 
-    .card .card-content.gun-free {
-        background-color: #44ae53;
+        .card-content.gun-free {
+            background-color: #44ae53;
+        }
+        .card-title {
+            line-height: 36px;
+        }
     }
 }
+
 .bold {
     font-weight: bold;
 }
@@ -463,13 +476,13 @@ nav .input-field label:active i {
 .header-row .fund-name {
     font-weight: bolder;
     color: white;
-    text-shadow: 2px 2px darkgrey;
 }
 
 .ticker-container {
     margin-right: 50px;
 
     .ticker {
+        text-shadow: none;
         font-weight: bold;
         border-bottom: 1px solid grey;
         padding: 14px 20px 5px 20px;
@@ -589,12 +602,18 @@ nav .input-field label:active i {
             flex-direction: row;
             flex-wrap: wrap;
         }
-
-        .card {
-            margin: 10px;
+        .card-wrapper {
             flex-grow: 1;
+            margin: 0 5px;
+        }
+        .card {
+            margin: 10px auto;
             width: 200px;
             height: 320px;
+
+            .card-content {
+                padding: 0;
+            }
         }
 
         @media only screen and (max-width : 500px) {
@@ -615,7 +634,7 @@ nav .input-field label:active i {
     }
 }
 .card {
-    .ticker {
+    .card-bg {
         position: relative;
         color: white;
         text-shadow: 2px 2px black;
@@ -624,10 +643,15 @@ nav .input-field label:active i {
         margin: 0;
         text-align: center;
         background-size: cover;
+        height: 60%;
+    }
+
+    .ticker {
+        text-shadow: none;
     }
 
     .fund-name {
-        color: #4d4d4d;
+        color: black;
         display: block;
         display: -webkit-box;
         margin-top: 0;
@@ -638,10 +662,12 @@ nav .input-field label:active i {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
+        text-shadow: none;
+        margin-bottom: 0;
     }
 
     .fund-type {
-        font-size: 18px;
+        color: #2f2626;
         line-height: 1.2;
         display: -webkit-box;
         -webkit-line-clamp: 1;
@@ -649,6 +675,12 @@ nav .input-field label:active i {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
+        text-shadow: none;
+        margin: 0 auto;
+        position: absolute;
+        top: 85%;
+        left: 0;
+        right: 0;
 
         i {
             vertical-align: middle;
@@ -694,10 +726,70 @@ nav .input-field label:active i {
 
 header, .cards-container, footer {
     padding-left: 400px;
+
+    &.no-padding {
+        padding-left: 0;
+    }
 }
 
 @media only screen and (max-width : 992px) {
     header, .cards-container, footer {
         padding-left: 0;
+    }
+}
+
+@-webkit-keyframes fadeIt {
+    0%   { background-color: #b71c1c; }
+    100% { background-color: #FFFFFF; }
+}
+@-moz-keyframes fadeIt {
+    0%   { background-color: #b71c1c; }
+    100% { background-color: #FFFFFF; }
+}
+@-o-keyframes fadeIt {
+    0%   { background-color: #b71c1c; }
+    100% { background-color: #FFFFFF; }
+}
+@keyframes fadeIt {
+    0%   { background-color: #b71c1c; }
+    100% { background-color: #FFFFFF; }
+}
+
+.invalid {
+    background-image:none !important;
+    -webkit-animation: fadeIt 1s ease-in-out;
+    -moz-animation: fadeIt 1s ease-in-out;
+    -o-animation: fadeIt 1s ease-in-out;
+    animation: fadeIt 1s ease-in-out;
+}
+
+.shake {
+    outline-color: red;
+    /* also need animation and -moz-animation */
+    -webkit-animation: shake .6s linear;
+}
+
+/* also need keyframes and -moz-keyframes */
+@-webkit-keyframes shake {
+    0% {
+        left:-10px;
+    }
+    16% {
+        left:9px;
+    }
+    33% {
+        left:-6px;
+    }
+    50% {
+        left:5px;
+    }
+    66% {
+        left:-2px;
+    }
+    83% {
+        left:1px;
+    }
+    100% {
+        left: 0px;
     }
 }

@@ -1,12 +1,12 @@
 <!-- JST data.enableBrand -->
-<% if(data.enableBrand) { %>
+<% if(enableBrand) { %>
 <a href="/" class="brand-logo waves-effect waves-light btn"><img width="120" src="/images/OnePebble_Logo-white-horizontal.png" alt="One Pebble" class="logo"></a>
 <% } %>
 <!-- JST data.enableBrand -->
-<form class="<%= data.enableBrand ? 'brand' : 'no-brand' %>">
+<form class="<%= enableBrand ? 'brand' : 'no-brand' %>" autocomplete="off">
     <div class="input-field">
             <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-            <input id="search" class="autocomplete" type="search" placeholder="Test another fund" required>
+            <input id="search" class="autocomplete" autocomplete="off" type="search" placeholder="Test another fund" required>
             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
             <i class="material-icons close">close</i>
     </div>
