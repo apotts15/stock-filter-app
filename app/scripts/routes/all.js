@@ -16,6 +16,8 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
             'search/': 'search',
             'fund/:id': 'fund',
             'funds/': 'funds',
+            'funds/:id' : 'funds',
+            'funds/:id?*queryString' : 'funds',
             'funds/company/:id?*queryString' : 'funds',
             'funds/company/:id': 'funds'
         },

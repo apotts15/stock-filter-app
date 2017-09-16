@@ -19,7 +19,7 @@
         <div class="card gunstocks">
             <div class="card-content">
                 <!-- JST data.fund.categoryData -->
-                <h5 class="bold"><%= fund.gunStocks.length === 1 ? fund.gunStocks.length + ' Gun Stock' : fund.gunStocks.length + ' Gun Stocks' %></h5>
+                <h5 class="bold"><%= fund.gunStocks && fund.gunStocks.length === 1 ? fund.gunStocks.length + ' Gun Stock' : fund.gunStocks.length + ' Gun Stocks' %></h5>
                 <div class="row">
 
                     <div class="col s6 m6 l3">
@@ -48,8 +48,8 @@
                         <h5><span class="bold">$47M+</span> is held in <%= fund.gunStocks.length %> ammo maker/seller stocks, comprised of <span class="bold"><%= rando %></span> of the fund.</h5>
                         <h5 class="h55 light-grey"><%= ticker %> holds similar percentage of gun stocks to the average US stock fund and also a similar percentage to other funds in the same category.</h5>
                     </div>
-                    <div class="col s6 m6 l3">
-                        <a class="waves-effect waves-light btn red darken-1" href="/#funds/">See Alternative Funds</a>
+                    <div class="col s12 m6 l4">
+                        <a class="waves-effect waves-light btn red darken-1" href="/#funds/all">See Alternative Funds</a>
                     </div>
                 </div>
             </div>

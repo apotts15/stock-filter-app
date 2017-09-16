@@ -3,6 +3,7 @@
         <ul id="slide-out" class="side-nav fixed">
             <li>
                 <img width="100%" src="/images/OnePebble_Logo-marine-horizontal.png" alt="One Pebble" class="logo">
+                <i class="material-icons sidenav-close close">close</i>
             </li>
             <li class="filter-col">
                 <ul>
@@ -31,7 +32,7 @@
                             <span class="range-val right" id="returns-upper"></span>
                         </div>
                     </li>
-                    <li class="row">
+                    <li class="row no-marg">
                         <p class="col s3">Dividends</p>
                         <div class="col s8 ranger">
                             <div id="dividend-slider"></div>
@@ -39,7 +40,7 @@
                             <span class="range-val right" id="dividend-upper"></span>
                         </div>
                     </li>
-                    <li class="row">
+                    <li class="row no-marg">
                         <p class="col s3">Category</p>
                         <div class="col s7 input-field category-select">
                             <select id="category-dd">
@@ -59,7 +60,7 @@
                             </select>
                         </div>
                     </li>
-                    <li class="row">
+                    <li class="row no-marg">
                         <p class="col s3">Focus</p>
                         <div class="col s7 input-field">
                             <select id="focus-dd">
@@ -102,7 +103,7 @@
                             </select>
                         </div>
                     </li>
-                    <li class="row">
+                    <li class="row no-marg">
                         <p class="col s3">Niche</p>
                         <div class="col s7 input-field">
                             <select id="niche-dd">
@@ -161,7 +162,7 @@
                             </select>
                         </div>
                     </li>
-                    <li class="row">
+                    <li class="row no-marg">
                         <p class="col s3">Brand</p>
                         <div class="col s7 input-field">
                             <select id="brand-dd">
@@ -295,9 +296,9 @@
                                <%= fund.fundBasics.segment %>
                             </p>
                         </div>
-                        <div class="card-content center-align <%= fund.gunStocks.length >= 1 ? 'gun-full' : 'gun-free' %>">
-                            <p><i class="material-icons medium">check</i><%= fund.analysis.fundClosureRisk %></p>
-                            <p><i class="material-icons show_chart">show_chart</i><%= fund.analysis.fundClosureRisk %> Risk</p>
+                        <div class="card-content <%= fund.gunStocks.length >= 1 ? 'gun-full' : 'gun-free' %>">
+                            <p><i class="material-icons trending_up">trending_up</i><%= fund.analysis.fundClosureRisk %></p>
+                            <p><i class="material-icons timeline">timeline</i><%= fund.analysis.fundClosureRisk %> Risk</p>
 
                         </div>
                     </div>

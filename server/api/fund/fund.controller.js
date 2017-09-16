@@ -7,7 +7,7 @@ var Fund = mongoose.model('Fund');
 
 exports.getBySymbol = function(req, res) {
 
-    console.log('req.params.id', req.params.id);
+    console.log('Fund getBySymbol req.params.id: ', req.params.id);
 
     Fund.get(req.params.id, function (err, results) {
         if (err){
@@ -43,8 +43,8 @@ var moneyFormat = function(labelValue) {
 
     var num =  parseFloat(number).toPrecision(2);
     if (num.indexOf('+') !== -1){
-         num = parseFloat(number).toPrecision(3);
-     }
+        num = parseFloat(number).toPrecision(3);
+    }
     return num + number.replace(/[^B|M|K]/g,"");
 };
 

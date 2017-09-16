@@ -10,10 +10,13 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         model: OnePebbleApp.Models.Fund,
         collection: OnePebbleApp.Collections.Funds,
         className: '',
+        MENU_TOGGLED: false,
         events: {
             "click .close": "clearSearch",
             "click .card" : "goToFund",
-            "click body" : "click",
+            "click .sidenav-close" : "closeNav",
+            "click .drag-target" : "closeNav",
+            "click .closed": "openNav",
             "click .ticker-container" : "clickit",
             "click .clear-all-filters": "clearAllFilters"
         },
@@ -23,8 +26,20 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             document.location.href = url[0];
         },
 
-        click: function () {
+        openNav: function(e) {
+            if($(e.target).hasClass('menu')){
+                console.log('Open clicked');
+                $('#slide-out').show().addClass('open').removeClass('closed');
+                $('.button-collapse').sideNav('show');
+            }
+        },
+
+        closeNav: function () {
+            console.log('Close clicked');
             $('.button-collapse').sideNav('hide');
+            $('.button-collapse').sideNav('destroy');
+            $('#slide-out').hide();
+            this.MENU_TOGGLED = false;
         },
 
         getTicker: function(e) {
@@ -86,9 +101,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             this.trigger("render", "render done!");
             $('.button-collapse').sideNav({
                     menuWidth: 400,
-                    edge: 'left', // Choose the horizontal origin
-                    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-                    draggable: true // Choose whether you can drag to open on touch screens
+                    edge: 'left' // Choose the horizontal origin
                 }
             );
 

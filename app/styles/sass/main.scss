@@ -57,10 +57,6 @@ nav {
     background-color: rgba(0,0,0,0);
 }
 
-.nav-wrapper {
-    background-color: #55606e;
-}
-
 
 /* COLORS */
 $onepebble-primary-color: #225665;
@@ -105,7 +101,9 @@ input:not([type]), input[type=date], input[type=datetime-local], input[type=date
 nav .input-field label {
     top: -10px;
 }
-
+.nav-wrapper {
+    background: white;
+};
 .nav-wrapper .input-field.op-input input[type=password] {
     height: inherit;
     padding-left: 4rem;
@@ -258,6 +256,12 @@ main {
     border-radius: 0;
 }
 
+.close {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
 .material-icons {
     &.icons {
         height: 50px;
@@ -377,12 +381,22 @@ nav .input-field label:active i {
     // border-radius: 0;
     // background: rgba(0, 0, 0, 0.6);
 }
+.close, .closed {
+    display: none;
+}
 @media only screen and (max-width: 1000px) {
     nav .brand-logo {
         display: none;
     }
 
+    .close, .closed {
+        display: block;
+    }
+
     .subpage {
+        .brand.closed {
+            display: none;
+        }
         .brand {
             margin-left: 0;
         }
@@ -396,10 +410,10 @@ nav .input-field label:active i {
             input[type=search] {
                 position: relative;
                 z-index: 1;
-                top: -64px;
+                top: -56px;
             }
             .autocomplete-content {
-                top: -64px;
+                top: -56px;
             }
             .label-icon {
                 z-index: 2;
@@ -547,7 +561,16 @@ nav .input-field label:active i {
 }
 
 .side-nav {
+    width: 400px;
     font-size: 14px;
+
+    li {
+        line-height: 21px;
+
+        &.no-marg {
+            margin: 0;
+        }
+    }
     .row {
         border-bottom: 1px solid #d7d7d7;
 
@@ -557,11 +580,19 @@ nav .input-field label:active i {
             color: #606060;
         }
     }
-    .select-wrapper .select-dropdown {
-        color: #606060;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.1);
-        padding: 0 10px;
+
+    .select-wrapper {
+        input.select-dropdown {
+            height: 32px;
+        }
+
+        .select-dropdown {
+            color: #606060;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.1);
+            padding: 0 10px;
+        }
+
 
         //&.active {
         //    border: none;
@@ -612,7 +643,7 @@ nav .input-field label:active i {
             height: 320px;
 
             .card-content {
-                padding: 0;
+                padding: 20px;
             }
         }
 

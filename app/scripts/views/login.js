@@ -33,30 +33,30 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             var $val =  $('#password').val();
 
             if ($val && $val.trim().length > 0) {
-                console.log('I hit enter and a password was provided', $target);
+                //console.log('I hit enter and a password was provided', $target);
                 this.doPasswordCheck($val);
             } else {
-                console.log('I hit enter but no password, prevented', $target);
+                //console.log('I hit enter but no password, prevented', $target);
                 e.preventDefault();
             }
         },
 
         doPasswordCheck: function(val) {
             if (val.toLocaleString() === 'wegivehope') {
-                console.log('The password matches!', val);
+                //console.log('The password matches!', val);
                 this.setAuthCookie();
                 this.goToNext();
             } else {
                 $('#password').addClass('invalid').val('');
                 $('.password .op-input').addClass('shake');
-                console.log('The password does not match!');
+                //console.log('The password does not match!');
             }
         },
 
         setAuthCookie: function() {
             var date = new Date();
             var minutes = 30;
-            //var minutes = .2;
+            //var minutes = .1;
             var time = minutes * 60 * 1000;
             date.setTime(date.getTime() + (time));
 
@@ -66,8 +66,6 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 // domain: 'demo.onepebble.com',
                 expires: date
             });
-
-            console.log('Cookie set: ', Cookies.get('OPAuth'));
         },
 
         insertParam: function (key, value) {
@@ -97,10 +95,11 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         timerExpiration: function() {
             console.log('cookie expired');
+            Backbone.history.navigate('/', {trigger: true});
         },
 
         goToNext: function() {
-            Backbone.history.navigate('#funds/', {trigger: true});
+            Backbone.history.navigate('#funds/all', {trigger: true});
             this.remove();
         },
 

@@ -12,9 +12,11 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         ENTER_KEY: 13,
         events: {
             'keyup': 'keyAction',
-            "click .close": "clearSearch",
-            'click': 'clickAction'
+            "click .close": "clearSearch"
+            //"click .input-field": 'clickAction'
         },
+
+        cachedTickers: {},
 
         keyAction: function(e) {
             this.showDD();
@@ -33,31 +35,39 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             }
         },
 
-        clickAction: function(e) {
-            var $target = $(e.target);
+        clickAction: function(item) {
+            // var $target = $(e.target);
+            //
+            var type = this.getType(item);
 
-            var type = this.getType(e);
-
-            if ($target && $target.parent() && $target.parent()[0] && $target.parent()[0].tagName === 'LI') {
-                if (type === 'etf') {
+            if (item) {
+                //if (type === 'etf') {
                     this.goToFund();
-                } else {
-                    this.goToFundList();
-                }
+                //} else if (type === 'company') {
+                // this.goToFundList();
+                //}
             }
+            //
+                // if (type === 'etf') {
+                // this.goToFund();
+                // }
+                // else {
+                //     this.goToFundList();
+                // }
+
         },
 
-        getType: function(e) {
-            var $parent = $(e.target).parent();
-            var $img = $parent.find('img');
-            var type = null;
-
-            if ($img && $img[0]) {
-                type = $img[0].src.split('/').pop().split('.png')[0];
+        getType: function() {
+            for (var prop in this.cachedTickers) {
+                if (this.cachedTickers.hasOwnProperty(prop)) {
+                    if (this.cachedTickers[prop].ticker === this.getSymbol()) {
+                        //console.log(this.cachedTickers[prop])
+                        console.log('type', this.cachedTickers[prop].ticker + ' - ' + this.cachedTickers[prop].type);
+                        //console.log(this.cachedTickers[prop].name)
+                        return this.cachedTickers[prop].type
+                    }
+                }
             }
-
-            console.log(type);
-            return type;
         },
 
         getSymbol: function() {
@@ -124,6 +134,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
                     if (!fundsArr) {
                         fundsArr = response;
+                        _.extend(that.cachedTickers, response);
                     }
                     var stocks = {};
                     for (var i = 0; i < fundsArr.length; i++) {
@@ -133,11 +144,14 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
                     $('.autocomplete-content:not(:last)').remove();
                     $('input.autocomplete').autocomplete({
+                        onAutocomplete: function(item) {
+                            that.clickAction(item);
+                        },
                         data: stocks,
+                        cacheable: true,
                         limit: 30 // The max amount of results that can be shown at once. Default: Infinity.
-                    });
-                    // remove duplicated
-                    //
+                    })
+
                 }
             });
         },
@@ -149,6 +163,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         showDD: function() {
             $('.dropdown-content').show();
+
         },
 
         hideDD: function() {

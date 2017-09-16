@@ -10,9 +10,6 @@ OnePebbleApp.Collections = OnePebbleApp.Collections || {};
         },
         url: function() {
             var route = '/funds/';
-            if (this.ticker) {
-                route += 'company/' + this.ticker;
-            }
             return route;
         },
         model: OnePebbleApp.Models.Fund
