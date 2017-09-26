@@ -91,7 +91,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         goToFundList: function() {
-            this.dimResults();
+
             var symbol = this.getSymbol();
 
             Backbone.history.navigate('funds/company/' + symbol, {trigger:true});

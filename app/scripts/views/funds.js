@@ -61,6 +61,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         initialize: function (collection) {
             var id = arguments[0].id;
+            this.qp = document.location.href.split('?')[1] || null;
 
             if (collection instanceof this.collection) {
                 this.collection = collection;
@@ -72,7 +73,10 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                     beforeSend: function (xhr) {
                     },
                     reset: true,
-                    data: params
+                    data: params,
+                    complete: function () {
+                      //  this.unDimResults();
+                    }
                 });
             }
 
@@ -100,11 +104,12 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
             this.trigger("render", "render done!");
             $('.button-collapse').sideNav({
-                    menuWidth: 400,
+                    menuWidth: 300,
                     edge: 'left' // Choose the horizontal origin
                 }
             );
 
+            this.unDimResults();
             return this;
         },
 
@@ -113,6 +118,14 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             var $focusSelect = $('#focus-dd');
             var $nicheSelect = $('#niche-dd');
             var $brandSelect = $('#brand-dd');
+            var $gunsCheck = $('#guns-check');
+            var $gamblingCheck = $('#gambling-check');
+            var $pornCheck = $('#porn-check');
+            var $tobaccoCheck = $('#tobacco-check');
+            var $ffCheck = $('#ff-check');
+            var $alcoholCheck = $('#alcohol-check');
+            var that = this;
+
             $catSelect.material_select();
 
             var url = document.location.href.split('?');
@@ -130,6 +143,55 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 if (qp['brand']) {
                     $brandSelect.val(qp['brand']);
                 }
+
+                if (qp['guns'] && qp['guns'] === 'yes') {
+                    $gunsCheck.attr('checked', 'checked');
+                }
+
+                if (qp['gambling'] && qp['gambling'] === 'yes') {
+                    $gamblingCheck.attr('checked', 'checked');
+                }
+
+                if (qp['pornography'] && qp['pornography'] === 'yes') {
+                    $pornCheck.attr('checked', 'checked');
+                }
+
+                if (qp['fossil'] && qp['fossil'] === 'yes') {
+                    $ffCheck.attr('checked', 'checked');
+                }
+
+                if (qp['tobacco'] && qp['tobacco'] === 'yes') {
+                    $tobaccoCheck.attr('checked', 'checked');
+                }
+
+                if (qp['alcohol'] && qp['alcohol'] === 'yes') {
+                    $alcoholCheck.attr('checked', 'checked');
+                }
+
+                $gunsCheck.on('change', function(e) {
+                    var value = e.target.checked ? 'yes' : 'no';
+                    that.filterResults([value], 'guns', false);
+                });
+                $gamblingCheck.on('change', function(e) {
+                    var value = e.target.checked ? 'yes' : 'no';
+                    that.filterResults([value], 'gambling', false);
+                });
+                $pornCheck.on('change', function(e) {
+                    var value = e.target.checked ? 'yes' : 'no';
+                    that.filterResults([value], 'pornography', false);
+                });
+                $ffCheck.on('change', function(e) {
+                    var value = e.target.checked ? 'yes' : 'no';
+                    that.filterResults([value], 'fossil', false);
+                });
+                $tobaccoCheck.on('change', function(e) {
+                    var value = e.target.checked ? 'yes' : 'no';
+                    that.filterResults([value], 'tobacoo', false);
+                });
+                $alcoholCheck.on('change', function(e) {
+                    var value = e.target.checked ? 'yes' : 'no';
+                    that.filterResults([value], 'alcohol', false);
+                });
             }
 
             $catSelect.material_select();
@@ -138,17 +200,28 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             $brandSelect.material_select();
         },
 
+        filterRangeMaxMin: {
+            'fundSize_min': 0,
+            'fundSize_max': 250000000000,
+            'expense_min': 0,
+            'expense_max': 300,
+            'returns_min': -0.0021, //-0.002097
+            'returns_max': 0.7802, //0.780195
+            'dividend_min': 0,
+            'dividend_max': 0.3106 //0.310594
+        },
+
         setFilterRanges: function(params) {
             var filterRanges = {
-                'fundSize_min': params['fundSize_min'] || 0,
-                'fundSize_max': params['fundSize_max'] || 250000000000,
-                'expense_min': params['expense_min'] || 0,
-                'expense_max': params['expense_max'] || 300,
-                'returns_min': params['returns_min'] || -0.002097,
-                'returns_max': params['returns_max'] || 0.780195,
-                'dividend_min': params['dividend_min'] || 0,
-                'dividend_max': params['dividend_max'] || 0.310594
-            }
+                'fundSize_min': params['fundSize_min'] || this.filterRangeMaxMin['fundSize_min'],
+                'fundSize_max': params['fundSize_max'] || this.filterRangeMaxMin['fundSize_max'],
+                'expense_min': params['expense_min'] || this.filterRangeMaxMin['expense_min'],
+                'expense_max': params['expense_max'] || this.filterRangeMaxMin['expense_max'],
+                'returns_min': params['returns_min'] || this.filterRangeMaxMin['returns_min'],
+                'returns_max': params['returns_max'] || this.filterRangeMaxMin['returns_max'],
+                'dividend_min': params['dividend_min'] || this.filterRangeMaxMin['dividend_min'],
+                'dividend_max': params['dividend_max'] || this.filterRangeMaxMin['dividend_max']
+            };
             return filterRanges;
         },
 
@@ -162,6 +235,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             var returnsSlider = document.getElementById('returns-slider');
             var dividendSlider = document.getElementById('dividend-slider');
             //var risksSlider = document.getElementById('risks-slider');
+            var that = this;
 
             var filterRanges = this.setFilterRanges(params);
 
@@ -198,29 +272,37 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 fundSizeValues[handle].innerHTML = moneyFormat.to(parseInt(values[handle], 10));
             });
 
-            var that = this;
             //fundSizeSlider.noUiSlider.on('update', this.filterResults.bind(this));
             fundSizeSlider.noUiSlider.on('update', function(args) {
+                if (args[0] == that.filterRangeMaxMin['fundSize_min'] && args[1] == that.filterRangeMaxMin['fundSize_max'] ) {
+                    return false;
+                }
+
+                that.dimResults();
                 that.filterResults(args, 'fundSize', true);
             });
 
             // Fund Category DD - fundCategoryDD
             $(fundCategoryDD).on('change', function(e) {
+                that.dimResults();
                 that.filterResults([e.currentTarget.value], 'category', false);
             });
 
             // Focus DD - focusDD
             $(focusDD).on('change', function(e) {
+                that.dimResults();
                 that.filterResults([e.currentTarget.value], 'focus', false);
             });
 
             // niche DD - nicheDD
             $(nicheDD).on('change', function(e) {
+                that.dimResults();
                 that.filterResults([e.currentTarget.value], 'niche', false);
             });
 
             // brand DD - brandDD
             $(brandDD).on('change', function(e) {
+                that.dimResults();
                 that.filterResults([e.currentTarget.value], 'brand', false);
             });
 
@@ -251,6 +333,11 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 expenseValues[handle].innerHTML = parseInt(values[handle], 10) / 100 + '%';
             });
             expenseSlider.noUiSlider.on('update', function(args) {
+                if (args[0] == that.filterRangeMaxMin['expense_min'] && args[1] == that.filterRangeMaxMin['expense_max'] ) {
+                    return false;
+                }
+
+                that.dimResults();
                 that.filterResults(args, 'expense', true);
             });
 
@@ -278,10 +365,15 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             ];
 
             returnsSlider.noUiSlider.on('update', function( values, handle ) {
-                //debugger;
                 returnsValues[handle].innerHTML = (values[handle] * 100).toFixed(2) + '%';
             });
+
             returnsSlider.noUiSlider.on('update', function(args) {
+                if (args[0] == that.filterRangeMaxMin['returns_min'] && args[1] == that.filterRangeMaxMin['returns_max'] ) {
+                    return false;
+                }
+
+                that.dimResults();
                 that.filterResults(args, 'returns', true);
             });
 
@@ -308,13 +400,17 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 document.getElementById('dividend-upper')
             ];
 
-            dividendSlider.noUiSlider.on('update', function(args) {
-                that.filterResults(args, 'dividend', true);
+            dividendSlider.noUiSlider.on('update', function( values, handle ) {
+                dividendValues[handle].innerHTML = (values[handle] * 100).toFixed(2) + '%';
             });
 
-            dividendSlider.noUiSlider.on('update', function( values, handle ) {
-                //debugger;
-                dividendValues[handle].innerHTML = (values[handle] * 100).toFixed(2) + '%';
+            dividendSlider.noUiSlider.on('update', function(args) {
+                if (args[0] == that.filterRangeMaxMin['dividend_min'] && args[1] == that.filterRangeMaxMin['dividend_max'] ) {
+                    return false;
+                }
+
+                that.dimResults();
+                that.filterResults(args, 'dividend', true);
             });
         },
 
@@ -327,7 +423,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             var qp_arr;
             var final_qp;
             var filterRanges = this.setFilterRanges([]);
-console.log(values, key, range);
+            //console.log(values, key, range);
 
             if (!old_qp) {
                 if (range && filterRanges[key + '_min'].toFixed(4) === parseFloat(values[0]).toFixed(4) && filterRanges[key + '_max'].toFixed(4) === parseFloat(values[1]).toFixed(4)) {
@@ -335,7 +431,6 @@ console.log(values, key, range);
                 } else if (filterRanges[key] === values[0]) {
                     return;
                 }
-
             }
 
             if (range) {
@@ -461,6 +556,16 @@ console.log(values, key, range);
 
         remove: function () {
             this.undelegateEvents();
+        },
+
+        dimResults: function() {
+            $('.filter #spinner').show();
+            $('.cards-col').css({opacity: .5});
+        },
+
+        unDimResults: function() {
+            $('.filter #spinner').hide();
+            $('.cards-col').css({opacity: 1});
         }
     });
 })();

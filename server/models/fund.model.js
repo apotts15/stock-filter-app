@@ -116,9 +116,41 @@ var FundSchema = new Schema(
             msciSriExclusionCriteriaPct: Number,
             msciEsgHasBadge: Boolean
         },
+        categoryData: Schema.Types.Mixed,
         companies: [],
         gunStocks: [],
-        categoryData: Schema.Types.Mixed
+        sinStocks: {
+            guns: {
+                investList: [],
+                divestList: [],
+                hasSinStocks: Boolean
+            },
+            alcohol: {
+                investList: [],
+                divestList: [],
+                hasSinStocks: Boolean
+            },
+            gambling: {
+                investList: [],
+                divestList: [],
+                hasSinStocks: Boolean
+            },
+            porn: {
+                investList: [],
+                divestList: [],
+                hasSinStocks: Boolean
+            },
+            tobacco: {
+                investList: [],
+                divestList: [],
+                hasSinStocks: Boolean
+            },
+            fossilFuel: {
+                investList: [],
+                divestList: [],
+                hasSinStocks: Boolean
+            }
+        }
     });
 
 FundSchema.methods = {

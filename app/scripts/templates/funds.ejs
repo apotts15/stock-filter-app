@@ -1,4 +1,55 @@
 <header class="filter">
+    <div id="spinner">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <form>
         <ul id="slide-out" class="side-nav fixed">
             <li>
@@ -7,6 +58,35 @@
             </li>
             <li class="filter-col">
                 <ul>
+                    <li class="row">
+                        <p class="col s3">Values</p>
+                        <div class="col s8 ranger">
+                            <p>
+                                <input type="checkbox" class="filled-in" id="guns-check" />
+                                <label for="guns-check">Guns/Ammo</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="filled-in" id="gambling-check" />
+                                <label for="gambling-check">Gambling</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="filled-in" id="porn-check" />
+                                <label for="porn-check">Pornography</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="filled-in" id="tobacco-check" />
+                                <label for="tobacco-check">Tobacco</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="filled-in" id="ff-check" />
+                                <label for="ff-check">Fossil Fuel</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="filled-in" id="alcohol-check" />
+                                <label for="alcohol-check">Alcohol</label>
+                            </p>
+                        </div>
+                    </li>
                     <li class="row">
                         <p class="col s3">Fund Size</p>
                         <div class="col s8 ranger">
@@ -269,6 +349,7 @@
             </div>
         </nav>
         <div class="col s12 cards-col"> <!-- Note that "m8 l9" was added -->
+
             <div class="col s12 cards-list-header">
                 <!-- JST data.funds.length -->
                 <h6><%= funds.length %> Funds Found</h6>
@@ -296,9 +377,14 @@
                                <%= fund.fundBasics.segment %>
                             </p>
                         </div>
-                        <div class="card-content <%= fund.gunStocks.length >= 1 ? 'gun-full' : 'gun-free' %>">
-                            <p><i class="material-icons trending_up">trending_up</i><%= fund.analysis.fundClosureRisk %></p>
-                            <p><i class="material-icons timeline">timeline</i><%= fund.analysis.fundClosureRisk %> Risk</p>
+                        <div class="card-content center <%= fund.sinStocks.guns.hasSinStocks ? 'gun-full' : 'gun-free' %>">
+                            <% if (fund.sinStocks.guns.hasSinStocks) { %>
+                                <i class="material-icons clear left">clear</i><h5>Has Gun Stock</h5>
+                            <% } else { %>
+                                <i class="material-icons check left">check</i><h5>Gun-free Stock</h5>
+                            <% } %>
+                            <!--<p><i class="material-icons trending_up">trending_up</i><%= fund.analysis.fundClosureRisk %></p>-->
+                                <i class="material-icons timeline left">timeline</i><h5><%= fund.analysis.fundClosureRisk %> Risk</h5>
 
                         </div>
                     </div>

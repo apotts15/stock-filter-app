@@ -336,7 +336,27 @@ $shades: (
     "transparent": transparent
 );
 
+
+/* COLORS */
+$onepebble-primary-color: #225665;
+$onepebble-primary: (
+    "base":     $onepebble-primary-color
+);
+
+$onepebble-secondary-color: #00A5A9;
+$onepebble-secondary: (
+    "base":     $onepebble-secondary-color
+);
+
+$onepebble-highlight-color: #ffaa00;
+$onepebble-highlight: (
+    "base":     $onepebble-highlight-color
+);
+
 $colors: (
+    "onepebble-primary":    $onepebble-primary,
+    "onepebble-secondary":  $onepebble-secondary,
+    "onepebble-highlight":  $onepebble-highlight,
     "materialize-red": $materialize-red,
     "red": $red,
     "pink": $pink,

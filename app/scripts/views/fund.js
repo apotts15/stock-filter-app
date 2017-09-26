@@ -11,8 +11,9 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         collection: OnePebbleApp.Collections.Funds,
         className: '',
         events: {
-            "dblclick" : "clickit",
-            "click .card" : "goToFund"
+            "dblclick": "clickit",
+            "click .card": "goToFund",
+            "click .see-alt-funds": "goToFunds"
         },
 
         goToFund: function(e) {
@@ -21,6 +22,10 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 return false;
             }
             Backbone.history.navigate('fund/' + ticker, {trigger:true});
+        },
+
+        goToFunds: function(e) {
+            Backbone.history.navigate('funds/all', {trigger:true});
         },
 
         getTicker: function(e) {

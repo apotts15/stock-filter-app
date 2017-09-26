@@ -99,7 +99,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         goToNext: function() {
-            Backbone.history.navigate('#funds/all', {trigger: true});
+            Backbone.history.navigate('#questionnaire/', {trigger: true});
             this.remove();
         },
 
@@ -135,7 +135,13 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             return params;
         },
 
-        initialize: function (obj) {
+        initialize: function () {
+        },
+
+        render: function () {
+            this.$el.html(this.template({ enableBrand: this.enableBrand }));
+            this.trigger("render", "render done!");
+
             $('.category-animation').wodry({
                 animation: 'rotateX',
                 delay: 1000,
@@ -143,11 +149,6 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             }).show();
 
             $('.no-category-animation').hide();
-        },
-
-        render: function () {
-            this.$el.html(this.template({ enableBrand: this.enableBrand }));
-            this.trigger("render", "render done!");
 
             return this;
         },

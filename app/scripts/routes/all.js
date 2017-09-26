@@ -10,6 +10,7 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
         routes: {
             '': 'home',
             '#': 'home',
+            '#login': 'home',
             '?*queryString': 'home',
             '#?*queryString': 'home',
             'fund/': 'fund',
@@ -19,7 +20,9 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
             'funds/:id' : 'funds',
             'funds/:id?*queryString' : 'funds',
             'funds/company/:id?*queryString' : 'funds',
-            'funds/company/:id': 'funds'
+            'funds/company/:id': 'funds',
+            'questionnaire/': 'questions',
+            'questionnaire/?*queryString': 'questions'
         },
 
         initialize: function() {
@@ -27,7 +30,7 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
 
         validateAuth: function() {
             var authenticated = Cookies.get('OPAuth');
-            console.log('authenticated', authenticated);
+
             if (authenticated) {
                 console.log('authenticated');
                 return true;
@@ -37,17 +40,22 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
             }
         },
 
-        home: function(queryParam) {
-            if (this.validateAuth()) {
-                var qp = this.parseQueryString(queryParam);
-                var url = qp.redirectUrl ? decodeURIComponent(qp.redirectUrl) : 'search/';
-
-                Backbone.history.navigate(url, {trigger: true});
+        home: function() {
+            var loginView = new OnePebbleApp.Views.Login({
+                el: $('main')
+            });
+            loginView.render();
+        },
+        questions: function(queryParam) {
+            if (!this.validateAuth()) {
+                Backbone.history.navigate('/', {trigger: true});
             } else {
-                var loginView = new OnePebbleApp.Views.Login({
-                    el: $('.nav-wrapper')
-                });
-                loginView.render();
+                if ($('#questionaire').length === 0) {
+                    var questionsView = new OnePebbleApp.Views.Questions({
+                        el: $('main')
+                    });
+                    questionsView.render();
+                }
             }
         },
 
@@ -125,6 +133,10 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
 
         showPosts: function (id, queryString) {
             var params = this.parseQueryString(queryString);
+        },
+
+        dimResults: function() {
+            $('.cards-col').css({opacity: .5});
         }
 
     });
