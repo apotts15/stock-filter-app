@@ -18,7 +18,9 @@ exports.getBySymbol = function(req, res) {
             } else {
                 results.categoryData = categorize(results);
                 results.gunStocks = filterGunStocks(results);
-                console.log('gunStocks', results.gunStocks);
+
+                results = filterStocks(results);
+
                 res.send(results);
             }
         }
@@ -39,13 +41,135 @@ var moneyFormat = function(labelValue) {
 
                 ? Math.abs(Number(labelValue)) / 1.0e+3 + "K"
 
-                : Math.abs(Number(labelValue));
+                : Math.abs(Number(labelValue)) + 'none';
 
-    var num =  parseFloat(number).toPrecision(2);
-    if (num.indexOf('+') !== -1){
-        num = parseFloat(number).toPrecision(3);
+    var numb =  parseFloat(number).toPrecision(2);
+    if (numb.indexOf('+') !== -1){
+        numb = parseFloat(number).toPrecision(3);
     }
-    return num + number.replace(/[^B|M|K]/g,"");
+
+    if (numb == 0 || number == 0) {
+        return 0;
+    }
+    // console.log('number',number);
+    // console.log('numb + number',numb + number);
+    // console.log('numb + number.replace: ',numb + number.replace(/[^B|M|K]/g,""));
+
+    return numb + number.replace(/[^B|M|K|none]/g,"");
+};
+
+
+
+var getAllocations = function(tickers, companyAllocation) {
+    var stockList = [];
+
+    _.each(tickers, function(ticker){
+        var matchingCo = _.find(companyAllocation, function(co) {
+            return co.ticker === ticker;
+        });
+        if (matchingCo) {
+            stockList.push(matchingCo);
+        }
+    });
+
+    return stockList;
+};
+
+// input: '1.234%'
+// output: .001234
+var convertFromPercent = function(perc) {
+    var percent = perc.slice(0, perc.length-1)/100;
+    return parseFloat(percent);
+};
+
+// input: .001234
+// output: '1.234%'
+var convertToPercent = function(num) {
+    return (num * 100).toFixed(2) + '%';
+};
+
+var getAllocationNumTotal = function(allocations) {
+    var percent = 0;
+    _.each(allocations, function(allocation){
+        var thisPercent = convertFromPercent(allocation.percent);
+        percent += thisPercent;
+    });
+
+    return percent;
+};
+
+var getAllocationPercentTotal = function(num) {
+    return convertToPercent(num);
+};
+
+var getAUM = function(fund) {
+    return fund.fundBasics && fund.fundBasics.aum && fund.fundBasics.aum.value || null;
+};
+
+var getAUMFormated = function(fund) {
+    var num = getAUM(fund);
+    if (!num) {
+        return 'fund ';
+    }
+    return moneyFormat(num);
+};
+
+var _sinfulAumFormated = function(allocationNum, fund) {
+    return moneyFormat(allocationNum * getAUM(fund));
+};
+
+var getMetal = function(allocationNum) {
+    var metal;
+
+    if (allocationNum < 0) {
+        metal = 'platinum';
+    } else if (allocationNum == 0) {
+        metal = 'gold';
+    } else if (allocationNum > 0 && allocationNum <= .01 ) {
+        metal = 'silver';
+    } else if (allocationNum > .01 && allocationNum <= .05 ) {
+        metal = 'bronze';
+    } else if (allocationNum > .05 ) {
+        metal = 'none'
+    } else {
+        metal = 'missed-ranking' + allocationNum;
+        console.log('!!!' + metal + '!!!');
+    }
+
+    return metal;
+};
+
+var filterStocks = function(fund) {
+    var totalNum = 0;
+    _.each(_.keys(fund.sinStocks), function(sin) {
+        if (fund.sinStocks[sin] instanceof Object){
+            var sinSupported = fund.sinStocks[sin].supportedStocks.length > 0;
+            if (sinSupported) {
+                var supportedSinStocks = fund.sinStocks[sin] && fund.sinStocks[sin].supportedStocks;
+                var allocations = getAllocations(supportedSinStocks, fund.companyAllocation);
+                var allocationNum = getAllocationNumTotal(allocations);
+                var allocationPercent = getAllocationPercentTotal(allocationNum);
+                var aumFormated = getAUMFormated(fund);
+                var sinfulAumFormated = _sinfulAumFormated(allocationNum, fund);
+
+                totalNum += allocationNum;
+
+                fund.sinStocks[sin].allocations = allocations;
+                fund.sinStocks[sin].allocationNum = allocationNum;
+                fund.sinStocks[sin].allocationPercent = allocationPercent;
+                fund.sinStocks[sin].aumFormated = aumFormated;
+                fund.sinStocks[sin].sinfulAumFormated = sinfulAumFormated;
+            }
+        }
+    });
+    fund.sinStocks.total = {};
+    fund.sinStocks.total.allocationNum = totalNum;
+    fund.sinStocks.total.allocationPercent = getAllocationPercentTotal(totalNum);
+    fund.sinStocks.total.aumFormated = getAUMFormated(fund);
+    fund.sinStocks.total.totalSinfulAumFormated = _sinfulAumFormated(totalNum, fund);
+    fund.sinStocks.total.metal = getMetal(totalNum);
+
+    return fund;
 };
 
 var percentFormat = function(percent, reverse) {

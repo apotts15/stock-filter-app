@@ -2,7 +2,7 @@
     <div class="nav-wrapper">
     </div>
 </nav>
-<div class="background-<%= Math.floor(Math.random() * 3) + 1 %> bg-image">
+<div class="bg-image">
     <div class="container fund">
         <div class="row header-row" style="height: 220px">
             <div class="col s12 center-align">
@@ -16,36 +16,55 @@
             </div>
         </div>
 
-        <div class="card gunstocks">
+        <div class="card gunstocks overview">
             <div class="card-content">
                 <!-- JST data.fund.categoryData -->
                 <h5 class="bold"><%= fund.gunStocks && fund.gunStocks.length === 1 ? fund.gunStocks.length + ' Gun Stock' : fund.gunStocks.length + ' Gun Stocks' %></h5>
                 <div class="row">
 
                     <div class="col s6 m6 l3">
-                        <div class="card" data-id="<%= fund.ticker %>">
-                            <div class="card-bg background-<%= Math.floor(Math.random() * 6) + 1 %>">
-                                <h6 class="card-title ticker waves-effect waves-light btn blue darken-1"><%= fund.ticker %></h6>
-                            </div>
-                            <div class="card-content center-align <%= fund.gunStocks.length >= 1 ? 'gun-full' : 'gun-free' %>">
-                                <% if (fund.gunStocks.length >= 1) {  %>
-                                <h4 class="center-align">
-                                    <span class="bold"><% var rando = (Math.random() * (3.120 - 0.0200) + 0.0200).toFixed(4) + '%'; %><%= rando %></span>
-                                </h4>
-                                <h5>in Gun Stocks</h5>
-                                <% var infoText = 'Percentage of this fund going to Gun Stocks' } else { %>
-                                <h5><i class="material-icons medium">check</i></h5>
-                                <h5>Gun-Free Fund</h5>
-
-                                <% var infoText = 'None of the companies in this fund contribute to Gun Stocks' } %>
-                                <div class="tip center-align" data-tip="<%= infoText %>">
-                                    <i class="material-icons">info</i>
+                        <div class="card hoverable <%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'missing-metal' %>" data-id="<%= fund.ticker %>">
+                            <div class="card-bg">
+                                <h6 class="card-title ticker btn white"><%= fund.ticker %></h6>
+                                <div class="metals">
+                                    <img class="metal" src="/images/metals/<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'none' %>.png" alt="<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'No Metal' %>" class="<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'no-metal' %>" />
                                 </div>
+                                <!--<h5 class="fund-name"><%= fund.fund %></h5>-->
+                                <p class="fund-type center-align">
+                                <%= fund.fundBasics.segment %>
+                                </p>
+                            </div>
+                            <div class="card-content center">
+                                <h2 class="card-percentage center-align">
+                                    <span class="bold"><%= fund.sinStocks.total && fund.sinStocks.total.allocationPercent ? fund.sinStocks.total.allocationPercent : 'missing-allocation' %></span>
+                                </h2>
+                                <h5 class="card-percentage-description">in stocks against your values</h5>
                             </div>
                         </div>
+
+                        <!--<div class="card" data-id="<%= fund.ticker %>">-->
+                            <!--<div class="card-bg background-<%= Math.floor(Math.random() * 6) + 1 %>">-->
+                                <!--<h6 class="card-title ticker waves-effect waves-light btn blue darken-1"><%= fund.ticker %></h6>-->
+                            <!--</div>-->
+                            <!--<div class="card-content center-align <%= fund.gunStocks.length >= 1 ? 'gun-full' : 'gun-free' %>">-->
+                                <!--<% if (sinSupported) {  %>-->
+                                <!--<h2 class="card-precentage center-align">-->
+                                    <!--<span class="bold"><%= allocationPercent %></span>-->
+                                <!--</h2>-->
+                                <!--<h5>in Gun Stocks</h5>-->
+                                <!--<% var infoText = 'Percentage of this fund going to Gun Stocks' } else { %>-->
+                                <!--<h5><i class="material-icons medium">check</i></h5>-->
+                                <!--<h5>Gun-Free Fund</h5>-->
+
+                                <!--<% var infoText = 'None of the companies in this fund contribute to Gun Stocks' } %>-->
+                                <!--<div class="tip center-align" data-tip="<%= infoText %>">-->
+                                    <!--<i class="material-icons">info</i>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                     <div class="col s6 m6 l9">
-                        <h5><span class="bold">$47M+</span> is held in <%= fund.gunStocks.length %> ammo maker/seller stocks, comprised of <span class="bold"><%= rando %></span> of the fund.</h5>
+                        <h5>Of the total <span class="bold"><%= aumFormated %></span> under management, <span class="bold"><%= sinfulAumFormated %></span> is held in <%= fund.gunStocks.length %> ammo maker/seller stocks, comprised of <span class="bold"><%= allocationPercent %></span> of the fund.</h5>
                         <h5 class="h55 light-grey"><%= ticker %> holds similar percentage of gun stocks to the average US stock fund and also a similar percentage to other funds in the same category.</h5>
                     </div>
                     <div class="col s12 m6 l4">
@@ -80,91 +99,87 @@
             </div>
         </div>
 
-        <div class="cards-container no-padding">
-            <div class="cards-col">
-                <ul class="card-list">
-                    <!-- JST data.funds -->
-
-                    <li class="card-wrapper">
-                        <div class="card hoverable" data-id="ACSI">
-                            <div class="card-bg background-2">
-                                <h6 class="card-title ticker btn blue darken-1">ACSI</h6>
-                                <h5 class="fund-name">American Customer Satisfaction Core Alpha ETF</h5>
-                                <p class="fund-type center-align">
-                                    Equity: U.S. - Large Cap
-                                </p>
-                            </div>
-                            <div class="card-content center-align gun-free">
-                                <i class="material-icons clear left">clear</i><h5>Has Gun Stock</h5>
-                                <i class="material-icons timeline left">timeline</i><h5>Low Risk</h5>
-                            </div>
+        <div class="carousel">
+            <a class="carousel-item" href="#one!">
+                <div class="card hoverable gold" data-id="BND">
+                    <div class="card-bg">
+                        <h6 class="card-title ticker btn white">BND</h6>
+                        <div class="metals">
+                            <img class="metal" src="/images/metals/gold.png" alt="gold">
                         </div>
-                    </li>
-
-                    <li class="card-wrapper">
-                        <div class="card hoverable" data-id="ACTX">
-                            <div class="card-bg background-6">
-                                <h6 class="card-title ticker btn blue darken-1">ACTX</h6>
-                                <h5 class="fund-name">Global X Guru Activist Index ETF</h5>
-                                <p class="fund-type center-align">
-                                    Equity: U.S. - Total Market
-                                </p>
-                            </div>
-                            <div class="card-content center-align gun-free">
-                                <i class="material-icons check left">check</i><h5>Gun-free Stock</h5>
-                                <i class="material-icons timeline left">timeline</i><h5>Low Risk</h5>
-                            </div>
+                    </div>
+                    <div class="card-content center">
+                        <h2 class="card-percentage center-align">
+                            <span class="bold">0.00%</span>
+                        </h2>
+                        <h5 class="card-percentage-description">in stocks against your values</h5>
+                    </div>
+                </div>
+            </a>
+            <a class="carousel-item" href="#two!">
+                <div class="card hoverable gold" data-id="BND">
+                    <div class="card-bg">
+                        <h6 class="card-title ticker btn white">BND</h6>
+                        <div class="metals">
+                            <img class="metal" src="/images/metals/gold.png" alt="gold">
                         </div>
-                    </li>
-
-                    <li class="card-wrapper">
-                        <div class="card hoverable" data-id="AGG">
-                            <div class="card-bg background-3">
-                                <h6 class="card-title ticker btn blue darken-1">AGG</h6>
-                                <h5 class="fund-name">iShares Core U.S. Aggregate Bond ETF</h5>
-                                <p class="fund-type center-align">
-                                    Fixed Income: U.S. - Broad Market Investment Grade
-                                </p>
-                            </div>
-                            <div class="card-content center-align gun-free">
-                                <i class="material-icons check left">check</i><h5>Gun-free Stock</h5>
-                                <i class="material-icons timeline left">timeline</i><h5>Low Risk</h5>
-                            </div>
+                    </div>
+                    <div class="card-content center">
+                        <h2 class="card-percentage center-align">
+                            <span class="bold">0.00%</span>
+                        </h2>
+                        <h5 class="card-percentage-description">in stocks against your values</h5>
+                    </div>
+                </div>
+            </a>
+            <a class="carousel-item" href="#three!">
+                <div class="card hoverable silver" data-id="BNDS">
+                    <div class="card-bg">
+                        <h6 class="card-title ticker btn white">BNDS</h6>
+                        <div class="metals">
+                            <img class="metal" src="/images/metals/silver.png" alt="silver">
                         </div>
-                    </li>
-                    <li class="card-wrapper">
-                        <div class="card hoverable" data-id="AGGE">
-                            <div class="card-bg background-3">
-                                <h6 class="card-title ticker btn blue darken-1">AGGE</h6>
-                                <h5 class="fund-name">IQ Enhanced Core Bond U.S. ETF</h5>
-                                <p class="fund-type center-align">
-                                    Fixed Income: U.S. - Broad Market Investment Grade
-                                </p>
-                            </div>
-                            <div class="card-content center-align gun-free">
-                                <i class="material-icons clear left">clear</i><h5>Has Gun Stock</h5>
-                                <i class="material-icons timeline left">timeline</i><h5>Low Risk</h5>
-                            </div>
+                    </div>
+                    <div class="card-content center">
+                        <h2 class="card-percentage center-align">
+                            <span class="bold">0.29%</span>
+                        </h2>
+                        <h5 class="card-percentage-description">in stocks against your values</h5>
+                    </div>
+                </div>
+            </a>
+            <a class="carousel-item" href="#four!">
+                <div class="card hoverable bronze" data-id="BIV">
+                    <div class="card-bg">
+                        <h6 class="card-title ticker btn white">BIV</h6>
+                        <div class="metals">
+                            <img class="metal" src="/images/metals/bronze.png" alt="bronze">
                         </div>
-                    </li>
-
-                    <li class="card-wrapper">
-                        <div class="card hoverable" data-id="AGGP">
-                            <div class="card-bg background-4">
-                                <h6 class="card-title ticker btn blue darken-1">AGGP</h6>
-                                <h5 class="fund-name">IQ Enhanced Core Plus Bond U.S. ETF</h5>
-                                <p class="fund-type center-align">
-                                    Fixed Income: U.S. - Broad Market
-                                </p>
-                            </div>
-                            <div class="card-content center-align gun-free">
-                                <i class="material-icons check left">check</i><h5>Gun-free Stock</h5>
-                                <i class="material-icons timeline left">timeline</i><h5>Low Risk</h5>
-                            </div>
+                    </div>
+                    <div class="card-content center">
+                        <h2 class="card-percentage center-align">
+                            <span class="bold">1.28%</span>
+                        </h2>
+                        <h5 class="card-percentage-description">in stocks against your values</h5>
+                    </div>
+                </div>
+            </a>
+            <a class="carousel-item" href="#five!">
+                <div class="card hoverable none" data-id="VYM">
+                    <div class="card-bg">
+                        <h6 class="card-title ticker btn white">VYM</h6>
+                        <div class="metals">
+                            <img class="metal" src="/images/metals/none.png" alt="none">
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                    <div class="card-content center">
+                        <h2 class="card-percentage center-align">
+                            <span class="bold">8.43%</span>
+                        </h2>
+                        <h5 class="card-percentage-description">in stocks against your values</h5>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>

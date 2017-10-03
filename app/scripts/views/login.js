@@ -55,7 +55,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         setAuthCookie: function() {
             var date = new Date();
-            var minutes = 30;
+            var minutes = 90;
             //var minutes = .1;
             var time = minutes * 60 * 1000;
             date.setTime(date.getTime() + (time));

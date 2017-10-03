@@ -61,29 +61,41 @@
                     <li class="row">
                         <p class="col s3">Values</p>
                         <div class="col s8 ranger">
-                            <p>
+                            <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="guns-check" />
                                 <label for="guns-check">Guns/Ammo</label>
+                                <span class="supported green-text">(Supported)</span>
+                                <span class="against red-text">(Against)</span>
                             </p>
-                            <p>
+                            <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="gambling-check" />
                                 <label for="gambling-check">Gambling</label>
+                                <span class="supported green-text">(Supported)</span>
+                                <span class="against red-text">(Against)</span>
                             </p>
-                            <p>
+                            <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="porn-check" />
                                 <label for="porn-check">Pornography</label>
+                                <span class="supported green-text">(Supported)</span>
+                                <span class="against red-text">(Against)</span>
                             </p>
-                            <p>
+                            <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="tobacco-check" />
                                 <label for="tobacco-check">Tobacco</label>
+                                <span class="supported green-text">(Supported)</span>
+                                <span class="against red-text">(Against)</span>
                             </p>
-                            <p>
+                            <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="ff-check" />
                                 <label for="ff-check">Fossil Fuel</label>
+                                <span class="supported green-text">(Supported)</span>
+                                <span class="against red-text">(Against)</span>
                             </p>
-                            <p>
+                            <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="alcohol-check" />
                                 <label for="alcohol-check">Alcohol</label>
+                                <span class="supported green-text">(Supported)</span>
+                                <span class="against red-text">(Against)</span>
                             </p>
                         </div>
                     </li>
@@ -369,22 +381,40 @@
                 <!-- JST data.funds -->
                 <% _.each(funds, function(fund, i) { %>
                 <li class="card-wrapper">
-                    <div class="card hoverable" data-id="<%= fund.ticker %>">
-                        <div class="card-bg background-<%= Math.floor(Math.random() * 6) + 1 %>">
-                            <h6 class="card-title ticker btn blue darken-1"><%= fund.ticker %></h6>
-                            <h5 class="fund-name"><%= fund.fund %></h5>
+                    <div class="card hoverable <%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'missing-metal' %>" data-id="<%= fund.ticker %>">
+                        <div class="card-bg">
+                            <h6 class="card-title ticker btn white"><%= fund.ticker %></h6>
+                            <div class="metals">
+                                <img class="metal" src="/images/metals/<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'none' %>.png" alt="<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'No Metal' %>" class="<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'no-metal' %>" />
+                            </div>
+                            <!--<h5 class="fund-name"><%= fund.fund %></h5>-->
                             <p class="fund-type center-align">
                                <%= fund.fundBasics.segment %>
                             </p>
                         </div>
-                        <div class="card-content center <%= fund.sinStocks.guns.hasSinStocks ? 'gun-full' : 'gun-free' %>">
-                            <% if (fund.sinStocks.guns.hasSinStocks) { %>
-                                <i class="material-icons clear left">clear</i><h5>Has Gun Stock</h5>
-                            <% } else { %>
-                                <i class="material-icons check left">check</i><h5>Gun-free Stock</h5>
-                            <% } %>
-                            <!--<p><i class="material-icons trending_up">trending_up</i><%= fund.analysis.fundClosureRisk %></p>-->
-                                <i class="material-icons timeline left">timeline</i><h5><%= fund.analysis.fundClosureRisk %> Risk</h5>
+                        <div class="card-content center">
+                            <h2 class="card-percentage center-align">
+                                <span class="bold"><%= fund.sinStocks.total && fund.sinStocks.total.allocationPercent ? fund.sinStocks.total.allocationPercent : 'missing-allocation' %></span>
+                            </h2>
+                            <h5 class="card-percentage-description">in stocks against your values</h5>
+
+
+                            <!-- OLD CARD DATA-->
+                            <!-- ------------ -->
+                            <!-- ------------ -->
+
+                            <!--<% if (fund.sinStocks.hasGunsStocks) { %>-->
+                                <!--<i class="material-icons clear left">clear</i><h5>Has Gun Stock</h5>-->
+                            <!--<% } else { %>-->
+                                <!--<i class="material-icons check left">check</i><h5>Gun-free Stock</h5>-->
+                            <!--<% } %>-->
+                            <!--&lt;!&ndash;<p><i class="material-icons trending_up">trending_up</i><%= fund.analysis.fundClosureRisk %></p>&ndash;&gt;-->
+                                <!--<i class="material-icons timeline left">timeline</i><h5><%= fund.analysis.fundClosureRisk %> Risk</h5>-->
+
+                            <!-- ------------ -->
+                            <!-- ------------ -->
+                            <!-- OLD CARD DATA-->
+
 
                         </div>
                     </div>

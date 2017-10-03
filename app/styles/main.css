@@ -84,6 +84,31 @@ nav .input-field label {
   top: -10px;
 }
 
+.values-category .supported {
+  display: none;
+}
+.values-category .against {
+  display: unset;
+}
+.values-category.checked .supported {
+  display: unset;
+}
+.values-category.checked .against {
+  display: none;
+}
+
+[type="checkbox"].filled-in:not(:checked) + label:after {
+  height: 20px;
+  width: 20px;
+  border: 2px solid #5a5a5a;
+  top: 0px;
+  z-index: 0;
+  content: '\d7';
+  font-size: 24px;
+  line-height: 17px;
+  color: darkred;
+}
+
 .nav-wrapper {
   background: white;
 }
@@ -170,6 +195,9 @@ main {
   padding-bottom: 10px;
 }
 
+.gunstocks .card {
+  border-radius: 5px;
+}
 .gunstocks .card .ticker {
   text-shadow: none;
   margin: 0;
@@ -182,6 +210,7 @@ main {
 }
 .gunstocks .card .card-title {
   line-height: 36px;
+  display: inline-flex;
 }
 
 .bold {
@@ -585,44 +614,105 @@ nav .input-field label:active i {
 }
 .cards-container .cards-col .card-wrapper {
   flex-grow: 1;
-  margin: 0 5px;
+  margin: 0 20px;
 }
 .cards-container .cards-col .card {
   margin: 10px auto;
-  width: 200px;
-  height: 320px;
+  width: 215px;
+  height: 300px;
+  border-radius: 5px;
 }
 .cards-container .cards-col .card .card-content {
   padding: 20px;
 }
-@media only screen and (max-width: 500px) {
-  .cards-container .cards-col .card {
-    width: 180px;
-  }
+
+.fund .overview .card.gold .metal, .fund .overview .card.silver .metal, .fund .overview .card.bronze .metal, .fund .overview .card.none .metal {
+  width: unset;
+  margin: 20px 0 0 0;
 }
 
-.fund-ticker {
-  border: 1px solid #061d25;
-  color: #061d25;
-  background: white;
+.card {
+  border-radius: 5px;
 }
-.fund-ticker:hover {
+.card .metal {
+  width: 60px;
+  margin: 15px;
+}
+.card.platinum {
+  background-color: #627d76;
+}
+.card.platinum .card-bg {
+  background-color: #abb3b3;
+}
+.card.gold {
+  background-color: #877745;
+}
+.card.gold .card-bg {
+  background-color: #bfad76;
+}
+.card.silver {
+  background-color: #91a1aa;
+}
+.card.silver .metal {
+  width: 55px;
+}
+.card.silver .card-bg {
+  background-color: #bdc9d1;
+}
+.card.bronze {
+  background-color: #876345;
+}
+.card.bronze .card-bg {
+  background-color: #ba8254;
+}
+.card.none {
+  background-color: #909090;
+}
+.card.none .card-bg {
+  background-color: #cecece;
+}
+.card.missed-ranking {
+  background-color: darkred;
+}
+.card.missed-ranking .card-bg {
   background-color: white;
 }
-
+.card .card-content {
+  color: white;
+}
+.card .card-content .card-percentage {
+  margin: 0;
+}
+.card .card-content .card-percentage-description {
+  margin: 5px 12px;
+  font-size: 16px !important;
+}
 .card .card-bg {
   position: relative;
   color: white;
   text-shadow: 2px 2px black;
   font-weight: normal;
-  padding: 15px;
+  padding: 20px;
   margin: 0;
   text-align: center;
   background-size: cover;
   height: 60%;
+  border-radius: 5px 5px 0px 0px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent 400px, rgba(0, 0, 0, 0.8) 800px);
+  background-size: 800px 100%;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
 }
 .card .ticker {
   text-shadow: none;
+  box-shadow: none;
+  border-radius: 25px;
+  border: 2px solid #b7b7b9;
+  font-weight: bold;
+  color: #868687;
+  margin: 0;
+  line-height: 36px;
+  display: inline-flex;
 }
 .card .fund-name {
   color: black;
@@ -651,16 +741,12 @@ nav .input-field label:active i {
   text-shadow: none;
   margin: 0 auto;
   position: absolute;
-  top: 85%;
+  top: 90%;
   left: 0;
   right: 0;
 }
 .card .fund-type i {
   vertical-align: middle;
-}
-
-.bg-image {
-  height: 310px;
 }
 
 .background-1 {

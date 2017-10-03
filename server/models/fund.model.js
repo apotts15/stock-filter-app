@@ -118,39 +118,9 @@ var FundSchema = new Schema(
         },
         categoryData: Schema.Types.Mixed,
         companies: [],
+        companyAllocation: [],
         gunStocks: [],
-        sinStocks: {
-            guns: {
-                investList: [],
-                divestList: [],
-                hasSinStocks: Boolean
-            },
-            alcohol: {
-                investList: [],
-                divestList: [],
-                hasSinStocks: Boolean
-            },
-            gambling: {
-                investList: [],
-                divestList: [],
-                hasSinStocks: Boolean
-            },
-            porn: {
-                investList: [],
-                divestList: [],
-                hasSinStocks: Boolean
-            },
-            tobacco: {
-                investList: [],
-                divestList: [],
-                hasSinStocks: Boolean
-            },
-            fossilFuel: {
-                investList: [],
-                divestList: [],
-                hasSinStocks: Boolean
-            }
-        }
+        sinStocks: Schema.Types.Mixed
     });
 
 FundSchema.methods = {
@@ -196,6 +166,23 @@ FundSchema.statics = {
         var dbFilter = { $and: filter};
         console.log('getByCompanyFilter query:', dbFilter);
         this.find(dbFilter)
+            .exec(cb);
+    },
+
+    updateFund: function (ticker, updateObj, cb) {
+        var _ticker = ticker.toUpperCase().toString();
+        var query = { 'ticker': _ticker};
+        //updateObj {sinStock: "test"}
+        console.log('updateFund query: ', query);
+        console.log('updateFund updateObj: ', updateObj);
+
+        //db.funds.updateOne({ticker: "ACTX"},{ $set: {sinStock: "test"}})
+        //this.updateOne(query, { $set: updateObj}, function(arg1, arg2, arg3) {
+        this.updateOne({"ticker": "ACSI"}, {$set: {"test": "test"}}, function(arg1, arg2) {
+            console.log('arguments: ', arguments);
+            console.log('arguments 1: ', arg1);
+            console.log('arguments 2: ', arg2);
+        })
             .exec(cb);
     }
 };

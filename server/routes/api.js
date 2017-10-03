@@ -10,6 +10,7 @@ module.exports = function (app) {
     app.use('/',require('./../api/index'));
     app.use('/fund',require('./../api/fund/index'));
     app.use('/funds',require('./../api/funds/index'));
+    app.use('/fundAllocations',require('./../api/fundAllocations/index'));
     app.use('/search',require('./../api/searches/index'));
     app.use('/doctors',require('./../api/doctors/index'));
 };

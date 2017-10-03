@@ -32,7 +32,6 @@ DoctorSchema.statics = {
 
 module.exports = mongoose.model('Doctor', DoctorSchema);
 //
-//
 // var mongoose = require('mongoose');
 // var Schema = mongoose.Schema;
 //

@@ -59,6 +59,34 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             Backbone.history.navigate('fund/' + ticker, {trigger:true});
         },
 
+        getSinStocks: function(sin) {
+            return this.model.getSinStocks(sin);
+        },
+
+        getAllocations: function(tickers) {
+            return this.model.getAllocations(tickers);
+        },
+
+        getAllocationNumTotal: function(allocations) {
+            return this.model.getAllocationNumTotal(allocations);
+        },
+
+        getAllocationPercentTotal: function(num) {
+            return this.model.getAllocationPercentTotal(num);
+        },
+
+        getAUM: function() {
+            return this.model.get('fundBasics').aum.value || null
+        },
+
+        getAUMFormated: function() {
+            var num = this.getAUM();
+            if (!num) {
+                return 'fund ';
+            }
+            return this.model.getFormated(num);
+        },
+
         initialize: function (collection) {
             var id = arguments[0].id;
             this.qp = document.location.href.split('?')[1] || null;
@@ -85,6 +113,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         render: function () {
+            console.log(this.collection.toJSON()[0]);
             this.$el.html(this.template({
                 funds: this.collection.toJSON(),
                 searchId: this.id,
@@ -146,26 +175,32 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
                 if (qp['guns'] && qp['guns'] === 'yes') {
                     $gunsCheck.attr('checked', 'checked');
+                    $gunsCheck.parent().addClass('checked');
                 }
 
                 if (qp['gambling'] && qp['gambling'] === 'yes') {
                     $gamblingCheck.attr('checked', 'checked');
+                    $gamblingCheck.parent().addClass('checked');
                 }
 
                 if (qp['pornography'] && qp['pornography'] === 'yes') {
                     $pornCheck.attr('checked', 'checked');
+                    $pornCheck.parent().addClass('checked');
                 }
 
                 if (qp['fossil'] && qp['fossil'] === 'yes') {
                     $ffCheck.attr('checked', 'checked');
+                    $ffCheck.parent().addClass('checked');
                 }
 
                 if (qp['tobacco'] && qp['tobacco'] === 'yes') {
                     $tobaccoCheck.attr('checked', 'checked');
+                    $tobaccoCheck.parent().addClass('checked');
                 }
 
                 if (qp['alcohol'] && qp['alcohol'] === 'yes') {
                     $alcoholCheck.attr('checked', 'checked');
+                    $alcoholCheck.parent().addClass('checked');
                 }
 
                 $gunsCheck.on('change', function(e) {
@@ -186,7 +221,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 });
                 $tobaccoCheck.on('change', function(e) {
                     var value = e.target.checked ? 'yes' : 'no';
-                    that.filterResults([value], 'tobacoo', false);
+                    that.filterResults([value], 'tobacco', false);
                 });
                 $alcoholCheck.on('change', function(e) {
                     var value = e.target.checked ? 'yes' : 'no';

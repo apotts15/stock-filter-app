@@ -36,7 +36,6 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         previous: function() {
             // Previous slide
             $('.carousel').carousel('prev');
-            //Backbone.history.navigate('/previous', {trigger:true});
         },
 
         exit: function(e) {

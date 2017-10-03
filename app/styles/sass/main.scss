@@ -101,9 +101,38 @@ input:not([type]), input[type=date], input[type=datetime-local], input[type=date
 nav .input-field label {
     top: -10px;
 }
+
+.values-category {
+    .supported {
+        display: none;
+    }
+    .against {
+        display: unset;
+    }
+    &.checked {
+        .supported {
+            display: unset;
+        }
+        .against {
+            display: none;
+        }
+    }
+}
+
+[type="checkbox"].filled-in:not(:checked)+label:after {
+    height: 20px;
+    width: 20px;
+    border: 2px solid #5a5a5a;
+    top: 0px;
+    z-index: 0;
+    content: '\d7';
+    font-size: 24px;
+    line-height: 17px;
+    color: darkred;
+}
 .nav-wrapper {
     background: white;
-};
+}
 .nav-wrapper .input-field.op-input input[type=password] {
     height: inherit;
     padding-left: 4rem;
@@ -203,6 +232,8 @@ main {
 
 .gunstocks {
     .card {
+        border-radius: 5px;
+
         .ticker {
             text-shadow: none;
             margin: 0;
@@ -216,6 +247,7 @@ main {
         }
         .card-title {
             line-height: 36px;
+            display: inline-flex;
         }
     }
 }
@@ -700,12 +732,16 @@ nav .input-field label:active i {
         }
         .card-wrapper {
             flex-grow: 1;
-            margin: 0 5px;
+            margin: 0 20px;
         }
         .card {
             margin: 10px auto;
-            width: 200px;
-            height: 320px;
+            width: 215px;
+            height: 300px;
+            border-radius: 5px;
+
+            //-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.5);
+            //box-shadow: 0 1px 1px 0 rgba(0,0,0,0.5);
 
             .card-content {
                 padding: 20px;
@@ -713,37 +749,129 @@ nav .input-field label:active i {
         }
 
         @media only screen and (max-width : 500px) {
-            .card {
-                width: 180px;
-            }
+
         }
     }
 }
 
-.fund-ticker {
-    border: 1px solid #061d25;
-    color: #061d25;
-    background: white;
-
-    &:hover {
-        background-color: white;
+//.fund-ticker {
+//    border: 1px solid #061d25;
+//    color: #061d25;
+//    background: white;
+//
+//    &:hover {
+//        background-color: white;
+//    }
+//}
+.fund {
+    .overview {
+        .card {
+            &.gold,
+            &.silver,
+            &.bronze,
+            &.none {
+                .metal {
+                    width: unset;
+                    margin: 20px 0 0 0;
+                }
+            }
+        }
     }
 }
 .card {
+    border-radius: 5px;
+
+    .metal {
+        width: 60px;
+        margin: 15px;
+    }
+
+    &.platinum {
+        background-color: #627d76;
+
+        .card-bg {
+            background-color: #abb3b3;
+        }
+    }
+    &.gold {
+        background-color: #877745;
+        .card-bg {
+            background-color: #bfad76;
+        }
+    }
+    &.silver {
+        background-color: #91a1aa;
+
+        .metal {
+            width: 55px;
+        }
+
+        .card-bg {
+            background-color: #bdc9d1;
+        }
+    }
+    &.bronze {
+        background-color: #876345;
+
+        .card-bg {
+            background-color: #ba8254;
+        }
+    }
+    &.none {
+        background-color: #909090;
+
+        .card-bg {
+            background-color: #cecece;
+        }
+    }
+    &.missed-ranking {
+        background-color: darkred;
+
+        .card-bg {
+            background-color: white;
+        }
+    }
+
+    .card-content {
+        color: white;
+
+        .card-percentage {
+            margin: 0;
+        }
+
+        .card-percentage-description {
+            margin: 5px 12px;
+            font-size: 16px !important;
+        }
+    }
+
     .card-bg {
         position: relative;
         color: white;
         text-shadow: 2px 2px black;
         font-weight: normal;
-        padding: 15px;
+        padding: 20px;
         margin: 0;
         text-align: center;
         background-size: cover;
         height: 60%;
+        border-radius: 5px 5px 0px 0px;
+        background-image: linear-gradient(to right, rgba(0,0,0, 0.8), rgba(0,0,0, 0) 400px, rgba(0,0,0, 0.8) 800px);
+        background-size: 800px 100%;
+        background-position: 50% 100%;
+        background-repeat: no-repeat;
     }
 
     .ticker {
         text-shadow: none;
+        box-shadow: none;
+        border-radius: 25px;
+        border: 2px solid #b7b7b9;
+        font-weight: bold;
+        color: #868687;
+        margin: 0;
+        line-height: 36px;
+        display: inline-flex;
     }
 
     .fund-name {
@@ -774,7 +902,7 @@ nav .input-field label:active i {
         text-shadow: none;
         margin: 0 auto;
         position: absolute;
-        top: 85%;
+        top: 90%;
         left: 0;
         right: 0;
 
@@ -783,35 +911,31 @@ nav .input-field label:active i {
         }
     }
 }
-.bg-image {
-    height: 310px;
-}
-
-
-.background-1 {
-    background-size: cover;
-    background: url("/images/bg1.png") no-repeat;
-}
-.background-2 {
-    background-size: cover;
-    background: url("/images/bg2.png") no-repeat;
-}
-.background-3 {
-    background-size: cover;
-    background: url("/images/bg3.png") no-repeat;
-}
-.background-4 {
-    background-size: cover;
-    background: url("/images/bg4.png") no-repeat;
-}
-.background-5 {
-    background-size: cover;
-    background: url("/images/bg5.png") no-repeat;
-}
-.background-6 {
-    background-size: cover;
-    background: url("/images/bg6.png") no-repeat;
-}
+//
+//.background-1 {
+//    background-size: cover;
+//    background: url("/images/bg1.png") no-repeat;
+//}
+//.background-2 {
+//    background-size: cover;
+//    background: url("/images/bg2.png") no-repeat;
+//}
+//.background-3 {
+//    background-size: cover;
+//    background: url("/images/bg3.png") no-repeat;
+//}
+//.background-4 {
+//    background-size: cover;
+//    background: url("/images/bg4.png") no-repeat;
+//}
+//.background-5 {
+//    background-size: cover;
+//    background: url("/images/bg5.png") no-repeat;
+//}
+//.background-6 {
+//    background-size: cover;
+//    background: url("/images/bg6.png") no-repeat;
+//}
 
 .pagination {
         li:last-child a {

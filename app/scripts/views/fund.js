@@ -50,17 +50,46 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             this.listenTo(this.model, 'reset', this.render);
             this.listenTo(this.model, 'change', this.render);
             this.$el.on('click', this.clickit);
-            console.log(this.model.attributes);
         },
 
-
         render: function () {
-            this.$el.html(this.template({iconSet: this.iconSet, ticker: this.getTicker(), fund: this.model.toJSON()}));
+            var sinStocks = this.model.get('sinStocks');
+            //var sinSupported = this.model.isSupportedSinStock(sin);
+            var sinSupported = sinStocks.hasGunsStocks;
+            var gunsInfo = sinSupported ? sinStocks.guns : null;
+            var allocationNum;
+            var allocationPercent;
+            var gunsStocks;
+            var allocations;
+            var aumFormated;
+            var sinfulAumFormated;
+
+            if (sinSupported) {
+                allocations = gunsInfo.supportedStocks;
+                allocationNum = gunsInfo.allocationNum;
+                allocationPercent = gunsInfo.allocationPercent;
+                aumFormated = gunsInfo.aumFormated;
+                sinfulAumFormated = gunsInfo.sinfulAumFormated;
+            }
+
+            this.$el.html(this.template({
+                iconSet: this.iconSet,
+                sinSupported: sinSupported,
+                allocations: allocations,
+                allocationPercent: allocationPercent,
+                aumFormated: aumFormated,
+                sinfulAumFormated: sinfulAumFormated,
+                ticker: this.getTicker(),
+                fund: this.model.toJSON()
+            }));
+
             $('main').html(this.$el.html());
             $(window).scrollTop(0);
             this.typeahead();
 
             this.tooltip();
+
+            $('.carousel').carousel({fullWidth: false}).style('height','300px');
 
             this.trigger("render", "render done!");
             return this;
