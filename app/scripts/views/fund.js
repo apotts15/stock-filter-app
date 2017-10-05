@@ -21,11 +21,15 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             if (!ticker) {
                 return false;
             }
-            Backbone.history.navigate('fund/' + ticker, {trigger:true});
+            var url = document.location.href.split('?');
+            var queryParams = url[1] ? '?' + url[1] : '';
+            Backbone.history.navigate('fund/' + ticker + queryParams, {trigger:true});
         },
 
         goToFunds: function(e) {
-            Backbone.history.navigate('funds/all', {trigger:true});
+            var url = document.location.href.split('?');
+            var queryParams = url[1] ? '?' + url[1] : '';
+            Backbone.history.navigate('funds/all' + queryParams, {trigger:true});
         },
 
         getTicker: function(e) {
@@ -33,7 +37,9 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
             if (!ticker){
                 var url = window.location.href.split('#fund/');
+
                 ticker = url && url[1];
+                ticker = ticker.split('?')[0];
             }
             return ticker;
         },
@@ -45,7 +51,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 beforeSend: function (xhr) {
                 }, reset: true, data: {}
             }).done(function (data) {
-                console.log(this.data = data);
+                //console.log(this.data = data);
             });
             this.listenTo(this.model, 'reset', this.render);
             this.listenTo(this.model, 'change', this.render);
@@ -54,31 +60,12 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         render: function () {
             var sinStocks = this.model.get('sinStocks');
-            //var sinSupported = this.model.isSupportedSinStock(sin);
-            var sinSupported = sinStocks.hasGunsStocks;
-            var gunsInfo = sinSupported ? sinStocks.guns : null;
-            var allocationNum;
-            var allocationPercent;
-            var gunsStocks;
-            var allocations;
-            var aumFormated;
-            var sinfulAumFormated;
 
-            if (sinSupported) {
-                allocations = gunsInfo.supportedStocks;
-                allocationNum = gunsInfo.allocationNum;
-                allocationPercent = gunsInfo.allocationPercent;
-                aumFormated = gunsInfo.aumFormated;
-                sinfulAumFormated = gunsInfo.sinfulAumFormated;
-            }
+
 
             this.$el.html(this.template({
                 iconSet: this.iconSet,
-                sinSupported: sinSupported,
-                allocations: allocations,
-                allocationPercent: allocationPercent,
-                aumFormated: aumFormated,
-                sinfulAumFormated: sinfulAumFormated,
+
                 ticker: this.getTicker(),
                 fund: this.model.toJSON()
             }));
@@ -89,7 +76,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
             this.tooltip();
 
-            $('.carousel').carousel({fullWidth: false}).style('height','300px');
+            $('.fund-detail-carousel').carousel();
 
             this.trigger("render", "render done!");
             return this;

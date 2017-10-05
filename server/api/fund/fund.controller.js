@@ -141,9 +141,11 @@ var getMetal = function(allocationNum) {
 
 var filterStocks = function(fund) {
     var totalNum = 0;
+    var allocationCount = 0;
     _.each(_.keys(fund.sinStocks), function(sin) {
         if (fund.sinStocks[sin] instanceof Object){
-            var sinSupported = fund.sinStocks[sin].supportedStocks.length > 0;
+            var supportedStocksLength = fund.sinStocks[sin].supportedStocks && fund.sinStocks[sin].supportedStocks.length;
+            var sinSupported = supportedStocksLength > 0;
             if (sinSupported) {
                 var supportedSinStocks = fund.sinStocks[sin] && fund.sinStocks[sin].supportedStocks;
                 var allocations = getAllocations(supportedSinStocks, fund.companyAllocation);
@@ -153,6 +155,7 @@ var filterStocks = function(fund) {
                 var sinfulAumFormated = _sinfulAumFormated(allocationNum, fund);
 
                 totalNum += allocationNum;
+                allocationCount += supportedStocksLength;
 
                 fund.sinStocks[sin].allocations = allocations;
                 fund.sinStocks[sin].allocationNum = allocationNum;
@@ -168,6 +171,7 @@ var filterStocks = function(fund) {
     fund.sinStocks.total.aumFormated = getAUMFormated(fund);
     fund.sinStocks.total.totalSinfulAumFormated = _sinfulAumFormated(totalNum, fund);
     fund.sinStocks.total.metal = getMetal(totalNum);
+    fund.sinStocks.total.allocationCount = allocationCount;
 
     return fund;
 };
@@ -376,7 +380,7 @@ var categories = {
                 }
             },
             "no-data": {
-                "name": "Not enough info to",
+                "name": "Not enough info",
                 "description": "No enough data to make a determination",
                 "rules": {
                     "max": null,
@@ -426,7 +430,7 @@ var categories = {
                 }
             },
             "no-data": {
-                "name": "Not enough info to",
+                "name": "Not enough info",
                 "description": "No enough data to make a determination",
                 "rules": {
                     "max": null,
@@ -476,7 +480,7 @@ var categories = {
                 }
             },
             "no-data": {
-                "name": "Not enough info to",
+                "name": "Not enough info",
                 "description": "No enough data to make a determination",
                 "rules": {
                     "max": null,
@@ -527,7 +531,7 @@ var categories = {
                 }
             },
             "no-data": {
-                "name": "Not enough info to",
+                "name": "Not enough info",
                 "description": "No enough data to make a determination",
                 "rules": {
                     "max": null,
@@ -577,7 +581,7 @@ var categories = {
                 }
             },
             "no-data": {
-                "name": "Not enough info to",
+                "name": "Not enough info",
                 "description": "No enough data to make a determination",
                 "rules": {
                     "max": null,

@@ -56,7 +56,9 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             if (!ticker) {
                 return false;
             }
-            Backbone.history.navigate('fund/' + ticker, {trigger:true});
+            var url = document.location.href.split('?');
+            var queryParams = url[1] ? '?' + url[1] : '';
+            Backbone.history.navigate('fund/' + ticker + queryParams, {trigger:true});
         },
 
         getSinStocks: function(sin) {
@@ -113,7 +115,6 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         render: function () {
-            console.log(this.collection.toJSON()[0]);
             this.$el.html(this.template({
                 funds: this.collection.toJSON(),
                 searchId: this.id,
@@ -173,60 +174,36 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                     $brandSelect.val(qp['brand']);
                 }
 
-                if (qp['guns'] && qp['guns'] === 'yes') {
+                if (qp['guns'] && (qp['guns'] === 'no' || qp['guns'] === 'indeterminate')) {
+                    that.dimResults();
                     $gunsCheck.attr('checked', 'checked');
                     $gunsCheck.parent().addClass('checked');
                 }
 
-                if (qp['gambling'] && qp['gambling'] === 'yes') {
+                if (qp['gambling'] && (qp['gambling'] === 'no' || qp['gambling'] === 'indeterminate')) {
                     $gamblingCheck.attr('checked', 'checked');
                     $gamblingCheck.parent().addClass('checked');
                 }
 
-                if (qp['pornography'] && qp['pornography'] === 'yes') {
+                if (qp['pornography'] && (qp['pornography'] === 'no' || qp['pornography'] === 'indeterminate')) {
                     $pornCheck.attr('checked', 'checked');
                     $pornCheck.parent().addClass('checked');
                 }
 
-                if (qp['fossil'] && qp['fossil'] === 'yes') {
+                if (qp['fossil'] && (qp['fossil'] === 'no' || qp['fossil'] === 'indeterminate')) {
                     $ffCheck.attr('checked', 'checked');
                     $ffCheck.parent().addClass('checked');
                 }
 
-                if (qp['tobacco'] && qp['tobacco'] === 'yes') {
+                if (qp['tobacco'] && (qp['tobacco'] === 'no' || qp['tobacco'] === 'indeterminate')) {
                     $tobaccoCheck.attr('checked', 'checked');
                     $tobaccoCheck.parent().addClass('checked');
                 }
 
-                if (qp['alcohol'] && qp['alcohol'] === 'yes') {
+                if (qp['alcohol'] && (qp['alcohol'] === 'no' || qp['alcohol'] === 'indeterminate')) {
                     $alcoholCheck.attr('checked', 'checked');
                     $alcoholCheck.parent().addClass('checked');
                 }
-
-                $gunsCheck.on('change', function(e) {
-                    var value = e.target.checked ? 'yes' : 'no';
-                    that.filterResults([value], 'guns', false);
-                });
-                $gamblingCheck.on('change', function(e) {
-                    var value = e.target.checked ? 'yes' : 'no';
-                    that.filterResults([value], 'gambling', false);
-                });
-                $pornCheck.on('change', function(e) {
-                    var value = e.target.checked ? 'yes' : 'no';
-                    that.filterResults([value], 'pornography', false);
-                });
-                $ffCheck.on('change', function(e) {
-                    var value = e.target.checked ? 'yes' : 'no';
-                    that.filterResults([value], 'fossil', false);
-                });
-                $tobaccoCheck.on('change', function(e) {
-                    var value = e.target.checked ? 'yes' : 'no';
-                    that.filterResults([value], 'tobacco', false);
-                });
-                $alcoholCheck.on('change', function(e) {
-                    var value = e.target.checked ? 'yes' : 'no';
-                    that.filterResults([value], 'alcohol', false);
-                });
             }
 
             $catSelect.material_select();
@@ -261,6 +238,12 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         filter: function(params) {
+            var $gunsCheck = $('#guns-check');
+            var $gamblingCheck = $('#gambling-check');
+            var $pornCheck = $('#porn-check');
+            var $tobaccoCheck = $('#tobacco-check');
+            var $ffCheck = $('#ff-check');
+            var $alcoholCheck = $('#alcohol-check');
             var fundSizeSlider = document.getElementById('fund-size-slider');
             var fundCategoryDD = document.getElementById('category-dd');
             var focusDD = document.getElementById('focus-dd');
@@ -302,6 +285,67 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 document.getElementById('fund-size-lower'),
                 document.getElementById('fund-size-upper')
             ];
+
+            $gunsCheck.on('change', function(e) {
+                that.dimResults();
+                var value = e.target.checked ? 'no' : 'yes';
+                if (value === 'no') {
+                    $gunsCheck.parent().addClass('checked');
+                } else {
+                    $gunsCheck.parent().removeClass('checked');
+                }
+                that.filterResults([value], 'guns', false);
+            });
+            $gamblingCheck.on('change', function(e) {
+                that.dimResults();
+                var value = e.target.checked ? 'no' : 'yes';
+                if (value === 'no') {
+                    $gamblingCheck.parent().addClass('checked');
+                } else {
+                    $gamblingCheck.parent().removeClass('checked');
+                }
+                that.filterResults([value], 'gambling', false);
+            });
+            $pornCheck.on('change', function(e) {
+                that.dimResults();
+                var value = e.target.checked ? 'no' : 'yes';
+                if (value === 'no') {
+                    $pornCheck.parent().addClass('checked');
+                } else {
+                    $pornCheck.parent().removeClass('checked');
+                }
+                that.filterResults([value], 'pornography', false);
+            });
+            $ffCheck.on('change', function(e) {
+                that.dimResults();
+                var value = e.target.checked ? 'no' : 'yes';
+                if (value === 'no') {
+                    $ffCheck.parent().addClass('checked');
+                } else {
+                    $ffCheck.parent().removeClass('checked');
+                }
+                that.filterResults([value], 'fossil', false);
+            });
+            $tobaccoCheck.on('change', function(e) {
+                that.dimResults();
+                var value = e.target.checked ? 'no' : 'yes';
+                if (value === 'no') {
+                    $tobaccoCheck.parent().addClass('checked');
+                } else {
+                    $tobaccoCheck.parent().removeClass('checked');
+                }
+                that.filterResults([value], 'tobacco', false);
+            });
+            $alcoholCheck.on('change', function(e) {
+                that.dimResults();
+                var value = e.target.checked ? 'no' : 'yes';
+                if (value === 'no') {
+                    $alcoholCheck.parent().addClass('checked');
+                } else {
+                    $alcoholCheck.parent().removeClass('checked');
+                }
+                that.filterResults([value], 'alcohol', false);
+            });
 
             fundSizeSlider.noUiSlider.on('update', function( values, handle ) {
                 fundSizeValues[handle].innerHTML = moneyFormat.to(parseInt(values[handle], 10));

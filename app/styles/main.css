@@ -322,26 +322,28 @@ label {
   color: black !important;
 }
 
-#questionaire {
+#questionnaire {
   margin: 100px auto;
 }
-#questionaire label {
+#questionnaire label {
   color: black;
+  text-transform: uppercase;
 }
-#questionaire .btn.previous,
-#questionaire .btn.next {
-  margin: auto 10px;
-}
-#questionaire .progress-title {
+#questionnaire .btn.previous,
+#questionnaire .btn.next,
+#questionnaire .btn.submit {
   margin: auto 20px;
 }
-#questionaire .indicators {
+#questionnaire .progress-title {
+  margin: auto 20px;
+}
+#questionnaire .indicators {
   bottom: -28px;
 }
-#questionaire .indicator-item {
+#questionnaire .indicator-item {
   background-color: #225665;
 }
-#questionaire .indicator-item.active {
+#questionnaire .indicator-item.active {
   background-color: #00A5A9;
 }
 
@@ -481,7 +483,6 @@ nav .input-field label:active i {
 
 .header-row .fund-name {
   font-weight: bolder;
-  color: white;
 }
 
 .ticker-container {
@@ -680,6 +681,11 @@ nav .input-field label:active i {
 .card .card-content {
   color: white;
 }
+@media only screen and (max-width: 500px) {
+  .card .card-content .card-percentage {
+    font-size: 2rem !important;
+  }
+}
 .card .card-content .card-percentage {
   margin: 0;
 }
@@ -749,36 +755,6 @@ nav .input-field label:active i {
   vertical-align: middle;
 }
 
-.background-1 {
-  background-size: cover;
-  background: url("/images/bg1.png") no-repeat;
-}
-
-.background-2 {
-  background-size: cover;
-  background: url("/images/bg2.png") no-repeat;
-}
-
-.background-3 {
-  background-size: cover;
-  background: url("/images/bg3.png") no-repeat;
-}
-
-.background-4 {
-  background-size: cover;
-  background: url("/images/bg4.png") no-repeat;
-}
-
-.background-5 {
-  background-size: cover;
-  background: url("/images/bg5.png") no-repeat;
-}
-
-.background-6 {
-  background-size: cover;
-  background: url("/images/bg6.png") no-repeat;
-}
-
 .pagination li:last-child a {
   padding-right: 0;
 }
@@ -795,6 +771,11 @@ header.no-padding, .cards-container.no-padding, footer.no-padding {
     padding-left: 0;
   }
 }
+.fund-detail-carousel {
+  overflow: visible;
+  top: -115px;
+}
+
 @-webkit-keyframes fadeIt {
   0% {
     background-color: #b71c1c;

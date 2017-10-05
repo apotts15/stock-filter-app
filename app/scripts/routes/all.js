@@ -50,7 +50,7 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
             if (!this.validateAuth()) {
                 Backbone.history.navigate('/', {trigger: true});
             } else {
-                if ($('#questionaire').length === 0) {
+                if ($('#questionnaire').length === 0) {
                     var questionsView = new OnePebbleApp.Views.Questions({
                         el: $('main')
                     });

@@ -38,16 +38,13 @@ redisClient.auth('sBCZoEk74k81cgvM', function(err,reply) {
 });
 
 redisClient.set("language", "nodejs", function(err,reply) {
-    console.log(err);
-    console.log(reply);
 });
 
 redisClient.hmset('frameworks', 'javascript', 'BackboneJS', 'css', 'Bootstrap', 'node', 'Express');
 
 redisClient.hgetall('frameworks', function(err, object) {
-    console.log('hgetall', object);
+    //console.log('hgetall', object);
 });
-
 
 mongoose.Promise = global.Promise;
 
@@ -90,26 +87,25 @@ var createNewEntries = function(db, entries, callback) {
 
 //Get the default connection
 var db = mongoose.connection;
-var entries = [];
-// fs.readFile("./FINAL-etfData-with-companies.json", "utf8", function(error,data) {
+// var entries = [];
+// fs.readFile("./etf-11-allocated.json", "utf8", function(error,data) {
 // // fs.readFile("../data/search-data/search-data-companies-5.json", "utf8", function(error,data) {
 //     if (error) throw error;
 //
 //     entries = JSON.parse(data);
-//     console.log('entries', entries)
+//     console.log('entries', entries);
 // });
 
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('disconnected', connectMongo);
 db.once('open', function() {
-    console.log('connected to mongo db');
+    console.log('connected to mongo db: ', config.db.mongo.uri);
     // createNewEntries(db, entries, function() {
     //     console.log('Adding new Entries');
     //     db.close();
     // });
 });
-
 
 // Populate DB with sample data
 //if(config.seedDB) { require('./config/seed'); }
@@ -133,11 +129,14 @@ require('./config/express')(app);
 
 fs.readdirSync(join(__dirname, 'models')).forEach(function (file) {
     if (~file.indexOf('.js')) {
-        require(join(__dirname, 'models', file))};
+        require(join(__dirname, 'models', file));
+    }
 });
 
 fs.readdirSync(join(__dirname, 'routes')).forEach(function (file) {
-    if (~file.indexOf('.js')) require(join(__dirname, 'routes', file))(app);
+    if (~file.indexOf('.js')) {
+        require(join(__dirname, 'routes', file))(app);
+    }
 });
 
 app.use(function (req, res) {
@@ -148,8 +147,8 @@ app.use(function (req, res) {
 var server = require('http').createServer(app);
 
 server.listen(process.env.PORT || config.port || 5000, function () {
-  console.log('Server PATH: ', path.join(config.root, config.appPath));
-  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  console.log('SERVER PATH: ', path.join(config.root, config.appPath));
+  console.log('EXPRESS SERVER: listening on %d, in %s mode', config.port, app.get('env'));
 });
 
 // server.listen(config.port, config.ip, function () {

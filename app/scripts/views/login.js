@@ -99,7 +99,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         goToNext: function() {
-            Backbone.history.navigate('#questionnaire/', {trigger: true});
+            Backbone.history.navigate('#questionnaire/?guns=indeterminate&tobacco=indeterminate&pornography=indeterminate&fossil=indeterminate&alcohol=indeterminate&gambling=indeterminate', {trigger: true});
             this.remove();
         },
 

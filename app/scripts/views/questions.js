@@ -29,7 +29,8 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             Backbone.history.navigate('/', {trigger: true});
         },
 
-        next: function() {
+        next: function(e) {
+            //this.updatePreference(e);
             $('.carousel').carousel('next');
         },
 
@@ -43,6 +44,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         submit: function(e) {
+            //this.updatePreference(e);
             var url = document.location.href.split('?');
             var queryParams = null;
 
@@ -54,7 +56,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         updatePreference: function(e) {
-            var answer = $(e.target).val();
+            var answer = $(e.target).val() || $(e.target).data("id");
             var pref = answer.split('-')[0];
             var cat = answer.split('-')[1];
             this.insertParam(cat, pref);
@@ -64,6 +66,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             this.question =  {
                 number: obj.question
             }
+            //document.location.href += '?guns=indeterminate&gambling=indeterminate&pornography=indeterminate&alcohol=indeterminate&fossil=indeterminate&tobacco=indeterminate';
         },
 
         getQuestionData: function() {
@@ -96,7 +99,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                   number: 'four',
                   numeric_num: 4,
                   icon: 'Oil-Industry',
-                  category: 'fossil-fuel',
+                  category: 'fossil',
                   question: 'I wish to <span class="bold">divest (exclude from my portfolio)</span> companies involved in the production or selling of <span class="bold">fossil fuel</span>.',
                   answers: ['yes', 'no']
               },

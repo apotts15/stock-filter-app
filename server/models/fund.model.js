@@ -137,7 +137,7 @@ FundSchema.statics = {
     },
     getAll: function (cb) {
         console.log('getAll query');
-        this.find({})
+        this.find({}).limit(500)
             .exec(cb);
     },
     getBySymbol: function (ticker, cb) {

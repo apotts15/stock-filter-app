@@ -363,16 +363,18 @@ main {
 label {
     color: black !important;
 }
-#questionaire {
+#questionnaire {
     margin: 100px auto;
 
     label {
         color: black;
+        text-transform: uppercase;
     }
 
     .btn.previous,
-    .btn.next {
-        margin: auto 10px
+    .btn.next,
+    .btn.submit {
+        margin: auto 20px;
     }
 
     .progress-title {
@@ -569,7 +571,6 @@ nav .input-field label:active i {
 }
 .header-row .fund-name {
     font-weight: bolder;
-    color: white;
 }
 
 .ticker-container {
@@ -747,10 +748,6 @@ nav .input-field label:active i {
                 padding: 20px;
             }
         }
-
-        @media only screen and (max-width : 500px) {
-
-        }
     }
 }
 
@@ -834,6 +831,12 @@ nav .input-field label:active i {
 
     .card-content {
         color: white;
+
+        @media only screen and (max-width : 500px) {
+            .card-percentage {
+                font-size: 2rem !important;
+            }
+        }
 
         .card-percentage {
             margin: 0;
@@ -957,7 +960,10 @@ header, .cards-container, footer {
         padding-left: 0;
     }
 }
-
+.fund-detail-carousel {
+    overflow: visible;
+    top: -115px;
+}
 //.carousel-item:not(.active) .btn{
 //    visibility: hidden;
 //}

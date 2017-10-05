@@ -65,37 +65,37 @@
                                 <input type="checkbox" class="filled-in" id="guns-check" />
                                 <label for="guns-check">Guns/Ammo</label>
                                 <span class="supported green-text">(Supported)</span>
-                                <span class="against red-text">(Against)</span>
+                                <span class="against red-text">(Divested)</span>
                             </p>
                             <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="gambling-check" />
                                 <label for="gambling-check">Gambling</label>
                                 <span class="supported green-text">(Supported)</span>
-                                <span class="against red-text">(Against)</span>
+                                <span class="against red-text">(Divested)</span>
                             </p>
                             <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="porn-check" />
                                 <label for="porn-check">Pornography</label>
                                 <span class="supported green-text">(Supported)</span>
-                                <span class="against red-text">(Against)</span>
+                                <span class="against red-text">(Divested)</span>
                             </p>
                             <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="tobacco-check" />
                                 <label for="tobacco-check">Tobacco</label>
                                 <span class="supported green-text">(Supported)</span>
-                                <span class="against red-text">(Against)</span>
+                                <span class="against red-text">(Divested)</span>
                             </p>
                             <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="ff-check" />
                                 <label for="ff-check">Fossil Fuel</label>
                                 <span class="supported green-text">(Supported)</span>
-                                <span class="against red-text">(Against)</span>
+                                <span class="against red-text">(Divested)</span>
                             </p>
                             <p class="values-category">
                                 <input type="checkbox" class="filled-in" id="alcohol-check" />
                                 <label for="alcohol-check">Alcohol</label>
                                 <span class="supported green-text">(Supported)</span>
-                                <span class="against red-text">(Against)</span>
+                                <span class="against red-text">(Divested)</span>
                             </p>
                         </div>
                     </li>
@@ -381,20 +381,20 @@
                 <!-- JST data.funds -->
                 <% _.each(funds, function(fund, i) { %>
                 <li class="card-wrapper">
-                    <div class="card hoverable <%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'missing-metal' %>" data-id="<%= fund.ticker %>">
+                    <div class="card hoverable <%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'gold' %>" data-id="<%= fund.ticker %>">
                         <div class="card-bg">
                             <h6 class="card-title ticker btn white"><%= fund.ticker %></h6>
                             <div class="metals">
-                                <img class="metal" src="/images/metals/<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'none' %>.png" alt="<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'No Metal' %>" class="<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'no-metal' %>" />
+                                <img class="metal" src="/images/metals/<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'gold' %>.png" alt="<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'gold' %>" class="<%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'no-metal' %>" />
                             </div>
                             <!--<h5 class="fund-name"><%= fund.fund %></h5>-->
-                            <p class="fund-type center-align">
-                               <%= fund.fundBasics.segment %>
-                            </p>
+                            <!--<p class="fund-type center-align">-->
+                               <!--<%= fund.fundBasics.segment %>-->
+                            <!--</p>-->
                         </div>
                         <div class="card-content center">
                             <h2 class="card-percentage center-align">
-                                <span class="bold"><%= fund.sinStocks.total && fund.sinStocks.total.allocationPercent ? fund.sinStocks.total.allocationPercent : 'missing-allocation' %></span>
+                                <span class="bold"><%= fund.sinStocks.total && fund.sinStocks.total.allocationPercent ? fund.sinStocks.total.allocationPercent : '0.0%' %></span>
                             </h2>
                             <h5 class="card-percentage-description">in stocks against your values</h5>
 

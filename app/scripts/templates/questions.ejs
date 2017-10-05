@@ -1,5 +1,5 @@
 <button class="btn waves-effect waves-light onepebble-secondary exit">Exit</button>
-<div id="questionaire" class="container carousel carousel-slider" data-indicators="true">
+<div id="questionnaire" class="container carousel carousel-slider" data-indicators="true">
     <% _.each(questions, function(question) { %>
         <div class="carousel-item" href="#<%= question.number %>!" id="question-<%= question.numeric_num %>">
             <!--<div class="row">-->
@@ -43,9 +43,9 @@
                 </div>
                 <div class="col s6 right-align">
                     <% if (question.numeric_num !== questions.length) { %>
-                        <a class="waves-effect waves-light btn onepebble-primary next" data-id="">Next</a>
+                        <a class="waves-effect waves-light btn onepebble-primary next" data-id="indeterminate-<%= question.category %>">Next</a>
                     <% } else { %>
-                        <a class="waves-effect waves-light btn onepebble-highlight submit">Submit</a>
+                        <a class="waves-effect waves-light btn onepebble-highlight submit" data-id="indeterminate-<%= question.category %>">Submit</a>
                     <% } %>
                 </div>
             </div><!-- Page Content goes here -->

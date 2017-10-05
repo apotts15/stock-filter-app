@@ -22,50 +22,50 @@ var categoryKeys = [
     'guns',
     'alcohol',
     'gambling',
-    'porn',
+    'pornography',
     'tobacco',
-    'fossilFuel'
+    'fossil'
 ];
 
 var rangeKeys = {
     'max': '$lt',
     'min': '$gt'
 };
-
-var filterCategories = function(results) {
-    results.sinStocks = {};
-    results.sinStocks.gunStocks = filterStocks(results);
-    results.sinStocks.alcoholStocks = filterStocks(results);
-    results.sinStocks.gamblingStocks = filterStocks(results);
-    results.sinStocks.alcoholStocks = filterStocks(results);
-    results.sinStocks.pornStocks = filterStocks(results);
-    results.sinStocks.tobaccoStocks = filterStocks(results);
-    results.sinStocks.fossilFuelStocks = filterStocks(results);
-
-    if (results.sinStocks.gunStocks) {
-        console.log('gunStocks via filter', results.gunStocks);
-    }
-    if (results.sinStocks.alcoholStocks) {
-        console.log('alcoholStocks via filter', results.alcoholStocks);
-    }
-    if (results.sinStocks.gamblingStocks) {
-        console.log('gamblingStocks via filter', results.gamblingStocks);
-    }
-    if (results.sinStocks.alcoholStocks) {
-        console.log('alcoholStocks via filter', results.alcoholStocks);
-    }
-    if (results.pornStocks) {
-        console.log('pornStocks via filter', results.pornStocks);
-    }
-    if (results.sinStocks.tobaccoStocks) {
-        console.log('tobaccoStocks via filter', results.tobaccoStocks);
-    }
-    if (results.sinStocks.fossilFuelStocks) {
-        console.log('fossilFuelStocks via filter', results.fossilFuelStocks);
-    }
-
-    return results;
-};
+//
+// var filterCategories = function(results) {
+//     results.sinStocks = {};
+//     results.sinStocks.gunStocks = filterStocks(results);
+//     results.sinStocks.alcoholStocks = filterStocks(results);
+//     results.sinStocks.gamblingStocks = filterStocks(results);
+//     results.sinStocks.alcoholStocks = filterStocks(results);
+//     results.sinStocks.pornStocks = filterStocks(results);
+//     results.sinStocks.tobaccoStocks = filterStocks(results);
+//     results.sinStocks.fossilFuelStocks = filterStocks(results);
+//
+//     if (results.sinStocks.gunStocks) {
+//         console.log('gunStocks via filter', results.gunStocks);
+//     }
+//     if (results.sinStocks.alcoholStocks) {
+//         console.log('alcoholStocks via filter', results.alcoholStocks);
+//     }
+//     if (results.sinStocks.gamblingStocks) {
+//         console.log('gamblingStocks via filter', results.gamblingStocks);
+//     }
+//     if (results.sinStocks.alcoholStocks) {
+//         console.log('alcoholStocks via filter', results.alcoholStocks);
+//     }
+//     if (results.pornStocks) {
+//         console.log('pornStocks via filter', results.pornStocks);
+//     }
+//     if (results.sinStocks.tobaccoStocks) {
+//         console.log('tobaccoStocks via filter', results.tobaccoStocks);
+//     }
+//     if (results.sinStocks.fossilFuelStocks) {
+//         console.log('fossilFuelStocks via filter', results.fossilFuelStocks);
+//     }
+//
+//     return results;
+// };
 
 var capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -181,7 +181,7 @@ var getMetal = function(allocationNum) {
     } else if (allocationNum > .05 ) {
         metal = 'none';
     } else {
-        metal = 'missed-ranking';
+        metal = 'gold'; // || 'missed-ranking';
         console.log('!!!' + metal + '!!! ' + allocationNum);
     }
 
@@ -194,12 +194,14 @@ var sortResults = function(results) {
     });
 };
 
-var filterStocks = function(funds) {
+var filterStocks = function(funds, categoriesToFilterOut) {
     _.each(funds, function(fund) {
         var totalNum = 0;
+        var allocationCount = 0;
         _.each(_.keys(fund.sinStocks), function(sin) {
             if (fund.sinStocks[sin] instanceof Object){
-                var sinSupported = fund.sinStocks[sin].supportedStocks && fund.sinStocks[sin].supportedStocks.length > 0;
+                var supportedStocksLength = fund.sinStocks[sin].supportedStocks && fund.sinStocks[sin].supportedStocks.length;
+                var sinSupported = supportedStocksLength > 0;
                 if (sinSupported) {
                     var supportedSinStocks = fund.sinStocks[sin] && fund.sinStocks[sin].supportedStocks;
                     var allocations = getAllocations(supportedSinStocks, fund.companyAllocation);
@@ -209,6 +211,7 @@ var filterStocks = function(funds) {
                     var sinfulAumFormated = _sinfulAumFormated(allocationNum, fund);
 
                     totalNum += allocationNum;
+                    allocationCount += supportedStocksLength;
 
                     //sinStock[sin].allocations = allocations;
                     fund.sinStocks[sin].allocationNum = allocationNum;
@@ -225,6 +228,7 @@ var filterStocks = function(funds) {
         fund.sinStocks.total.aumFormated = getAUMFormated(fund);
         fund.sinStocks.total.totalSinfulAumFormated = _sinfulAumFormated(totalNum, fund);
         fund.sinStocks.total.metal = getMetal(totalNum);
+        fund.sinStocks.total.allocationCount = allocationCount;
 
         // if (fund.ticker === 'ACTX') {
         //     console.log('!!!Fund ACTX!!!');
@@ -311,6 +315,42 @@ var filterStocks = function(funds) {
         return fund;
     });
 
+
+    // filter Out These Funds
+    if (categoriesToFilterOut && categoriesToFilterOut.length > 0) {
+        console.log('categoriesToFilterOut', categoriesToFilterOut);
+
+        funds = _.filter(funds, function(fund) {
+            var includeFund = true;
+            // true means include
+            // if (fund.sinStocks.hasGunsStocks) {
+            //     console.log('fund.hasGunsStocks: filter out this gun stock fund', fund);
+            //     includeFund = false;
+            //     return includeFund;
+            // }
+
+            _.each(categoriesToFilterOut, function(category){
+                var cat = category;
+                if (cat === 'fossil') {
+                    cat = 'FossilFuel';
+                } else if (cat === 'pornography') {
+                    cat = 'Porn';
+                } else {
+                    cat = capitalize(cat);
+                }
+                var categoryCheck = 'has' + cat + 'Stocks';
+
+                if (fund.sinStocks[categoryCheck]) {
+                    includeFund = false;
+                    return includeFund;
+                }
+            });
+
+            return includeFund;
+        });
+    }
+
+
     return funds;
 };
 
@@ -335,7 +375,7 @@ exports.getFunds = function(req, res) {
     var $andFilter = [];
     var id = req.params.id;
     var allFunds = id && id === 'all';
-    var categoriesChoosen = [];
+    var categoriesToFilterOut = [];
 
     if (!_.isEmpty(req.query)) {
         console.log('req.query', req.query);
@@ -346,12 +386,15 @@ exports.getFunds = function(req, res) {
             var filterKey = filterKeys[queryArr[0]];
             // guns, porn, alcohol
             var categoryKey = _.indexOf(categoryKeys, queryArr[0]) >= 0 ? queryArr[0] : false;
-            console.log('categoryKey',categoryKey);
             // max, min
             var range = rangeKeys[queryArr[1]];
 
             if (categoryKey) {
-                categoriesChoosen.push(categoryKey);
+                if (value === 'yes') {
+                    categoriesToFilterOut.push(categoryKey);
+                } else if (value === 'no' || value === 'indeterminate') {
+
+                }
             }
 
             // if already in the filter obj
@@ -360,25 +403,26 @@ exports.getFunds = function(req, res) {
             }
 
             // no min or max included i.e. {fund: value}
-            if (queryArr && queryArr.length === 1 && range) {
+            if (queryArr && queryArr.length === 1) {
+                console.log('no min or max included i.e. {fund: value}', value);
                 filter[filterKeys[key]] = value;
             } else {
                 // min or max included so create new obj i.e. {fund: {min, max}}
                 if (!filter[filterKey]) {
+                    console.log('min or max included so create new obj i.e. {fund: {min, max}}', value);
                     filter[filterKey] = {};
                     filter[filterKey][range] = value;
                 }
             }
-
-            $andFilter.push(filter);
+            if (value !== 'all') {
+                $andFilter.push(filter);
+            }
         });
-        console.log('FUNDS: Fund.filter + $andFilter: ', $andFilter);
 
         if ($andFilter && $andFilter.length > 0) {
+            console.log('FUNDS: Fund filter on $andFilter: ', $andFilter);
             //'fundBasics.aum.value': { $gt: 28890, $lt: 28890000 } }
             Fund.filter({ $and: $andFilter} , function (err, results) {
-
-                console.log('Fund filter on $andFilter');
                 if (err){
                     console.log('error', err);
                 } else {
@@ -386,8 +430,8 @@ exports.getFunds = function(req, res) {
                         console.log('no results');
                         res.send([]);
                     } else {
-                        if (categoriesChoosen && categoriesChoosen.length > 0) {
-                            results = filterCategories(results, categoriesChoosen);
+                        if (categoriesToFilterOut && categoriesToFilterOut.length > 0) {
+                            results = filterStocks(results, categoriesToFilterOut);
                         } else {
                             results = filterStocks(results)
                         }
@@ -400,8 +444,12 @@ exports.getFunds = function(req, res) {
             });
 
         } else {
-            if (categoriesChoosen && categoriesChoosen.length > 0) {
-                getAllFunds(res, categoriesChoosen);
+            if (categoriesToFilterOut && categoriesToFilterOut.length > 0) {
+                // filter out explicitly stated values
+                getAllFunds(res, categoriesToFilterOut);
+            } else {
+                // query params were provided but not enough values so filter all values out
+                getAllFunds(res, categoryKeys);
             }
         }
     } else {
@@ -410,7 +458,6 @@ exports.getFunds = function(req, res) {
 };
 
 var getAllFunds = function(res, filterOnCategories) {
-
     Fund.getAll(function (err, results) {
         if (err) {
             console.log('error', err);
@@ -465,14 +512,14 @@ exports.getByCompany = function(req, res) {
 
         //'fundBasics.aum.value': { $gt: 28890, $lt: 28890000 } }
         Fund.filter($andFilter, function (err, results) {
-            console.log('FUNDS: Fund.filter + $andFilter: ',$andFilter);
+            console.log('should never hit getByCompany, FUNDS: Fund.filter + $andFilter: ',$andFilter);
             if (err){
                 console.log('error', err);
             } else {
                 if (!results) {
                     res.send([]);
                 } else {
-                    results = filterCategories(results);
+//                    results = filterCategories(results);
 
                     results = sortResults(results);
 

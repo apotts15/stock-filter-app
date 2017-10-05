@@ -87,7 +87,7 @@ var createNewEntries = function(db, entries, callback) {
 
 //Get the default connection
 var db = mongoose.connection;
-// var entries = [];
+var entries = [];
 // fs.readFile("./etf-11-allocated.json", "utf8", function(error,data) {
 // // fs.readFile("../data/search-data/search-data-companies-5.json", "utf8", function(error,data) {
 //     if (error) throw error;
@@ -95,7 +95,6 @@ var db = mongoose.connection;
 //     entries = JSON.parse(data);
 //     console.log('entries', entries);
 // });
-
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('disconnected', connectMongo);
