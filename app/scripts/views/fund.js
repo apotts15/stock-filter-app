@@ -59,13 +59,8 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         render: function () {
-            var sinStocks = this.model.get('sinStocks');
-
-
-
             this.$el.html(this.template({
                 iconSet: this.iconSet,
-
                 ticker: this.getTicker(),
                 fund: this.model.toJSON()
             }));
@@ -76,7 +71,12 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
             this.tooltip();
 
-            $('.fund-detail-carousel').carousel();
+            if (!window.mobileDetected) {
+                $('.fund-detail-carousel').carousel();
+            } else {
+                $('.fund-detail-carousel').removeClass('carousel');
+            }
+
 
             this.trigger("render", "render done!");
             return this;

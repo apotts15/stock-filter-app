@@ -165,9 +165,13 @@ var filterStocks = function(fund) {
             }
         }
     });
+
     fund.sinStocks.total = {};
+    fund.sinStocks.total.allocationPosNeg = totalNum >= 0 ? 'positive' : 'negative';
     fund.sinStocks.total.allocationNum = totalNum;
     fund.sinStocks.total.allocationPercent = getAllocationPercentTotal(totalNum);
+    fund.sinStocks.total.allocationAbsoluteNum = Math.abs(totalNum);
+    fund.sinStocks.total.allocationAbsolutePercent = getAllocationPercentTotal(Math.abs(totalNum));
     fund.sinStocks.total.aumFormated = getAUMFormated(fund);
     fund.sinStocks.total.totalSinfulAumFormated = _sinfulAumFormated(totalNum, fund);
     fund.sinStocks.total.metal = getMetal(totalNum);

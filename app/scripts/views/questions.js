@@ -126,7 +126,11 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             this.$el.html(this.template({questions: this.getQuestionData()}));
             $('main').html(this.$el.html());
 
-            $('.carousel.carousel-slider').carousel({fullWidth: true});
+            if (!window.mobileDetected) {
+                $('.carousel.carousel-slider').carousel({fullWidth: true});
+            } else {
+                $('#questionnaire').removeClass('carousel').removeClass(' carousel-slider');
+            }
 
             this.trigger("render", "render done!");
             return this;

@@ -41,7 +41,7 @@
                 <div class="col s6 left-align">
                     <a class="waves-effect waves-light btn onepebble-primary previous<%= question.numeric_num === 1 ? ' disabled' : '' %>">Previous</a>
                 </div>
-                <div class="col s6 right-align">
+                <div class="col <%= question.numeric_num !== questions.length ? 's12 right-align' : 's12 center-align' %>">
                     <% if (question.numeric_num !== questions.length) { %>
                         <a class="waves-effect waves-light btn onepebble-primary next" data-id="indeterminate-<%= question.category %>">Next</a>
                     <% } else { %>

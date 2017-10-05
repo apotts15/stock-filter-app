@@ -21,7 +21,7 @@
                 <!-- JST data.fund.categoryData -->
                 <div class="row">
 
-                    <div class="col s6 m6 l3">
+                    <div class="col s12 m6 l3">
                         <div class="card hoverable <%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'gold' %>" data-id="<%= fund.ticker %>">
                             <div class="card-bg">
                                 <h6 class="card-title ticker btn white"><%= fund.ticker %></h6>
@@ -35,37 +35,15 @@
                             </div>
                             <div class="card-content center">
                                 <h2 class="card-percentage center-align">
-                                    <span class="bold"><%= fund.sinStocks.total && fund.sinStocks.total.allocationPercent ? fund.sinStocks.total.allocationPercent : 'gold' %></span>
+                                    <span class="bold"><%= fund.sinStocks.total && fund.sinStocks.total.allocationPercent ? fund.sinStocks.total.allocationAbsolutePercent : 'gold' %></span>
                                 </h2>
-                                <h5 class="card-percentage-description">in stocks against your values</h5>
+                                <h5 class="card-percentage-description">in stocks <%= fund.sinStocks.total.allocationNum < 0 ? 'supporting' : 'against' %> your values</h5>
                             </div>
                         </div>
-
-                        <!--<div class="card" data-id="<%= fund.ticker %>">-->
-                            <!--<div class="card-bg background-<%= Math.floor(Math.random() * 6) + 1 %>">-->
-                                <!--<h6 class="card-title ticker waves-effect waves-light btn blue darken-1"><%= fund.ticker %></h6>-->
-                            <!--</div>-->
-                            <!--<div class="card-content center-align <%= fund.gunStocks.length >= 1 ? 'gun-full' : 'gun-free' %>">-->
-                                <!--<% if (fund.sinStocks.total.allocationNum !== 0) {  %>-->
-                                <!--<h2 class="card-precentage center-align">-->
-                                    <!--<span class="bold"></span>-->
-                                <!--</h2>-->
-                                <!--<h5>in Gun Stocks</h5>-->
-                                <!--<% var infoText = 'Percentage of this fund going to Gun Stocks' } else { %>-->
-                                <!--<h5><i class="material-icons medium">check</i></h5>-->
-                                <!--<h5>Gun-Free Fund</h5>-->
-
-                                <!--<% var infoText = 'None of the companies in this fund contribute to Gun Stocks' } %>-->
-                                <!--<div class="tip center-align" data-tip="<%= infoText %>">-->
-                                    <!--<i class="material-icons">info</i>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
                     </div>
-                    <div class="col s6 m6 l9">
-                        <h5 class="h55"><span class="bold"><%= ticker %></span> receives <span class="bold"><%= fund.sinStocks.total.metal !== 'none' ? fund.sinStocks.total.metal : 'no' %></span> ranking. The fund is comprised from <span class="bold"><%= fund.companyAllocation.length ? fund.companyAllocation.length + ' total' : 'numerous' %></span> company allocations, <span class="bold"><%= fund.sinStocks.total.allocationCount %></span> of which are against your values.</h5>
-                        <h5>Of the total <span class="bold">$<%= fund.sinStocks.total.aumFormated %></span> under management, <span class="bold"><%= fund.sinStocks.total.allocationPercent %></span> is held in stocks against your values. This totals <span class="bold">$<%= fund.sinStocks.total.totalSinfulAumFormated %></span> going towards companies against your values.</h5>
+                    <div class="col s12 m6 l9">
+                        <h5 class="h55"><span class="bold"><%= ticker %></span> receives <span class="bold"><%= fund.sinStocks.total.metal !== 'none' ? fund.sinStocks.total.metal : 'no' %></span> ranking. The fund is comprised from <span class="bold"><%= fund.companyAllocation.length ? fund.companyAllocation.length + ' total' : 'numerous' %></span> company allocations, <span class="bold"><%= fund.sinStocks.total.allocationCount %></span> of which <%= fund.sinStocks.total.allocationNum < 0 ? 'support' : 'are against' %> your values.</h5>
+                        <h5>Of the total <span class="bold">$<%= fund.sinStocks.total.aumFormated %></span> under management, a total of <span class="bold">$<%= fund.sinStocks.total.totalSinfulAumFormated %></span> or <span class="bold"><%= fund.sinStocks.total.allocationAbsolutePercent %></span> are going towards companies <%= fund.sinStocks.total.allocationNum < 0 ? 'supporting' : 'against' %> your values.</h5>
                     </div>
                     <div class="col s12 m6 l4">
                         <br><br>
@@ -74,7 +52,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="col s12">
             <h4 class="section-title">Fund Metrics</h4>
@@ -186,7 +163,9 @@
                 </div>
             </div>
         </div>
+
         <div class="col s12 center">
+            <h5 class="section-description">Find alternative funds and customize your results.</h5>
             <button class="waves-effect waves-light btn red darken-1 see-alt-funds">See Alternative Funds</button><br><br><br>
         </div>
     </div>

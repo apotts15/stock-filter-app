@@ -363,6 +363,24 @@ main {
 label {
     color: black !important;
 }
+
+.mobile {
+    #questionnaire {
+        .previous,
+        .next {
+            display: none;
+        }
+    }
+
+    .fund-detail-carousel {
+        .card {
+            width: 70%;
+            text-align: center;
+            margin: 1rem auto;
+        }
+    }
+}
+
 #questionnaire {
     margin: 100px auto;
 
