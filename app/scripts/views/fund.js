@@ -71,9 +71,10 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
             this.tooltip();
 
-            if (!window.mobileDetected) {
+            if (!Vel.State.isMobile) {
                 $('.fund-detail-carousel').carousel();
             } else {
+                document.getElementsByTagName('body')[0].classList.add('mobile');
                 $('.fund-detail-carousel').removeClass('carousel');
             }
 

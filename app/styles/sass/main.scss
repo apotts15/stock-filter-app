@@ -131,7 +131,6 @@ nav .input-field label {
     color: darkred;
 }
 .nav-wrapper {
-    background: white;
 }
 .nav-wrapper .input-field.op-input input[type=password] {
     height: inherit;
@@ -160,7 +159,9 @@ nav .input-field label {
         color: black;
     }
 }
-
+.card-container {
+    background: red !important;
+}
 /* label color */
 .op-input {
     input {
@@ -169,7 +170,7 @@ nav .input-field label {
     input[type=search]:focus,
     input[type=password]:focus,
     input[type=type]:focus {
-        background-color: white !important;
+        background-color: transparent !important;
         border-bottom: 1px solid $onepebble-primary-color !important;
         box-shadow: 0 1px 0 0 $onepebble-primary-color !important;
     }
@@ -210,7 +211,7 @@ main {
 }
 
 .row .col.filter-col {
-    background-color: white;
+    background-color: transparent;
     overflow-y: scroll;
     padding: 0 40px;
     max-width: 450px;
@@ -360,6 +361,7 @@ main {
     }
 
 }
+
 label {
     color: black !important;
 }
@@ -378,6 +380,9 @@ label {
             text-align: center;
             margin: 1rem auto;
         }
+    }
+    .submit-container {
+        text-align: center;
     }
 }
 
@@ -417,6 +422,39 @@ label {
     top: 0;
     left: 0;
 }
+.logo-container {
+    position: relative;
+    padding: 20px 0 0 0;
+    max-width: 600px;
+
+    .logo {
+
+    }
+    .beta {
+        position: absolute;
+        right: 6px;
+        top: 60px;
+        color: #225665;
+        font-weight: bold;
+    }
+}
+
+.filter {
+    .logo-container {
+
+    }
+    .logo {
+        //max-width: 350px;
+        max-width: 600px;
+        padding: 0;
+        margin: 19px 0 0 5px;
+    }
+    .beta {
+        right: 8px;
+        top: 41px;
+        font-size: 10px;
+    }
+}
 
 .subpage {
     border-bottom: 1px #d7d7d7 solid;
@@ -434,14 +472,9 @@ label {
         box-shadow: none;
     }
 
-    .logo {
-        padding: 0;
-        margin: 19px 0 0 5px;
-    }
-
     input[type=search] {
         border-bottom: 1px solid #d7d7d7 !important;
-        background-color: white;
+        background-color: transparent !important;
         color: #4d4d4d !important;
 
         &::-webkit-input-placeholder {
@@ -553,11 +586,6 @@ nav .input-field label:active i {
         display: none;
     }
 }
-@media (min-width: 980px) {
-    .nav-wrapper {
-        //padding: 30px;
-    }
-}
 
 @media (min-width: 767px) {
     .typeahead-wrapper {
@@ -565,10 +593,6 @@ nav .input-field label:active i {
     }
 }
 
-.logo {
-    max-width: 600px;
-    padding: 20px 0 0 0;
-}
 .powerful-tool {
     //margin-top: 400px;
 }
@@ -662,6 +686,7 @@ nav .input-field label:active i {
 .side-nav {
     width: 400px;
     font-size: 14px;
+    //background-color: transparent;
 
     li {
         line-height: 21px;
@@ -691,12 +716,6 @@ nav .input-field label:active i {
             box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.1);
             padding: 0 10px;
         }
-
-
-        //&.active {
-        //    border: none;
-        //    margin: 0 2px;
-        //}
     }
 }
 .filter #spinner {
@@ -706,14 +725,12 @@ nav .input-field label:active i {
 }
 
 .cards-container {
-    background-color: #f2f2f2;
+    background-color: transparent;
 
     .cards-col {
         width: 100%;
         //min-height: 100%;
         padding: 0;
-
-
 
         .cards-list-header {
             position: relative;
@@ -964,7 +981,9 @@ nav .input-field label:active i {
     }
 }
 
-
+header {
+    border: none !important;
+}
 header, .cards-container, footer {
     padding-left: 400px;
 

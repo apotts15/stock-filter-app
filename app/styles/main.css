@@ -109,10 +109,6 @@ nav .input-field label {
   color: darkred;
 }
 
-.nav-wrapper {
-  background: white;
-}
-
 .nav-wrapper .input-field.op-input input[type=password] {
   height: inherit;
   padding-left: 4rem;
@@ -138,6 +134,10 @@ nav .input-field label {
   color: black;
 }
 
+.card-container {
+  background: red !important;
+}
+
 /* label color */
 .op-input input {
   font-size: 1.2rem !important;
@@ -145,7 +145,7 @@ nav .input-field label {
 .op-input input[type=search]:focus,
 .op-input input[type=password]:focus,
 .op-input input[type=type]:focus {
-  background-color: white !important;
+  background-color: transparent !important;
   border-bottom: 1px solid #225665 !important;
   box-shadow: 0 1px 0 0 #225665 !important;
 }
@@ -178,7 +178,7 @@ main {
 }
 
 .row .col.filter-col {
-  background-color: white;
+  background-color: transparent;
   overflow-y: scroll;
   padding: 0 40px;
   max-width: 450px;
@@ -331,6 +331,9 @@ label {
   text-align: center;
   margin: 1rem auto;
 }
+.mobile .submit-container {
+  text-align: center;
+}
 
 #questionnaire {
   margin: 100px auto;
@@ -363,6 +366,30 @@ label {
   left: 0;
 }
 
+.logo-container {
+  position: relative;
+  padding: 20px 0 0 0;
+  max-width: 600px;
+}
+.logo-container .beta {
+  position: absolute;
+  right: 6px;
+  top: 60px;
+  color: #225665;
+  font-weight: bold;
+}
+
+.filter .logo {
+  max-width: 600px;
+  padding: 0;
+  margin: 19px 0 0 5px;
+}
+.filter .beta {
+  right: 8px;
+  top: 41px;
+  font-size: 10px;
+}
+
 .subpage {
   border-bottom: 1px #d7d7d7 solid;
   padding: 0 !important;
@@ -378,13 +405,9 @@ label {
   background-color: #55606e;
   box-shadow: none;
 }
-.subpage .logo {
-  padding: 0;
-  margin: 19px 0 0 5px;
-}
 .subpage input[type=search] {
   border-bottom: 1px solid #d7d7d7 !important;
-  background-color: white;
+  background-color: transparent !important;
   color: #4d4d4d !important;
 }
 .subpage input[type=search]::-webkit-input-placeholder {
@@ -469,11 +492,6 @@ nav .input-field label:active i {
     display: none;
   }
 }
-.logo {
-  max-width: 600px;
-  padding: 20px 0 0 0;
-}
-
 .section-title {
   font-weight: bold;
   color: #6b6b6b;
@@ -590,7 +608,7 @@ nav .input-field label:active i {
 }
 
 .cards-container {
-  background-color: #f2f2f2;
+  background-color: transparent;
 }
 .cards-container .cards-col {
   width: 100%;
@@ -767,6 +785,10 @@ nav .input-field label:active i {
 
 .pagination li:last-child a {
   padding-right: 0;
+}
+
+header {
+  border: none !important;
 }
 
 header, .cards-container, footer {
