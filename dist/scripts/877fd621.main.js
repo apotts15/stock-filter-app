@@ -1,4 +1,5 @@
 window.OnePebbleApp={Models:{},Collections:{},Views:{},Routers:{},init:function(){"use strict";window.searchCache||(window.searchCache=[])}},$(document).ready(function(){"use strict";OnePebbleApp.init()}), this["JST"] = this["JST"] || {};
+
 this["JST"]["app/scripts/templates/fund.ejs"] = function(obj) {
     obj || (obj = {});
     var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
