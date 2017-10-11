@@ -12,7 +12,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         className: '',
         MENU_TOGGLED: false,
         events: {
-            "click .close": "clearSearch",
+            "click .sidenav-close": "clearSearch",
             "click .card" : "goToFund",
             "click .sidenav-close" : "closeNav",
             "click .drag-target" : "closeNav",
@@ -53,12 +53,17 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         goToFund: function(e) {
             var ticker = this.getTicker(e);
+            var toggleMetal = $(e.target).hasClass('activator') || $(e.target).hasClass('close');
+
             if (!ticker) {
                 return false;
             }
+
             var url = document.location.href.split('?');
             var queryParams = url[1] ? '?' + url[1] : '';
-            Backbone.history.navigate('fund/' + ticker + queryParams, {trigger:true});
+            if (!toggleMetal) {
+                Backbone.history.navigate('fund/' + ticker + queryParams, {trigger:true});
+            }
         },
 
         getSinStocks: function(sin) {

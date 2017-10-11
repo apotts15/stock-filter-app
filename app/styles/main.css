@@ -35,27 +35,27 @@ body {
 }
 
 h1 {
-  font-size: 3.0rem !important;
+  font-size: 3.0rem;
 }
 
 h2 {
-  font-size: 2.5rem !important;
+  font-size: 2.5rem;
 }
 
 h3 {
-  font-size: 2.0rem !important;
+  font-size: 2.0rem;
 }
 
 h4 {
-  font-size: 1.5rem !important;
+  font-size: 1.5rem;
 }
 
 h5 {
-  font-size: 1.3rem !important;
+  font-size: 1.3rem;
 }
 
 h6 {
-  font-size: 1.1rem !important;
+  font-size: 1.1rem;
 }
 
 nav {
@@ -193,24 +193,6 @@ main {
 
 .filter-col .row:first-child {
   padding-bottom: 10px;
-}
-
-.gunstocks .card {
-  border-radius: 5px;
-}
-.gunstocks .card .ticker {
-  text-shadow: none;
-  margin: 0;
-}
-.gunstocks .card .card-content.gun-full {
-  background-color: rgba(255, 170, 0, 0.64);
-}
-.gunstocks .card .card-content.gun-free {
-  background-color: #44ae53;
-}
-.gunstocks .card .card-title {
-  line-height: 36px;
-  display: inline-flex;
 }
 
 .bold {
@@ -379,11 +361,12 @@ label {
   font-weight: bold;
 }
 
-.filter .logo {
+.subpage .logo {
   max-width: 600px;
   padding: 0;
   margin: 19px 0 0 5px;
 }
+
 .filter .beta {
   right: 8px;
   top: 41px;
@@ -437,7 +420,7 @@ nav .input-field label:active i {
   color: black !important;
 }
 
-.close, .closed {
+.sidenav-close, .closed {
   display: none;
 }
 
@@ -446,7 +429,7 @@ nav .input-field label:active i {
     display: none;
   }
 
-  .close, .closed {
+  .sidenav-close, .closed {
     display: block;
   }
 
@@ -635,9 +618,6 @@ nav .input-field label:active i {
   flex-direction: row;
   flex-wrap: wrap;
 }
-.cards-container .cards-col .card-list i.material-icons:first-child {
-  margin: 10px 0 0 0;
-}
 .cards-container .cards-col .card-list i.material-icons.left {
   float: left;
 }
@@ -645,14 +625,9 @@ nav .input-field label:active i {
   flex-grow: 1;
   margin: 0 20px;
 }
-.cards-container .cards-col .card {
-  margin: 10px auto;
-  width: 215px;
-  height: 300px;
-  border-radius: 5px;
-}
-.cards-container .cards-col .card .card-content {
-  padding: 20px;
+
+.header-ticker:hover {
+  box-shadow: none;
 }
 
 .fund .overview .card.gold .metal, .fund .overview .card.silver .metal, .fund .overview .card.bronze .metal, .fund .overview .card.none .metal {
@@ -660,54 +635,153 @@ nav .input-field label:active i {
   margin: 20px 0 0 0;
 }
 
+.caps {
+  text-transform: uppercase;
+}
+
+.ticker {
+  font-size: 18px !important;
+  text-shadow: none;
+  box-shadow: none;
+  border-radius: 25px;
+  color: #868687;
+  margin: 0;
+  line-height: 30px;
+  letter-spacing: 1px;
+  display: inline-flex;
+  padding: 4px 1.5rem 0 1.5rem;
+}
+
+.diamond .ticker {
+  background-color: #2391CA;
+}
+
+.platinum .ticker {
+  background-color: #54656E;
+}
+
+.gold .ticker {
+  background-color: #A59871;
+}
+
+.silver .ticker {
+  background-color: #94A1A9;
+}
+
+.bronze .ticker {
+  background-color: #826449;
+}
+
+.none .ticker {
+  background-color: #BCBCBC;
+}
+
 .card {
-  border-radius: 5px;
+  border-radius: 3px;
+  background-color: white;
+  margin: 10px auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 3px;
 }
 .card .metal {
-  width: 60px;
-  margin: 15px;
+  margin: 12px 0 0 0;
+}
+.card.diamond {
+  border: 1px solid #2391CA;
+}
+.card.diamond .card-header {
+  background-color: #2391CA;
+}
+.card.diamond .card-reveal {
+  background-image: radial-gradient(#ffffff 0%, #74c8eb 100%);
 }
 .card.platinum {
-  background-color: #627d76;
+  border: 1px solid #54656E;
 }
-.card.platinum .card-bg {
-  background-color: #abb3b3;
+.card.platinum .card-header {
+  background-color: #54656E;
+}
+.card.platinum .card-reveal {
+  background-image: radial-gradient(#ffffff 0%, #8a9fa8 100%);
 }
 .card.gold {
-  background-color: #877745;
+  border: 1px solid #A59871;
 }
-.card.gold .card-bg {
-  background-color: #bfad76;
+.card.gold .card-header {
+  background-color: #A59871;
+}
+.card.gold .card-reveal {
+  background-image: radial-gradient(#ffffff 0%, #d7c592 100%);
 }
 .card.silver {
-  background-color: #91a1aa;
+  border: 1px solid #94A1A9;
 }
-.card.silver .metal {
-  width: 55px;
+.card.silver .card-header {
+  background-color: #94A1A9;
 }
-.card.silver .card-bg {
-  background-color: #bdc9d1;
+.card.silver .card-reveal {
+  background-image: radial-gradient(#ffffff 0%, #c8cccd 100%);
 }
 .card.bronze {
-  background-color: #876345;
+  border: 1px solid #826449;
 }
-.card.bronze .card-bg {
-  background-color: #ba8254;
+.card.bronze .card-header {
+  background-color: #826449;
+}
+.card.bronze .card-reveal {
+  background-image: radial-gradient(#ffffff 0%, #d6c6ba 100%);
 }
 .card.none {
-  background-color: #909090;
+  border: 1px solid #BCBCBC;
 }
-.card.none .card-bg {
-  background-color: #cecece;
+.card.none .card-header {
+  background-color: #BCBCBC;
+}
+.card.none .card-reveal {
+  background-image: radial-gradient(#ffffff 0%, #f1f1f1 100%);
 }
 .card.missed-ranking {
   background-color: darkred;
+  border: 1px solid darkred;
 }
-.card.missed-ranking .card-bg {
+.card.missed-ranking .card-reveal,
+.card.missed-ranking .card-reveal .card-bg {
   background-color: white;
+}
+.card .card-header {
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 0;
+  line-height: 22px;
+}
+.card i.material-icons.right-top {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  margin: 0;
+  z-index: 1;
+}
+.card i.material-icons.right-bottom {
+  position: absolute;
+  bottom: 2px;
+  right: 1px;
+  margin: 1px;
+}
+.card .more_vert {
+  color: white;
+  font-size: 18px;
+}
+.card .control_point {
+  color: #5C5C5C;
+  text-shadow: none;
+  font-size: 18px;
 }
 .card .card-content {
   color: white;
+  padding: 20px;
 }
 @media only screen and (max-width: 500px) {
   .card .card-content .card-percentage {
@@ -717,70 +791,106 @@ nav .input-field label:active i {
 .card .card-content .card-percentage {
   margin: 0;
 }
-.card .card-content .card-percentage-description {
-  margin: 5px 12px;
-  font-size: 16px !important;
+.card .card-reveal {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-align: center;
 }
-.card .card-bg {
+.card .card-reveal .card-bg {
+  background-size: cover;
+  background: url("/images/fund-bg.png") no-repeat;
+}
+.card .card-summary-container {
   position: relative;
   color: white;
   text-shadow: 2px 2px black;
   font-weight: normal;
-  padding: 20px;
+  padding: 10px;
   margin: 0;
   text-align: center;
-  background-size: cover;
-  height: 60%;
-  border-radius: 5px 5px 0px 0px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent 400px, rgba(0, 0, 0, 0.8) 800px);
-  background-size: 800px 100%;
-  background-position: 50% 100%;
-  background-repeat: no-repeat;
-}
-.card .ticker {
-  text-shadow: none;
-  box-shadow: none;
-  border-radius: 25px;
-  border: 2px solid #b7b7b9;
-  font-weight: bold;
-  color: #868687;
-  margin: 0;
-  line-height: 36px;
-  display: inline-flex;
 }
 .card .fund-name {
-  color: black;
-  display: block;
+  height: 28px;
+  color: #5C5C5C;
+  font-weight: bold;
   display: -webkit-box;
-  margin-top: 0;
-  margin-bottom: 30px;
+  margin: 15px 0;
   line-height: 1.2;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
   text-shadow: none;
-  margin-bottom: 0;
+  font-size: 12px;
+}
+.card .fund-summary,
+.card .medal-summary {
+  color: #5C5C5C;
+  text-shadow: none;
+}
+.card .fund-summary .col:first-of-type,
+.card .medal-summary .col:first-of-type {
+  border-right: 1px solid #5C5C5C;
+}
+.card .fund-summary .value,
+.card .medal-summary .value {
+  font-size: 19px;
+  margin: 0;
+  padding: 0;
+}
+.card .fund-summary .label,
+.card .medal-summary .label {
+  font-size: 14px;
+  margin: 0;
+  padding: 0 10px;
+  color: #5C5C5C;
+  text-shadow: none;
+}
+.card .fund-disclaimer {
+  position: absolute;
+  padding: 0;
+  bottom: 0;
+  text-align: center;
+}
+.card .fund-disclaimer .disclaimer {
+  font-size: 12px;
+  color: #9b9b9b;
+  text-shadow: none;
+  margin: 0;
 }
 .card .fund-type {
-  color: #2f2626;
+  font-size: 13px;
+  font-weight: bold;
+  color: #5C5C5C;
   line-height: 1.2;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
   text-shadow: none;
-  margin: 0 auto;
-  position: absolute;
-  top: 90%;
-  left: 0;
-  right: 0;
+  margin: 20px auto 0 auto;
+  padding: 0 5px;
 }
 .card .fund-type i {
   vertical-align: middle;
+}
+
+.alternative-funds {
+  margin-top: -150px;
+}
+
+.mobile .cards-container .cards-col .card-list {
+  padding: 0;
+}
+.mobile .cards-container .cards-col .card-wrapper {
+  margin: 0 5px;
+}
+.mobile .alternative-funds {
+  margin-top: 0;
 }
 
 .pagination li:last-child a {

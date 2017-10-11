@@ -127,7 +127,6 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             $('main').html(this.$el.html());
 
             if (!Vel.State.isMobile) {
-                debugger;
                 $('.carousel.carousel-slider').carousel({fullWidth: true});
             } else {
                 document.getElementsByTagName('body')[0].classList.add('mobile');
