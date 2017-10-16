@@ -49,7 +49,10 @@ var FundSchema = new Schema(
             },
             priceTr10YrAnnualized: {
                 value: Number
-            }
+            },
+            returnShort: String,
+            returnLong: String,
+            returnPercent: String
         },
         analysis: {
             analystPick: Boolean,
@@ -65,7 +68,8 @@ var FundSchema = new Schema(
             spread: {
                 value: Number
             },
-            fundClosureRisk: String
+            fundClosureRisk: String,
+            risk: String
         },
         fundamentals: {
             dividendYield: {
@@ -183,6 +187,12 @@ FundSchema.statics = {
             console.log('arguments 1: ', arg1);
             console.log('arguments 2: ', arg2);
         })
+            .exec(cb);
+    },
+
+    getFundsByTicker: function (tickers, cb) {
+        console.log('getFundsByTicker query:', tickers);
+        this.find({"companies": {$in: tickers}})
             .exec(cb);
     }
 };

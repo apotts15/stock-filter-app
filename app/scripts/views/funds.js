@@ -18,7 +18,13 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             "click .drag-target" : "closeNav",
             "click .closed": "openNav",
             "click .ticker-container" : "clickit",
-            "click .clear-all-filters": "clearAllFilters"
+            "click .clear-all-filters": "clearAllFilters",
+            "click .toggle-cards": "toggleCards"
+        },
+
+        toggleCards: function(e) {
+            this.insertParam()
+            $('.card').find('.activator').click()
         },
 
         clearAllFilters: function () {

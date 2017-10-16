@@ -22,10 +22,39 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
             'funds/company/:id?*queryString' : 'funds',
             'funds/company/:id': 'funds',
             'questionnaire/': 'questions',
-            'questionnaire/?*queryString': 'questions'
+            'questionnaire/?*queryString': 'questions',
+            'index/' : 'stgIndex',
+            'index/:sdg' : 'sdgIndex'
         },
 
+        IndexView: null,
+
         initialize: function() {
+        },
+
+        sdgIndex: function(sdg) {
+            if (sdg) {
+                console.log(sdg);
+            }
+
+            console.log('welcome to the SDG Index');
+
+            var indexColumn = new OnePebbleApp.Views.IndexColumn({
+                el: 'div',
+                id: sdg
+            });
+
+            if (!this.IndexView) {
+                this.IndexView = new OnePebbleApp.Views.Index({
+                    el: $('body'),
+                    indexColumn: indexColumn
+                });
+                this.IndexView.render(sdg);
+            }
+
+            //index.$el.find('indexCol-container').render(stg);
+
+            indexColumn.render(sdg);
         },
 
         validateAuth: function() {

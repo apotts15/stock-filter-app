@@ -139,9 +139,81 @@ var getMetal = function(allocationNum) {
     return metal;
 };
 
+
+
+var sortResults = function(results) {
+    return _.sortBy(results, function(result){
+        return result.sinStocks && result.sinStocks.total && result.sinStocks.total.allocationNum;
+    });
+};
+
+var getPerformanceReturns = function(object) {
+    var returnShort = '10yr';
+    var returnLong = '10 year'; // default 10 year
+    var returnPercent = '--'; // default 10 year
+    var returnNumber = 0;
+
+    if (object.priceTr10YrAnnualized && object.priceTr10YrAnnualized.value) {
+        returnShort = '10yr';
+        returnLong = '10 year';
+        returnNumber = object.priceTr10YrAnnualized.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr5YrAnnualized && object.priceTr5YrAnnualized.value) {
+        returnShort = '5yr';
+        returnLong = '5 year';
+        returnNumber = object.priceTr5YrAnnualized.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr3YrAnnualized && object.priceTr3YrAnnualized.value) {
+        returnShort = '3yr';
+        returnLong = '3 year';
+        returnNumber = object.priceTr3YrAnnualized.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr1Yr && object.priceTr1Yr.value) {
+        returnShort = '1yr';
+        returnLong = '1 year';
+        returnNumber = object.priceTr1Yr.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr3Mo && object.priceTr3Mo.value) {
+        returnShort = '3mo';
+        returnLong = '3 month';
+        returnNumber = object.priceTr3Mo.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr1Mo && object.priceTr1Mo.value) {
+        returnShort = '1mo';
+        returnLong = '1 month';
+        returnNumber = object.priceTr1Mo.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else {
+        returnShort = 'No History';
+        returnLong = 'No History';
+        returnNumber = 0;
+        returnPercent = '--';
+    }
+    object.returnShort = returnShort;
+    object.returnLong = returnLong;
+    object.returnPercent = returnPercent;
+    object.returnNumber = returnNumber;
+};
+
+var updatePerformance = function(objects) {
+    return _.each(objects, function(object) {
+        getPerformanceReturns(objects);
+    });
+};
+
+var updateAnalysis = function(responseAnalysis) {
+    var analysis = responseAnalysis;
+    analysis.risk = convertToPercent(analysis.spread.value);
+    return analysis;
+};
+
 var filterStocks = function(fund) {
     var totalNum = 0;
     var allocationCount = 0;
+
+    fund.performance = updatePerformance(fund.performance);
+    fund.analysis = updateAnalysis(fund.analysis);
+
     _.each(_.keys(fund.sinStocks), function(sin) {
         if (fund.sinStocks[sin] instanceof Object){
             var supportedStocksLength = fund.sinStocks[sin].supportedStocks && fund.sinStocks[sin].supportedStocks.length;

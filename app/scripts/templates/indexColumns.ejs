@@ -1,0 +1,174 @@
+<div class="col s12 m4">
+    <h4 class="onepebble-secondary-text">SDG Summary</h4>
+    <div class="card">
+        <div class="card-content sdg-header sdg-<%= sdg.goalNumber %>">
+            <img class="sdg-icon" width="42px" src="/images/SDGs/SDG-<%= sdg.goalNumber %>-white.png" alt="<%= sdg.name %>" />
+            <h2 class="sdg-goal">Goal <%= sdg.goalNumber %>:</h2>
+            <h3 class="sdg-name"><%= sdg.name %></h3>
+        </div>
+        <div class="card-content">
+            <p class="sdg-description"><%= sdg.description %></p>
+        </div>
+    </div>
+</div>
+
+<!--"The Western Union Company" : {-->
+<!--"companyName" : "The Western Union Company",-->
+<!--"nickName" : "Western Union",-->
+<!--"exchange" : "NYSE",-->
+<!--"ticker" : "WU",-->
+<!--"url" : "https://www.westernunion.com/",-->
+<!--"Quality Education" : "Top 10 (5)"-->
+<!--},-->
+
+<div class="index-list col s12 m4">
+    <h4 class="onepebble-secondary-text">Top 10 Companies</h4>
+    <ul class="collapsible popout" data-collapsible="accordion">
+        <% _.each(topCompanies, function(topCompany) { %>
+        <li class="<%= sdg.goalNumber.toLowerCase() !== 'all' ? 'gold' : topCompany.All %>">
+            <div class="collapsible-header">
+                <img class="metal <%= sdg.goalNumber.toLowerCase() !== 'all' ? 'gold' : topCompany.All %>" width="16px" height="26px" src="/images/metals/<%= sdg.goalNumber.toLowerCase() !== 'all' ? 'gold' : topCompany.All %>-sm.png" alt="<%= sdg.goalNumber.toLowerCase() !== 'all' ? 'gold' : topCompany.All %>" />
+                <h6 class="names onepebble-primary-text"><%= topCompany.nickName %></h6>
+                <i class="material-icons right-align expand_more">expand_more</i><i class="material-icons right-align expand_less">expand_less</i></div>
+            <div class="collapsible-body row onepebble-primary-text">
+                <div class="col s12 m6 center-align center">
+                    <img class="company-logo" width="125px" src="//logo.clearbit.com/<%= topCompany.url %>" alt="<%= topCompany.companyName %>" />
+                </div>
+                <div class="col s12 m4">
+                    <p class="company-label onepebble-primary-text">Stock ticker:</p>
+                    <h6 class="names white-text ticker"><%= topCompany.ticker %></h6>
+                    <p class="company-label onepebble-primary-text">Industry:</p>
+                    <h5><%= topCompany.nickName %></h5>
+                </div>
+                <div class="col s12">
+                    <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                </div>
+        </li>
+        <% }) %>
+    </ul>
+</div>
+<div class="index-list col s12 m4">
+    <h4 class="onepebble-secondary-text">Top 10 Funds</h4>
+    <ul class="collapsible popout" data-collapsible="accordion">
+        <% if (topFunds.length === 1)  { %>
+        <li>
+            <div id="spinner">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+
+                    <div class="spinner-layer spinner-red">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+
+                    <div class="spinner-layer spinner-yellow">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+
+                    <div class="spinner-layer spinner-green">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <% } else { %>
+        <% _.each(topFunds, function(topFund) { %>
+        <%   var metal = topFund.get('sinStocks').total && topFund.get('sinStocks').total.metal ? topFund.get('sinStocks').total.metal : 'gold' %>
+        <li class="<%= topFund.get('sinStocks').total && topFund.get('sinStocks').total.metal ? topFund.get('sinStocks').total.metal : 'gold' %>">
+            <div class="collapsible-header">
+                <img class="metal <%= metal %>" width="16px" height="26px" src="/images/metals/<%= metal %>-sm.png" alt="<%= metal %>" />
+                <h6 class="names white-text ticker"><%= topFund.get('ticker') %></h6>
+                <i class="material-icons right-align expand_more">expand_more</i><i class="material-icons right-align expand_less">expand_less</i></div>
+            <div class="collapsible-body row onepebble-primary-text">
+                <div class="col s12 m12">
+                    <p class="company-label onepebble-primary-text">Name:</p>
+                    <h5><%= topFund.get('fund') %></h5>
+                    <p class="company-label onepebble-primary-text">Category:</p>
+                    <h5><%= topFund.get('fundBasics').segment %></h5>
+                </div>
+                <div class="col s12">
+                    <div class="card-wrapper">
+                        <a href="/#fund/<%= topFund.get('ticker') %>">
+                        <div class="card fund-card hoverable <%= metal %>" data-id="<%= topFund.get('ticker') %>">
+                            <div class="card-header center"><%= metal %>
+                                <i class="activator material-icons right-top more_vert">more_vert</i>
+                            </div>
+                            <div class="card-summary-container">
+                                <h3 class="card-title ticker white-text"><%= topFund.get('ticker') %></h3>
+                                <p class="fund-name"><%= topFund.get('fund') %></p>
+                                <div class="fund-summary">
+                                    <div class="col s6">
+                                        <h4 class="value"><%= topFund.get('performance') && topFund.get('performance').returnPercent ? topFund.get('performance').returnPercent : '--' %></h4>
+                                        <p class="label caps">Return</p>
+                                    </div>
+                                    <div class="vert-divider"></div>
+                                    <div class="col s6">
+                                        <h4 class="value"><%= topFund.get('analysis').risk %></h4>
+                                        <p class="label caps">Risk</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-reveal medal-summary">
+                                <div class="card-header center"><%= metal %>
+                                    <span class="card-title">
+                                    <i class="close material-icons right-top more_vert">more_vert</i>
+                                </span>
+                                </div>
+
+                                <div class="card-bg">
+                                    <h6 class="fund-type caps"><%= topFund.get('fundBasics').segment %></h6>
+                                    <div class="metals">
+                                        <img class="metal" src="/images/metals/<%= metal %>.png" alt="<%= metal %>" class="<%= metal %>" />
+                                    </div>
+                                    <p class="label center-align"><span class="bold caps"><%= topFund.get('sinStocks').total && topFund.get('sinStocks').total.metal ? topFund.get('sinStocks').total.metal : 'None' %></span> in stocks aligned with your values</p>
+                                </div>
+                            </div>
+                            <% if (topFund.get('performance') && topFund.get('performance').returnShor !== '10yr') { %>
+                            <div class="col s12 fund-disclaimer">
+                                <p class="disclaimer caps"><span class="bold"><%= topFund.get('performance') && topFund.get('performance').returnShort %></span> <%= topFund.get('performance') && topFund.get('performance').returnShort !== 'No History' ? 'Backtested' : '' %></p>
+                            </div>
+                            <% } %>
+                            <i class="material-icons right-bottom control_point">control_point</i>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+        <% }) } %>
+    </ul>
+</div>

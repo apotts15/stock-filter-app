@@ -78,6 +78,27 @@ var pornStocks = ['FFN', 'RICK'];
 var tobaccoStocks = ['MO', 'AOI', 'BTI', 'LO', 'PM', 'RAI', 'SWM', 'UVV', 'VGR'];
 var fossilFuelStocks = ['PTEN', 'TELL', 'AR', 'CEO', 'CVE', 'CXO', 'ERF', 'HP', 'NBR', 'PBR', 'PBR-A', 'RIG', 'RSPP', 'VET', 'ANDV', 'DK', 'HFC', 'INT', 'MPC', 'PBF', 'PSX', 'PSXP', 'SHI', 'SUN', 'UGP', 'VLO', 'VVV'];
 
+var sdgs = {
+    "01": ["MA", "BNS", "K", "AON", "UN", "RIO", "BAK", "KO", "FMS", "SNY"],
+    "02": ["MA", "BAK", "ABT", "AGU", "CSX", "LLY", "PHG", "NASDAQ", "SYT", "TECK"],
+    "03": ["UN", "SNY", "AZN", "CSX", "LLY", "FDX", "GE", "TTM", "JNJ", "PFE"],
+    "04": ["MA", "BCS", "C", "CS", "FLR", "HSBC", "TTM", "MYL", "WMT", "WU"],
+    "05": ["MA", "K", "RIO", "KO", "C", "ENB", "GS", "JNJ", "WMT", "XRX"],
+    "06": ["UN", "KO", "ABB", "DWDP", "LLY", "F", "GFI", "INTC", "SPGI", "TEVA"],
+    "07": ["ABB", "C", "LLY", "E", "TTM", "MYL", "PEP", "PHG", "TECK", "TSLA"],
+    "08": ["BAK", "KO", "C", "F", "HPE", "RCL", "STO", "UBS", "UNP", "V"],
+    "09": ["UN", "BAK", "AAPL", "MT", "AZN", "CX", "HPE", "SCTY", "TSLA", "VALE"],
+    "10": ["UN", "ABT", "BCS", "BBL", "CX", "CL", "F", "GM", "HPE", "UBS"],
+    "11": ["MA", "KO", "ABB", "CX", "C", "FDX", "GM", "MYL", "NKE", "NVO"],
+    "12": ["UN", "KO", "BUD", "GSK", "GG", "JNJ", "NKE", "PEP", "PHG", "WMT"],
+    "13": ["FMS", "AGU", "BUD", "BP", "C", "E", "HSBC", "RDS.A", "STO", "TOT"],
+    "14": ["SNY", "AMZN", "AZN", "BAC", "LLY", "E", "TILE", "JNJ", "GMCR", "DIS"],
+    "15": ["UN", "ABT", "CPB", "CAT", "GG", "HSBC", "TTM", "STO", "SYT", "XRX"],
+    "16": ["MA", "KO", "BBL", "CB", "LLY", "FLR", "GE", "INTC", "MYL", "TM"],
+    "17": ["KO", "SNY", "BP", "DWDP", "HSBC", "JNJ", "MYL", "RDS.A", "NASDAQ", "TRIP"],
+    "all": ["MA", "UN", "BAK", "KO", "C", "LLY", "HSBC", "TTM", "JNJ", "MYL"]
+};
+
 var moneyFormat = function(labelValue) {
     // Nine Zeroes for Billions
     var number =  Math.abs(Number(labelValue)) >= 1.0e+9
@@ -188,16 +209,80 @@ var getMetal = function(allocationNum) {
     return metal;
 };
 
-var sortResults = function(results) {
+var sortResultsAllocationNum = function(results) {
     return _.sortBy(results, function(result){
         return result.sinStocks && result.sinStocks.total && result.sinStocks.total.allocationNum;
     });
+};
+
+var getPerformanceReturns = function(object) {
+    var returnShort = '10yr';
+    var returnLong = '10 year'; // default 10 year
+    var returnPercent = '--'; // default 10 year
+    var returnNumber = 0;
+
+    if (object.priceTr10YrAnnualized && object.priceTr10YrAnnualized.value) {
+        returnShort = '10yr';
+        returnLong = '10 year';
+        returnNumber = object.priceTr10YrAnnualized.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr5YrAnnualized && object.priceTr5YrAnnualized.value) {
+        returnShort = '5yr';
+        returnLong = '5 year';
+        returnNumber = object.priceTr5YrAnnualized.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr3YrAnnualized && object.priceTr3YrAnnualized.value) {
+        returnShort = '3yr';
+        returnLong = '3 year';
+        returnNumber = object.priceTr3YrAnnualized.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr1Yr && object.priceTr1Yr.value) {
+        returnShort = '1yr';
+        returnLong = '1 year';
+        returnNumber = object.priceTr1Yr.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr3Mo && object.priceTr3Mo.value) {
+        returnShort = '3mo';
+        returnLong = '3 month';
+        returnNumber = object.priceTr3Mo.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else if (object.priceTr1Mo && object.priceTr1Mo.value) {
+        returnShort = '1mo';
+        returnLong = '1 month';
+        returnNumber = object.priceTr1Mo.value;
+        returnPercent = convertToPercent(returnNumber);
+    } else {
+        returnShort = 'No History';
+        returnLong = 'No History';
+        returnNumber = 0;
+        returnPercent = '--';
+    }
+    object.returnShort = returnShort;
+    object.returnLong = returnLong;
+    object.returnPercent = returnPercent;
+    object.returnNumber = returnNumber;
+};
+
+var updatePerformance = function(objects) {
+    return _.each(objects, function(object) {
+        getPerformanceReturns(objects);
+    });
+};
+
+var updateAnalysis = function(responseAnalysis) {
+    var analysis = responseAnalysis;
+    analysis.risk = convertToPercent(analysis.spread.value);
+    return analysis;
 };
 
 var filterStocks = function(funds, categoriesToFilterOut) {
     _.each(funds, function(fund) {
         var totalNum = 0;
         var allocationCount = 0;
+
+        fund.performance = updatePerformance(fund.performance);
+        fund.analysis = updateAnalysis(fund.analysis);
+
         _.each(_.keys(fund.sinStocks), function(sin) {
             if (fund.sinStocks[sin] instanceof Object){
                 var supportedStocksLength = fund.sinStocks[sin].supportedStocks && fund.sinStocks[sin].supportedStocks.length;
@@ -318,7 +403,6 @@ var filterStocks = function(funds, categoriesToFilterOut) {
         return fund;
     });
 
-
     // filter Out These Funds
     if (categoriesToFilterOut && categoriesToFilterOut.length > 0) {
         console.log('categoriesToFilterOut', categoriesToFilterOut);
@@ -332,7 +416,7 @@ var filterStocks = function(funds, categoriesToFilterOut) {
             //     return includeFund;
             // }
 
-            _.each(categoriesToFilterOut, function(category){
+            _.each(categoriesToFilterOut, function(category) {
                 var cat = category;
                 if (cat === 'fossil') {
                     cat = 'FossilFuel';
@@ -353,7 +437,6 @@ var filterStocks = function(funds, categoriesToFilterOut) {
         });
     }
 
-
     return funds;
 };
 
@@ -367,7 +450,7 @@ exports.index = function(req, res) {
             if (!results) {
                 res.send([]);
             } else {
-                results = sortResults(results);
+                results = sortResultsAllocationNum(results);
                 res.send(results);
             }
         }
@@ -439,7 +522,7 @@ exports.getFunds = function(req, res) {
                             results = filterStocks(results)
                         }
 
-                        results = sortResults(results);
+                        results = sortResultsAllocationNum(results);
 
                         res.send(results);
                     }
@@ -468,13 +551,58 @@ var getAllFunds = function(res, filterOnCategories) {
             if (!results) {
                 res.send([]);
             } else {
-                console.log('Fund getAll');
+                console.log('Fund getAll via getAllFunds');
                 if (filterOnCategories && filterOnCategories.length > 0) {
                     console.log('Filter all on Category');
                     results = filterStocks(results, filterOnCategories);
                 }
 
-                results = sortResults(results);
+                results = sortResultsAllocationNum(results);
+
+                res.send(results);
+            }
+        }
+    });
+};
+
+var filterTopFunds = function(results) {
+    var sortedTopFund = _.sortBy(results, function(result){
+        return result.performance.returnNumber
+    });
+
+    console.log('sortedTopFund',sortedTopFund.length);
+    return sortedTopFund.reverse().slice(0, 10);
+};
+
+exports.getFundsByTicker = function(req, res) {
+    var sdgTickerList;
+    var id = req.params.id;
+    //console.log('sdgId', sdgId);
+    console.log('req', id);
+
+    if (id && sdgs[id]) {
+        sdgTickerList = sdgs[id];
+    }
+
+    console.log('sdgTickerList via getFundsByTicker', sdgTickerList);
+    Fund.getFundsByTicker(sdgTickerList, function (err, results) {
+        if (err) {
+            console.log('error', err);
+        } else {
+            if (!results) {
+                res.send([]);
+            } else {
+                results = filterStocks(results);
+                results = filterTopFunds(results);
+
+                console.log('getFundsByTicker',results.length);
+                //console.log(results);
+                // if (filterOnCategories && filterOnCategories.length > 0) {
+                //     console.log('Filter all on Category');
+                //     results = filterStocks(results, filterOnCategories);
+                // }
+                //
+                // results = sortResults(results);
 
                 res.send(results);
             }
@@ -524,7 +652,7 @@ exports.getByCompany = function(req, res) {
                 } else {
 //                    results = filterCategories(results);
 
-                    results = sortResults(results);
+                    results = sortResultsAllocationNum(results);
 
                     res.send(results);
                 }
@@ -540,7 +668,7 @@ exports.getByCompany = function(req, res) {
                     res.send([]);
                 } else {
                     //console.log('results', results);
-                    results = sortResults(results);
+                    results = sortResultsAllocationNum(results);
                     res.send(results);
                 }
             }

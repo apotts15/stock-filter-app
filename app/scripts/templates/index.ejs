@@ -1,0 +1,35 @@
+<section class="container ">
+    <div class="standard logo-container">
+        <img width="100%" src="/images/OnePebble_Logo-marine-horizontal.png" alt="One Pebble" class="logo"><span class="beta">BETA</span>
+    </div>
+
+    <h1 class="bold onepebble-secondary-text">The Index of General Sustainability</h1>
+    <p>This index is guided by the United Nation’s efforts for a more sustainable future by their focus on their 17 Sustainable Development Goals (SDGs). In efforts to affect change for a more sustainable future we have put our intelligence landscape to use to conglomerate a list of the companies and funds making the largest efforts to impact the world in one, or multiple, SDGs. For more information on this you can simply <a href="">click here</a>.</p>
+    <a href="#funds/all" class="back-link"><i class="material-icons arrow_back">arrow_back</i><span class="back"> Back To Filter</span> </a>
+    <section class="row">
+        <div class="wrap">
+            <div class="scrollbar">
+                <div class="handle">
+                    <div class="mousearea"></div>
+                </div>
+            </div>
+            <div class="controls left">
+                <span class="prev"><i class="material-icons chevron_left">chevron_left</i></span>
+            </div>
+            <div class="frame" id="forcecentered">
+                <ul class="clearfix">
+                    <% _.each(SDGs, function(SDG) { %>
+                    <li>
+                        <a href="#index/<%= SDG.goalNumber %>"><i class="sdg sdg-<%= SDG.goalNumber %>"><span class="label">SDG Goal <%= SDG.goalNumber %> -  <%= SDG.description %></span></i></a>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <div class="controls right">
+                <span class="next"><i class="material-icons chevron_right">chevron_right</i></span>
+            </div>
+        </div>
+    </section>
+    <section id="indexCol-container" class="row">
+    </section>
+</section>

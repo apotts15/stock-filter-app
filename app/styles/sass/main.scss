@@ -186,7 +186,7 @@ main {
     margin: 0 auto;
 }
 
-.card .card-content p.fund-metrics {
+.fund-card  .card-content p.fund-metrics {
     height: 41px;
 }
 
@@ -353,7 +353,7 @@ label {
     }
 
     .fund-detail-carousel {
-        .card {
+        .fund-card  {
             width: 70%;
             text-align: center;
             margin: 1rem auto;
@@ -361,6 +361,103 @@ label {
     }
     .submit-container {
         text-align: center;
+    }
+}
+
+/* Frame */
+.frame {
+    height: 125px;
+    line-height: 125px;
+    overflow: hidden;
+}
+.frame ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 125px;
+    font-size: 50px;
+}
+.frame ul li {
+    float: left;
+    width: 125px;
+    height: 125px;
+    margin: 0 1px 0 0;
+    padding: 0;
+    //background: #333;
+    //color: #ddd;
+    text-align: center;
+    cursor: pointer;
+}
+.frame ul li.active {
+
+}
+
+/* Scrollbar */
+.scrollbar {
+    margin: 0 0 1em 0;
+    height: 2px;
+    background: #ccc;
+    line-height: 0;
+}
+.scrollbar .handle {
+    width: 100px;
+    height: 100%;
+    background: #292a33;
+    cursor: pointer;
+}
+.scrollbar .handle .mousearea {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+}
+
+.index-list {
+    .names {
+        line-height: 26px;
+        margin: 0 10px;
+    }
+}
+.wrap {
+    position: relative;
+
+    .controls {
+        position: absolute;
+        height: 125px;
+        padding: 30px 0;
+        cursor: pointer;
+        user-focus-pointer: cursor;
+
+        &.left {
+            left: 0;
+            .chevron_left {
+                right: 30px;
+                top: 20px;
+                position: relative;
+            }
+
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cccccc+0,f2f2f2+100&1+0,0+100 */
+            background: -moz-linear-gradient(left,  rgba(204,204,204,1) 0%, rgba(242,242,242,0) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(left,  rgba(204,204,204,1) 0%,rgba(242,242,242,0) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right,  rgba(204,204,204,1) 0%,rgba(242,242,242,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#00f2f2f2',GradientType=1 ); /* IE6-9 */
+        }
+        &.right {
+            right: 0;
+            top: 20px;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f2f2+0,cccccc+100&0+1,1+100 */
+            background: -moz-linear-gradient(left,  rgba(242,242,242,0) 0%, rgba(242,242,242,0) 1%, rgba(204,204,204,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(left,  rgba(242,242,242,0) 0%,rgba(242,242,242,0) 1%,rgba(204,204,204,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right,  rgba(242,242,242,0) 0%,rgba(242,242,242,0) 1%,rgba(204,204,204,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00f2f2f2', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 */
+
+            .chevron_right {
+                right: -30px;
+                top: 20px;
+                position: relative;
+            }
+        }
     }
 }
 
@@ -394,11 +491,291 @@ label {
         }
     }
 }
+.back-link {
+    .material-icons {
+        font-size: 12px;
+    }
+    .back {
 
+    }
+}
+
+#indexCol-container {
+    .sdg-header {
+        padding: 0;
+        margin: 0;
+        color: white;
+    }
+    .sdg-icon {
+        float: right;
+        margin: 20px;
+    }
+    .sdg-goal {
+        text-transform: uppercase;
+        padding: 20px 20px 5px 20px;
+        margin: 0;
+        font-weight: bold;
+    }
+    .sdg-name {
+        padding: 0 20px 20px 20px;
+        margin: 0;
+        font-weight: bold;
+    }
+    .sdg-description {
+
+    }
+    .sdg-all {
+        background: green; /* For browsers that do not support gradients */
+            //background: -webkit-linear-gradient(left, #eb1c2d , #d3a029, #279b48, #c31f33, #ef402b, #00aed9, #fdb713, #8f1838, #f36d25, #e11484, #f99d26, #cf8d2a, #48773e, #007dbc, #3eb049, #02558b, #183668); /* For Safari 5.1 to 6.0 */
+            //background: -o-linear-gradient(right, #eb1c2d, #d3a029, #279b48, #c31f33, #ef402b, #00aed9 ,#fdb713, #8f1838, #f36d25, #e11484, #f99d26, #cf8d2a, #48773e, #007dbc, #3eb049, #02558b, #183668); /* For Opera 11.1 to 12.0 */
+            //background: -moz-linear-gradient(right, #eb1c2d, #d3a029, #279b48, #c31f33, #ef402b, #00aed9, #fdb713, #8f1838, #f36d25, #e11484, #f99d26, #cf8d2a, #48773e, #007dbc, #3eb049, #02558b, #183668); /* For Firefox 3.6 to 15 */
+            //background: linear-gradient(to right, #eb1c2d , #d3a029, #279b48, #c31f33, #ef402b, #00aed9, #fdb713, #8f1838, #f36d25, #e11484, #f99d26, #cf8d2a, #48773e, #007dbc, #3eb049, #02558b, #183668); /* Standard syntax (must be last) */
+        background: -webkit-linear-gradient(left, #eb1c2d , #d3a029, #279b48, #c31f33); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(right, #eb1c2d , #d3a029, #279b48, #c31f33); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(right, #eb1c2d , #d3a029, #279b48, #c31f33); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(to right, #eb1c2d , #d3a029, #279b48, #c31f33); /* Standard syntax (must be last) */
+    }
+    .sdg-01 {
+        background-color: #eb1c2d;
+    }
+    .sdg-02 {
+        background-color: #d3a029;
+    }
+    .sdg-03 {
+        background-color: #279b48;
+    }
+    .sdg-04 {
+        background-color: #c31f33;
+    }
+    .sdg-05 {
+        background-color: #ef402b;
+    }
+    .sdg-06 {
+        background-color: #00aed9;
+    }
+    .sdg-07 {
+        background-color: #fdb713;
+    }
+    .sdg-08 {
+        background-color: #8f1838;
+    }
+    .sdg-09 {
+        background-color: #f36d25;
+    }
+    .sdg-10 {
+        background-color: #e11484;
+    }
+    .sdg-11 {
+        background-color: #f99d26;
+    }
+    .sdg-12 {
+        background-color: #cf8d2a;
+    }
+    .sdg-13 {
+        background-color: #48773e;
+    }
+    .sdg-14 {
+        background-color: #007dbc;
+    }
+    .sdg-15 {
+        background-color: #3eb049;
+    }
+    .sdg-16 {
+        background-color: #02558b;
+    }
+    .sdg-17 {
+        background-color: #183668;
+    }
+}
+
+.active {
+    .sdg {
+        &.sdg-all {
+            background-image: url("/images/SDGs/SDG-all.png");
+        }
+        &.sdg-01 {
+            background-image: url("/images/SDGs/SDG-01.png");
+        }
+        &.sdg-02 {
+            background-image: url("/images/SDGs/SDG-02.png");
+        }
+        &.sdg-03 {
+            background-image: url("/images/SDGs/SDG-03.png");
+        }
+        &.sdg-04 {
+            background-image: url("/images/SDGs/SDG-04.png");
+        }
+        &.sdg-05 {
+            background-image: url("/images/SDGs/SDG-05.png");
+        }
+        &.sdg-06 {
+            background-image: url("/images/SDGs/SDG-06.png");
+        }
+        &.sdg-07 {
+            background-image: url("/images/SDGs/SDG-07.png");
+        }
+        &.sdg-08 {
+            background-image: url("/images/SDGs/SDG-08.png");
+        }
+        &.sdg-09 {
+            background-image: url("/images/SDGs/SDG-09.png");
+        }
+        &.sdg-10 {
+            background-image: url("/images/SDGs/SDG-10.png");
+        }
+        &.sdg-11 {
+            background-image: url("/images/SDGs/SDG-11.png");
+        }
+        &.sdg-12 {
+            background-image: url("/images/SDGs/SDG-12.png");
+        }
+        &.sdg-13 {
+            background-image: url("/images/SDGs/SDG-13.png");
+        }
+        &.sdg-14 {
+            background-image: url("/images/SDGs/SDG-14.png");
+        }
+        &.sdg-15 {
+            background-image: url("/images/SDGs/SDG-15.png");
+        }
+        &.sdg-16 {
+            background-image: url("/images/SDGs/SDG-16.png");
+        }
+        &.sdg-17 {
+            background-image: url("/images/SDGs/SDG-17.png");
+        }
+    }
+}
+.sdg {
+    width: 125px;
+    height: 125px;
+    display: block;
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    .label {
+        visibility: hidden;
+        height: 0;
+    }
+
+    &.sdg-all {
+        background-image: url("/images/SDGs/SDG-all-disabled.png");
+    }
+    &.sdg-01 {
+         background-image: url("/images/SDGs/SDG-01-disabled.png");
+    }
+    &.sdg-02 {
+        background-image: url("/images/SDGs/SDG-02-disabled.png");
+    }
+    &.sdg-03 {
+        background-image: url("/images/SDGs/SDG-03-disabled.png");
+    }
+    &.sdg-04 {
+        background-image: url("/images/SDGs/SDG-04-disabled.png");
+    }
+    &.sdg-05 {
+        background-image: url("/images/SDGs/SDG-05-disabled.png");
+    }
+    &.sdg-06 {
+        background-image: url("/images/SDGs/SDG-06-disabled.png");
+    }
+    &.sdg-07 {
+        background-image: url("/images/SDGs/SDG-07-disabled.png");
+    }
+    &.sdg-08 {
+        background-image: url("/images/SDGs/SDG-08-disabled.png");
+    }
+    &.sdg-09 {
+        background-image: url("/images/SDGs/SDG-09-disabled.png");
+    }
+    &.sdg-10 {
+        background-image: url("/images/SDGs/SDG-10-disabled.png");
+    }
+    &.sdg-11 {
+        background-image: url("/images/SDGs/SDG-11-disabled.png");
+    }
+    &.sdg-12 {
+        background-image: url("/images/SDGs/SDG-12-disabled.png");
+    }
+    &.sdg-13 {
+        background-image: url("/images/SDGs/SDG-13-disabled.png");
+    }
+    &.sdg-14 {
+        background-image: url("/images/SDGs/SDG-14-disabled.png");
+    }
+    &.sdg-15 {
+        background-image: url("/images/SDGs/SDG-15-disabled.png");
+    }
+    &.sdg-16 {
+        background-image: url("/images/SDGs/SDG-16-disabled.png");
+    }
+    &.sdg-17 {
+        background-image: url("/images/SDGs/SDG-17-disabled.png");
+    }
+}
+.collapsible.popout {
+
+    li {
+        background: white;
+    }
+
+    #spinner {
+        text-align: center;
+        padding: 10px;
+
+        .preloader-wrapper {
+            height: 40px;
+            width: 40px;
+        }
+    }
+
+    .collapsible-header {
+        position: relative;
+        .material-icons {
+            position: absolute;
+            right: 0;
+        }
+        .expand_more {
+            display: inline-block;
+        }
+        .expand_less {
+            display: none;
+        }
+
+        &.active {
+            .expand_more {
+                display: none;
+            }
+            .expand_less {
+                display: inline-block;
+            }
+        }
+    }
+    .collapsible-body {
+        padding: 10px 20px;
+    }
+
+    .company-logo {
+        margin: 20px 0 0 0;
+    }
+
+    .company-label {
+        padding: 0;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+}
 .exit {
     position: absolute;
     top: 0;
     left: 0;
+}
+.index {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 .logo-container {
     position: relative;
@@ -414,6 +791,15 @@ label {
         top: 60px;
         color: #225665;
         font-weight: bold;
+    }
+
+    &.standard {
+        width: 300px;
+        .beta {
+            right: -3px;
+            top: 38px;
+            font-size: 10px;
+        }
     }
 }
 
@@ -762,7 +1148,7 @@ nav .input-field label:active i {
 }
 .fund {
     .overview {
-        .card {
+        .fund-card  {
             &.gold,
             &.silver,
             &.bronze,
@@ -839,7 +1225,7 @@ $none-bg-color: #f1f1f1;
     }
 }
 
-.card {
+.fund-card  {
     border-radius: 3px;
     background-color: white;
     margin: 10px auto;

@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col s12 m6 l3">
                         <div class="card-wrapper">
-                            <div class="card hoverable <%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'gold' %>" data-id="<%= fund.ticker %>">
+                            <div class="card fund-card hoverable <%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'gold' %>" data-id="<%= fund.ticker %>">
                                 <div class="card-header center"><%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'gold' %>
                                     <i class="activator material-icons right-top more_vert">more_vert</i>
                                 </div>
@@ -30,7 +30,7 @@
                                     <p class="fund-name"><%= fund.fund %></p>
                                     <div class="fund-summary">
                                         <div class="col s6">
-                                            <h4 class="value"><%= fund.performance && fund.performance.yearPercent ? fund.performance.yearPercent : '--' %></h4>
+                                            <h4 class="value"><%= fund.performance && fund.performance.returnPercent ? fund.performance.returnPercent : '--' %></h4>
                                             <p class="label caps">Return</p>
                                         </div>
                                         <div class="vert-divider"></div>
@@ -55,9 +55,9 @@
                                         <p class="label center-align"><span class="bold caps"><%= fund.sinStocks.total && fund.sinStocks.total.metal ? fund.sinStocks.total.metal : 'None' %></span> in stocks aligned with your values</p>
                                     </div>
                                 </div>
-                                <% if (fund.performance && fund.performance.yearShort !== '10yr') { %>
+                                <% if (fund.performance && fund.performance.returnShort !== '10yr') { %>
                                 <div class="col s12 fund-disclaimer">
-                                    <p class="disclaimer caps"><span class="bold"><%= fund.performance && fund.performance.yearShort %></span> <%= fund.performance && fund.performance.yearShort !== 'No History' ? 'Backtested' : '' %></p>
+                                    <p class="disclaimer caps"><span class="bold"><%= fund.performance && fund.performance.returnShort %></span> <%= fund.performance && fund.performance.returnShort !== 'No History' ? 'Backtested' : '' %></p>
                                 </div>
                                 <% } %>
                                 <i class="material-icons right-bottom control_point">control_point</i>
@@ -106,7 +106,7 @@
 
         <div class="row carousel fund-detail-carousel">
             <div class="carousel-item">
-                <div class="card hoverable platinum" data-id="DFND">
+                <div class="card fund-card hoverable platinum" data-id="DFND">
                     <div class="card-header center">platinum
                         <i class="activator material-icons right-top more_vert">more_vert</i>
                     </div>
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="card hoverable gold" data-id="IEF">
+                <div class="card fund-card hoverable gold" data-id="IEF">
                     <div class="card-header center">gold
                         <i class="activator material-icons right-top more_vert">more_vert</i>
                     </div>
@@ -188,7 +188,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="card hoverable silver" data-id="ITM">
+                <div class="card fund-card hoverable silver" data-id="ITM">
                     <div class="card-header center">silver
                         <i class="activator material-icons right-top more_vert">more_vert</i>
                     </div>
@@ -232,7 +232,7 @@
 
             </div>
             <div class="carousel-item">
-                <div class="card hoverable bronze" data-id="BIV">
+                <div class="card fund-card hoverable bronze" data-id="BIV">
                     <div class="card-header center">bronze
                         <i class="activator material-icons right-top more_vert">more_vert</i>
                     </div>
@@ -271,7 +271,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="card hoverable none" data-id="DRIP">
+                <div class="card fund-card hoverable none" data-id="DRIP">
                     <div class="card-header center">none
                         <i class="activator material-icons right-top more_vert">more_vert</i>
                     </div>

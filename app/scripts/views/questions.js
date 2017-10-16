@@ -12,6 +12,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             "click .next" : "next",
             "click .previous" : "previous",
             "click .exit" : "exit",
+            "click .index" : "index",
             "click .submit" : "submit",
             'click .questionnaire-answers input': "updatePreference"
         },
@@ -41,6 +42,10 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         exit: function(e) {
             this.goToLogin(e);
+        },
+
+        index: function() {
+            Backbone.history.navigate('index/all', {trigger: true});
         },
 
         submit: function(e) {

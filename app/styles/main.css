@@ -155,7 +155,7 @@ main {
   margin: 0 auto;
 }
 
-.card .card-content p.fund-metrics {
+.fund-card .card-content p.fund-metrics {
   height: 41px;
 }
 
@@ -308,13 +308,112 @@ label {
 .mobile #questionnaire .next {
   display: none;
 }
-.mobile .fund-detail-carousel .card {
+.mobile .fund-detail-carousel .fund-card {
   width: 70%;
   text-align: center;
   margin: 1rem auto;
 }
 .mobile .submit-container {
   text-align: center;
+}
+
+/* Frame */
+.frame {
+  height: 125px;
+  line-height: 125px;
+  overflow: hidden;
+}
+
+.frame ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 125px;
+  font-size: 50px;
+}
+
+.frame ul li {
+  float: left;
+  width: 125px;
+  height: 125px;
+  margin: 0 1px 0 0;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Scrollbar */
+.scrollbar {
+  margin: 0 0 1em 0;
+  height: 2px;
+  background: #ccc;
+  line-height: 0;
+}
+
+.scrollbar .handle {
+  width: 100px;
+  height: 100%;
+  background: #292a33;
+  cursor: pointer;
+}
+
+.scrollbar .handle .mousearea {
+  position: absolute;
+  top: -9px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+}
+
+.index-list .names {
+  line-height: 26px;
+  margin: 0 10px;
+}
+
+.wrap {
+  position: relative;
+}
+.wrap .controls {
+  position: absolute;
+  height: 125px;
+  padding: 30px 0;
+  cursor: pointer;
+  user-focus-pointer: cursor;
+}
+.wrap .controls.left {
+  left: 0;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cccccc+0,f2f2f2+100&1+0,0+100 */
+  background: -moz-linear-gradient(left, #cccccc 0%, rgba(242, 242, 242, 0) 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #cccccc 0%, rgba(242, 242, 242, 0) 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #cccccc 0%, rgba(242, 242, 242, 0) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#00f2f2f2',GradientType=1 );
+  /* IE6-9 */
+}
+.wrap .controls.left .chevron_left {
+  right: 30px;
+  top: 20px;
+  position: relative;
+}
+.wrap .controls.right {
+  right: 0;
+  top: 20px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f2f2+0,cccccc+100&0+1,1+100 */
+  background: -moz-linear-gradient(left, rgba(242, 242, 242, 0) 0%, rgba(242, 242, 242, 0) 1%, #cccccc 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(242, 242, 242, 0) 0%, rgba(242, 242, 242, 0) 1%, #cccccc 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(242, 242, 242, 0) 0%, rgba(242, 242, 242, 0) 1%, #cccccc 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00f2f2f2', endColorstr='#cccccc',GradientType=1 );
+  /* IE6-9 */
+}
+.wrap .controls.right .chevron_right {
+  right: -30px;
+  top: 20px;
+  position: relative;
 }
 
 #questionnaire {
@@ -342,10 +441,268 @@ label {
   background-color: #00A5A9;
 }
 
+.back-link .material-icons {
+  font-size: 12px;
+}
+
+#indexCol-container .sdg-header {
+  padding: 0;
+  margin: 0;
+  color: white;
+}
+#indexCol-container .sdg-icon {
+  float: right;
+  margin: 20px;
+}
+#indexCol-container .sdg-goal {
+  text-transform: uppercase;
+  padding: 20px 20px 5px 20px;
+  margin: 0;
+  font-weight: bold;
+}
+#indexCol-container .sdg-name {
+  padding: 0 20px 20px 20px;
+  margin: 0;
+  font-weight: bold;
+}
+#indexCol-container .sdg-all {
+  background: green;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #eb1c2d, #d3a029, #279b48, #c31f33);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #eb1c2d, #d3a029, #279b48, #c31f33);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #eb1c2d, #d3a029, #279b48, #c31f33);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #eb1c2d, #d3a029, #279b48, #c31f33);
+  /* Standard syntax (must be last) */
+}
+#indexCol-container .sdg-01 {
+  background-color: #eb1c2d;
+}
+#indexCol-container .sdg-02 {
+  background-color: #d3a029;
+}
+#indexCol-container .sdg-03 {
+  background-color: #279b48;
+}
+#indexCol-container .sdg-04 {
+  background-color: #c31f33;
+}
+#indexCol-container .sdg-05 {
+  background-color: #ef402b;
+}
+#indexCol-container .sdg-06 {
+  background-color: #00aed9;
+}
+#indexCol-container .sdg-07 {
+  background-color: #fdb713;
+}
+#indexCol-container .sdg-08 {
+  background-color: #8f1838;
+}
+#indexCol-container .sdg-09 {
+  background-color: #f36d25;
+}
+#indexCol-container .sdg-10 {
+  background-color: #e11484;
+}
+#indexCol-container .sdg-11 {
+  background-color: #f99d26;
+}
+#indexCol-container .sdg-12 {
+  background-color: #cf8d2a;
+}
+#indexCol-container .sdg-13 {
+  background-color: #48773e;
+}
+#indexCol-container .sdg-14 {
+  background-color: #007dbc;
+}
+#indexCol-container .sdg-15 {
+  background-color: #3eb049;
+}
+#indexCol-container .sdg-16 {
+  background-color: #02558b;
+}
+#indexCol-container .sdg-17 {
+  background-color: #183668;
+}
+
+.active .sdg.sdg-all {
+  background-image: url("/images/SDGs/SDG-all.png");
+}
+.active .sdg.sdg-01 {
+  background-image: url("/images/SDGs/SDG-01.png");
+}
+.active .sdg.sdg-02 {
+  background-image: url("/images/SDGs/SDG-02.png");
+}
+.active .sdg.sdg-03 {
+  background-image: url("/images/SDGs/SDG-03.png");
+}
+.active .sdg.sdg-04 {
+  background-image: url("/images/SDGs/SDG-04.png");
+}
+.active .sdg.sdg-05 {
+  background-image: url("/images/SDGs/SDG-05.png");
+}
+.active .sdg.sdg-06 {
+  background-image: url("/images/SDGs/SDG-06.png");
+}
+.active .sdg.sdg-07 {
+  background-image: url("/images/SDGs/SDG-07.png");
+}
+.active .sdg.sdg-08 {
+  background-image: url("/images/SDGs/SDG-08.png");
+}
+.active .sdg.sdg-09 {
+  background-image: url("/images/SDGs/SDG-09.png");
+}
+.active .sdg.sdg-10 {
+  background-image: url("/images/SDGs/SDG-10.png");
+}
+.active .sdg.sdg-11 {
+  background-image: url("/images/SDGs/SDG-11.png");
+}
+.active .sdg.sdg-12 {
+  background-image: url("/images/SDGs/SDG-12.png");
+}
+.active .sdg.sdg-13 {
+  background-image: url("/images/SDGs/SDG-13.png");
+}
+.active .sdg.sdg-14 {
+  background-image: url("/images/SDGs/SDG-14.png");
+}
+.active .sdg.sdg-15 {
+  background-image: url("/images/SDGs/SDG-15.png");
+}
+.active .sdg.sdg-16 {
+  background-image: url("/images/SDGs/SDG-16.png");
+}
+.active .sdg.sdg-17 {
+  background-image: url("/images/SDGs/SDG-17.png");
+}
+
+.sdg {
+  width: 125px;
+  height: 125px;
+  display: block;
+  position: relative;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.sdg .label {
+  visibility: hidden;
+  height: 0;
+}
+.sdg.sdg-all {
+  background-image: url("/images/SDGs/SDG-all-disabled.png");
+}
+.sdg.sdg-01 {
+  background-image: url("/images/SDGs/SDG-01-disabled.png");
+}
+.sdg.sdg-02 {
+  background-image: url("/images/SDGs/SDG-02-disabled.png");
+}
+.sdg.sdg-03 {
+  background-image: url("/images/SDGs/SDG-03-disabled.png");
+}
+.sdg.sdg-04 {
+  background-image: url("/images/SDGs/SDG-04-disabled.png");
+}
+.sdg.sdg-05 {
+  background-image: url("/images/SDGs/SDG-05-disabled.png");
+}
+.sdg.sdg-06 {
+  background-image: url("/images/SDGs/SDG-06-disabled.png");
+}
+.sdg.sdg-07 {
+  background-image: url("/images/SDGs/SDG-07-disabled.png");
+}
+.sdg.sdg-08 {
+  background-image: url("/images/SDGs/SDG-08-disabled.png");
+}
+.sdg.sdg-09 {
+  background-image: url("/images/SDGs/SDG-09-disabled.png");
+}
+.sdg.sdg-10 {
+  background-image: url("/images/SDGs/SDG-10-disabled.png");
+}
+.sdg.sdg-11 {
+  background-image: url("/images/SDGs/SDG-11-disabled.png");
+}
+.sdg.sdg-12 {
+  background-image: url("/images/SDGs/SDG-12-disabled.png");
+}
+.sdg.sdg-13 {
+  background-image: url("/images/SDGs/SDG-13-disabled.png");
+}
+.sdg.sdg-14 {
+  background-image: url("/images/SDGs/SDG-14-disabled.png");
+}
+.sdg.sdg-15 {
+  background-image: url("/images/SDGs/SDG-15-disabled.png");
+}
+.sdg.sdg-16 {
+  background-image: url("/images/SDGs/SDG-16-disabled.png");
+}
+.sdg.sdg-17 {
+  background-image: url("/images/SDGs/SDG-17-disabled.png");
+}
+
+.collapsible.popout li {
+  background: white;
+}
+.collapsible.popout #spinner {
+  text-align: center;
+  padding: 10px;
+}
+.collapsible.popout #spinner .preloader-wrapper {
+  height: 40px;
+  width: 40px;
+}
+.collapsible.popout .collapsible-header {
+  position: relative;
+}
+.collapsible.popout .collapsible-header .material-icons {
+  position: absolute;
+  right: 0;
+}
+.collapsible.popout .collapsible-header .expand_more {
+  display: inline-block;
+}
+.collapsible.popout .collapsible-header .expand_less {
+  display: none;
+}
+.collapsible.popout .collapsible-header.active .expand_more {
+  display: none;
+}
+.collapsible.popout .collapsible-header.active .expand_less {
+  display: inline-block;
+}
+.collapsible.popout .collapsible-body {
+  padding: 10px 20px;
+}
+.collapsible.popout .company-logo {
+  margin: 20px 0 0 0;
+}
+.collapsible.popout .company-label {
+  padding: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
 .exit {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.index {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .logo-container {
@@ -359,6 +716,14 @@ label {
   top: 60px;
   color: #225665;
   font-weight: bold;
+}
+.logo-container.standard {
+  width: 300px;
+}
+.logo-container.standard .beta {
+  right: -3px;
+  top: 38px;
+  font-size: 10px;
 }
 
 .subpage .logo {
@@ -630,7 +995,7 @@ nav .input-field label:active i {
   box-shadow: none;
 }
 
-.fund .overview .card.gold .metal, .fund .overview .card.silver .metal, .fund .overview .card.bronze .metal, .fund .overview .card.none .metal {
+.fund .overview .fund-card.gold .metal, .fund .overview .fund-card.silver .metal, .fund .overview .fund-card.bronze .metal, .fund .overview .fund-card.none .metal {
   width: unset;
   margin: 20px 0 0 0;
 }
@@ -676,7 +1041,7 @@ nav .input-field label:active i {
   background-color: #BCBCBC;
 }
 
-.card {
+.fund-card {
   border-radius: 3px;
   background-color: white;
   margin: 10px auto;
@@ -684,72 +1049,72 @@ nav .input-field label:active i {
   height: 200px;
   border-radius: 3px;
 }
-.card .metal {
+.fund-card .metal {
   margin: 12px 0 0 0;
 }
-.card.diamond {
+.fund-card.diamond {
   border: 1px solid #2391CA;
 }
-.card.diamond .card-header {
+.fund-card.diamond .card-header {
   background-color: #2391CA;
 }
-.card.diamond .card-reveal {
+.fund-card.diamond .card-reveal {
   background-image: radial-gradient(#ffffff 0%, #74c8eb 100%);
 }
-.card.platinum {
+.fund-card.platinum {
   border: 1px solid #54656E;
 }
-.card.platinum .card-header {
+.fund-card.platinum .card-header {
   background-color: #54656E;
 }
-.card.platinum .card-reveal {
+.fund-card.platinum .card-reveal {
   background-image: radial-gradient(#ffffff 0%, #8a9fa8 100%);
 }
-.card.gold {
+.fund-card.gold {
   border: 1px solid #A59871;
 }
-.card.gold .card-header {
+.fund-card.gold .card-header {
   background-color: #A59871;
 }
-.card.gold .card-reveal {
+.fund-card.gold .card-reveal {
   background-image: radial-gradient(#ffffff 0%, #d7c592 100%);
 }
-.card.silver {
+.fund-card.silver {
   border: 1px solid #94A1A9;
 }
-.card.silver .card-header {
+.fund-card.silver .card-header {
   background-color: #94A1A9;
 }
-.card.silver .card-reveal {
+.fund-card.silver .card-reveal {
   background-image: radial-gradient(#ffffff 0%, #c8cccd 100%);
 }
-.card.bronze {
+.fund-card.bronze {
   border: 1px solid #826449;
 }
-.card.bronze .card-header {
+.fund-card.bronze .card-header {
   background-color: #826449;
 }
-.card.bronze .card-reveal {
+.fund-card.bronze .card-reveal {
   background-image: radial-gradient(#ffffff 0%, #d6c6ba 100%);
 }
-.card.none {
+.fund-card.none {
   border: 1px solid #BCBCBC;
 }
-.card.none .card-header {
+.fund-card.none .card-header {
   background-color: #BCBCBC;
 }
-.card.none .card-reveal {
+.fund-card.none .card-reveal {
   background-image: radial-gradient(#ffffff 0%, #f1f1f1 100%);
 }
-.card.missed-ranking {
+.fund-card.missed-ranking {
   background-color: darkred;
   border: 1px solid darkred;
 }
-.card.missed-ranking .card-reveal,
-.card.missed-ranking .card-reveal .card-bg {
+.fund-card.missed-ranking .card-reveal,
+.fund-card.missed-ranking .card-reveal .card-bg {
   background-color: white;
 }
-.card .card-header {
+.fund-card .card-header {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
   font-weight: bold;
@@ -757,51 +1122,51 @@ nav .input-field label:active i {
   border-radius: 0;
   line-height: 22px;
 }
-.card i.material-icons.right-top {
+.fund-card i.material-icons.right-top {
   position: absolute;
   top: 1px;
   right: 0;
   margin: 0;
   z-index: 1;
 }
-.card i.material-icons.right-bottom {
+.fund-card i.material-icons.right-bottom {
   position: absolute;
   bottom: 2px;
   right: 1px;
   margin: 1px;
 }
-.card .more_vert {
+.fund-card .more_vert {
   color: white;
   font-size: 18px;
 }
-.card .control_point {
+.fund-card .control_point {
   color: #5C5C5C;
   text-shadow: none;
   font-size: 18px;
 }
-.card .card-content {
+.fund-card .card-content {
   color: white;
   padding: 20px;
 }
 @media only screen and (max-width: 500px) {
-  .card .card-content .card-percentage {
+  .fund-card .card-content .card-percentage {
     font-size: 2rem !important;
   }
 }
-.card .card-content .card-percentage {
+.fund-card .card-content .card-percentage {
   margin: 0;
 }
-.card .card-reveal {
+.fund-card .card-reveal {
   padding: 0;
   margin: 0;
   overflow: hidden;
   text-align: center;
 }
-.card .card-reveal .card-bg {
+.fund-card .card-reveal .card-bg {
   background-size: cover;
   background: url("/images/fund-bg.png") no-repeat;
 }
-.card .card-summary-container {
+.fund-card .card-summary-container {
   position: relative;
   color: white;
   text-shadow: 2px 2px black;
@@ -810,7 +1175,7 @@ nav .input-field label:active i {
   margin: 0;
   text-align: center;
 }
-.card .fund-name {
+.fund-card .fund-name {
   height: 28px;
   color: #5C5C5C;
   font-weight: bold;
@@ -825,42 +1190,42 @@ nav .input-field label:active i {
   text-shadow: none;
   font-size: 12px;
 }
-.card .fund-summary,
-.card .medal-summary {
+.fund-card .fund-summary,
+.fund-card .medal-summary {
   color: #5C5C5C;
   text-shadow: none;
 }
-.card .fund-summary .col:first-of-type,
-.card .medal-summary .col:first-of-type {
+.fund-card .fund-summary .col:first-of-type,
+.fund-card .medal-summary .col:first-of-type {
   border-right: 1px solid #5C5C5C;
 }
-.card .fund-summary .value,
-.card .medal-summary .value {
+.fund-card .fund-summary .value,
+.fund-card .medal-summary .value {
   font-size: 19px;
   margin: 0;
   padding: 0;
 }
-.card .fund-summary .label,
-.card .medal-summary .label {
+.fund-card .fund-summary .label,
+.fund-card .medal-summary .label {
   font-size: 14px;
   margin: 0;
   padding: 0 10px;
   color: #5C5C5C;
   text-shadow: none;
 }
-.card .fund-disclaimer {
+.fund-card .fund-disclaimer {
   position: absolute;
   padding: 0;
   bottom: 0;
   text-align: center;
 }
-.card .fund-disclaimer .disclaimer {
+.fund-card .fund-disclaimer .disclaimer {
   font-size: 12px;
   color: #9b9b9b;
   text-shadow: none;
   margin: 0;
 }
-.card .fund-type {
+.fund-card .fund-type {
   font-size: 13px;
   font-weight: bold;
   color: #5C5C5C;
@@ -875,7 +1240,7 @@ nav .input-field label:active i {
   margin: 20px auto 0 auto;
   padding: 0 5px;
 }
-.card .fund-type i {
+.fund-card .fund-type i {
   vertical-align: middle;
 }
 
