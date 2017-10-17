@@ -33,13 +33,16 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
         },
 
         sdgIndex: function(sdg) {
-            if (sdg) {
-                console.log(sdg);
+            if (!sdg) {
+                Backbone.history.navigate('/index/all', {trigger: true});
             }
+            console.log('welcome to the SDG Index. Goal: ', sdg);
 
-            console.log('welcome to the SDG Index');
+            var footerView = new OnePebbleApp.Views.Footer({
+                el: $('body')
+            });
 
-            var indexColumn = new OnePebbleApp.Views.IndexColumn({
+            var indexColumnView = new OnePebbleApp.Views.IndexColumn({
                 el: 'div',
                 id: sdg
             });
@@ -47,14 +50,14 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
             if (!this.IndexView) {
                 this.IndexView = new OnePebbleApp.Views.Index({
                     el: $('body'),
-                    indexColumn: indexColumn
+                    id: sdg,
+                    indexColumn: indexColumnView,
+                    footerView: footerView
                 });
-                this.IndexView.render(sdg);
+                this.IndexView.render();
+                footerView.render(sdg);
             }
-
-            //index.$el.find('indexCol-container').render(stg);
-
-            indexColumn.render(sdg);
+            indexColumnView.render(sdg);
         },
 
         validateAuth: function() {
@@ -90,7 +93,6 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
 
         search: function() {
             if(!this.validateAuth()) {
-
                 Backbone.history.navigate('/', {trigger: true});
                 return false;
             }

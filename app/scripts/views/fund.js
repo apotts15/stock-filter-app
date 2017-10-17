@@ -79,7 +79,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             }
 
 
-            this.trigger("render", "render done!");
+            this.trigger("render", "Fund render done!");
             return this;
         },
 

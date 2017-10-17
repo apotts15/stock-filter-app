@@ -143,7 +143,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
             this.filter(this.collection.params);
 
-            this.trigger("render", "render done!");
+            this.trigger("render", "Funds render done!");
             $('.button-collapse').sideNav({
                     menuWidth: 300,
                     edge: 'left' // Choose the horizontal origin

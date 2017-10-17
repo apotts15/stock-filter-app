@@ -140,7 +140,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         render: function () {
             this.$el.html(this.template({ enableBrand: this.enableBrand }));
-            this.trigger("render", "render done!");
+            this.trigger("render", "Login render done!");
 
             $('.category-animation').wodry({
                 animation: 'rotateX',

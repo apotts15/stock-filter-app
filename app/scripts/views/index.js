@@ -13,15 +13,21 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         events: {},
         slyFrame: null,
 
-        initialize: function () {
+        initialize: function (options) {
             this.model = new this.model();
+            this.sdgId = options.id;
         },
 
         render: function () {
-            console.log('render index');
+            var slyFrameStartPosition = 0;
+
             this.$el.html(this.template({
                 SDGs: this.model.getSDGs()
             }));
+
+            if (this.sdgId !== 'all') {
+                slyFrameStartPosition = parseInt(this.sdgId);
+            }
 
             $('main').html(this.$el.html());
 
@@ -29,20 +35,20 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             //   Force Centered Navigation
             // -------------------------------------------------------------
             if (!this.slyFrame) {
-                var $frame = $('#forcecentered');
+                var $frame = $('#centered');
                 var $wrap  = $frame.parent();
 
                 // Call Sly on frame
                 this.slyFrame = $frame.sly({
                     horizontal: 1,
-                    itemNav: 'forceCentered',
+                    itemNav: 'centered',
                     smart: 1,
                     activateMiddle: 1,
                     activateOn: 'click',
                     mouseDragging: 1,
                     touchDragging: 1,
                     releaseSwing: 1,
-                    startAt: 0,
+                    startAt: slyFrameStartPosition,
                     scrollBar: $wrap.find('.scrollbar'),
                     scrollBy: 1,
                     speed: 300,
@@ -58,10 +64,8 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 });
             }
 
-            this.trigger("render", "render done!");
+            this.trigger("render", "Index render done!");
             return this;
         }
-
-
     });
 })();

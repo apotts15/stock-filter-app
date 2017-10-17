@@ -35,10 +35,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             this.listenTo(this.collection, 'change', this.render);
         },
 
-        render: function (sdg) {
-            console.log('render indexColumns:', sdg);
-            console.log('this.collection:', this.collection);
-
+        render: function () {
             $('#indexCol-container').html(this.template({
                 sdg: this.sdg,
                 topCompanies: this.topCompanies,
@@ -48,7 +45,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
             $('.collapsible').collapsible();
 
-            this.trigger("render", "render done!");
+            this.trigger("render", "Index Columns render done!");
             return this;
         }
     });

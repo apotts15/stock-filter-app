@@ -199,6 +199,10 @@ main {
   font-weight: bold;
 }
 
+.upper {
+  text-transform: uppercase;
+}
+
 .no-category-animation {
   display: inline-block;
   color: #ef5350;
@@ -317,13 +321,19 @@ label {
   text-align: center;
 }
 
+.sdg-index h1 {
+  margin: 10px 0;
+}
+.sdg-index p {
+  margin: 10px 0;
+}
+
 /* Frame */
 .frame {
   height: 125px;
   line-height: 125px;
   overflow: hidden;
 }
-
 .frame ul {
   list-style: none;
   margin: 0;
@@ -331,7 +341,6 @@ label {
   height: 125px;
   font-size: 50px;
 }
-
 .frame ul li {
   float: left;
   width: 125px;
@@ -340,6 +349,9 @@ label {
   padding: 0;
   text-align: center;
   cursor: pointer;
+}
+.frame ul li:hover, .frame ul li.active {
+  background-color: #dcdcdc;
 }
 
 /* Scrollbar */
@@ -366,8 +378,19 @@ label {
 }
 
 .index-list .names {
-  line-height: 26px;
+  line-height: 22px;
   margin: 0 10px;
+}
+
+.container .row.back-link-container {
+  margin-left: 0;
+}
+.container .row.back-link-container .back-link .material-icons {
+  font-size: 12px;
+}
+
+.container .row.sdg-slider {
+  margin: 0;
 }
 
 .wrap {
@@ -377,8 +400,12 @@ label {
   position: absolute;
   height: 125px;
   padding: 30px 0;
+  border: 0;
   cursor: pointer;
   user-focus-pointer: cursor;
+}
+.wrap .controls .disabled {
+  display: none;
 }
 .wrap .controls.left {
   left: 0;
@@ -394,12 +421,12 @@ label {
 }
 .wrap .controls.left .chevron_left {
   right: 30px;
-  top: 20px;
+  top: 0;
   position: relative;
 }
 .wrap .controls.right {
   right: 0;
-  top: 20px;
+  top: 0;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f2f2+0,cccccc+100&0+1,1+100 */
   background: -moz-linear-gradient(left, rgba(242, 242, 242, 0) 0%, rgba(242, 242, 242, 0) 1%, #cccccc 100%);
   /* FF3.6-15 */
@@ -412,37 +439,8 @@ label {
 }
 .wrap .controls.right .chevron_right {
   right: -30px;
-  top: 20px;
+  top: 0;
   position: relative;
-}
-
-#questionnaire {
-  margin: 100px auto;
-}
-#questionnaire label {
-  color: black;
-  text-transform: uppercase;
-}
-#questionnaire .btn.previous,
-#questionnaire .btn.next,
-#questionnaire .btn.submit {
-  margin: auto 20px;
-}
-#questionnaire .progress-title {
-  margin: auto 20px;
-}
-#questionnaire .indicators {
-  bottom: -28px;
-}
-#questionnaire .indicator-item {
-  background-color: #225665;
-}
-#questionnaire .indicator-item.active {
-  background-color: #00A5A9;
-}
-
-.back-link .material-icons {
-  font-size: 12px;
 }
 
 #indexCol-container .sdg-header {
@@ -466,16 +464,8 @@ label {
   font-weight: bold;
 }
 #indexCol-container .sdg-all {
-  background: green;
+  background-color: #245665;
   /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, #eb1c2d, #d3a029, #279b48, #c31f33);
-  /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, #eb1c2d, #d3a029, #279b48, #c31f33);
-  /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #eb1c2d, #d3a029, #279b48, #c31f33);
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, #eb1c2d, #d3a029, #279b48, #c31f33);
-  /* Standard syntax (must be last) */
 }
 #indexCol-container .sdg-01 {
   background-color: #eb1c2d;
@@ -651,46 +641,68 @@ label {
   background-image: url("/images/SDGs/SDG-17-disabled.png");
 }
 
-.collapsible.popout li {
+.collapsible li {
   background: white;
 }
-.collapsible.popout #spinner {
+.collapsible .col-header {
+  padding: 20px 20px 0 20px;
+}
+.collapsible .col-header h4 {
+  margin: 0;
+  border-bottom: 2px solid #00A5A9;
+  padding-bottom: 20px;
+}
+.collapsible #spinner {
   text-align: center;
   padding: 10px;
 }
-.collapsible.popout #spinner .preloader-wrapper {
+.collapsible #spinner .preloader-wrapper {
   height: 40px;
   width: 40px;
 }
-.collapsible.popout .collapsible-header {
+.collapsible .collapsible-header {
   position: relative;
 }
-.collapsible.popout .collapsible-header .material-icons {
+.collapsible .collapsible-header .material-icons {
   position: absolute;
   right: 0;
 }
-.collapsible.popout .collapsible-header .expand_more {
+.collapsible .collapsible-header .expand_more {
   display: inline-block;
 }
-.collapsible.popout .collapsible-header .expand_less {
+.collapsible .collapsible-header .expand_less {
   display: none;
 }
-.collapsible.popout .collapsible-header.active .expand_more {
+.collapsible .collapsible-header.active .expand_more {
   display: none;
 }
-.collapsible.popout .collapsible-header.active .expand_less {
+.collapsible .collapsible-header.active .expand_less {
   display: inline-block;
 }
-.collapsible.popout .collapsible-body {
-  padding: 10px 20px;
+.collapsible .collapsible-body {
+  padding: 10px;
+  margin: 0;
 }
-.collapsible.popout .company-logo {
+.collapsible .collapsible-body .ticker {
+  margin: 0;
+}
+.collapsible .collapsible-body h5 {
+  padding: 0;
+  margin: 0;
+}
+.collapsible .company-logo {
   margin: 20px 0 0 0;
 }
-.collapsible.popout .company-label {
+.collapsible .company-label {
   padding: 0;
+  margin: 10px 0 5px 0;
   font-size: 12px;
   text-transform: uppercase;
+}
+
+.metal-container {
+  width: 26px;
+  height: 26px;
 }
 
 .exit {
@@ -715,7 +727,6 @@ label {
   right: 6px;
   top: 60px;
   color: #225665;
-  font-weight: bold;
 }
 .logo-container.standard {
   width: 300px;
@@ -724,6 +735,31 @@ label {
   right: -3px;
   top: 38px;
   font-size: 10px;
+}
+
+#questionnaire {
+  margin: 100px auto;
+}
+#questionnaire label {
+  color: black;
+  text-transform: uppercase;
+}
+#questionnaire .btn.previous,
+#questionnaire .btn.next,
+#questionnaire .btn.submit {
+  margin: auto 20px;
+}
+#questionnaire .progress-title {
+  margin: auto 20px;
+}
+#questionnaire .indicators {
+  bottom: -28px;
+}
+#questionnaire .indicator-item {
+  background-color: #225665;
+}
+#questionnaire .indicator-item.active {
+  background-color: #00A5A9;
 }
 
 .subpage .logo {
@@ -1048,6 +1084,26 @@ nav .input-field label:active i {
   width: 200px;
   height: 200px;
   border-radius: 3px;
+  overflow: hidden;
+}
+.fund-card.small {
+  width: 150px;
+  height: 150px;
+}
+.fund-card.small .fund-name {
+  display: none;
+}
+.fund-card.small .fund-summary {
+  padding: 20px 0 0 0;
+  display: block;
+}
+.fund-card.small .fund-summary .label {
+  font-size: 10px;
+  padding: 0;
+}
+.fund-card.small .fund-summary .value {
+  font-size: 15px;
+  margin-left: -5px;
 }
 .fund-card .metal {
   margin: 12px 0 0 0;
@@ -1266,11 +1322,55 @@ header {
   border: none !important;
 }
 
-header, .cards-container, footer {
+header, .cards-container {
   padding-left: 400px;
 }
-header.no-padding, .cards-container.no-padding, footer.no-padding {
+header.no-padding, .cards-container.no-padding {
   padding-left: 0;
+}
+
+footer.page-footer {
+  background-color: #383838;
+  color: white;
+}
+footer.page-footer a:hover {
+  color: white !important;
+}
+footer.page-footer .social {
+  padding: 0 0 30px 0;
+}
+footer.page-footer .social li {
+  padding: 0;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+footer.page-footer .social li i {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+footer.page-footer .social li .facebook-icon {
+  background: url("/images/social/facebook-logo-white.png") no-repeat center center;
+}
+footer.page-footer .social li .facebook-icon:hover {
+  background-image: url("/images/social/facebook-logo-colored.png");
+}
+footer.page-footer .social li .twitter-icon {
+  background: url("/images/social/twitter-logo-white.png") no-repeat center center;
+}
+footer.page-footer .social li .twitter-icon:hover {
+  background-image: url("/images/social/twitter-logo-colored.png");
+}
+footer.page-footer .social li .linkedin-icon {
+  background: url("/images/social/linkedin-logo-white.png") no-repeat center center;
+}
+footer.page-footer .social li .linkedin-icon:hover {
+  background-image: url("/images/social/linkedin-logo-colored.png");
+}
+footer.page-footer .divider {
+  width: 50%;
 }
 
 @media only screen and (max-width: 992px) {

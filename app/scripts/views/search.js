@@ -107,7 +107,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
 
         render: function () {
             this.$el.html(this.template({ enableBrand: this.enableBrand }));
-            this.trigger("render", "render done!");
+            this.trigger("render", "Search render done!");
 
             this.typeahead();
 

@@ -138,7 +138,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
                 $('#questionnaire').removeClass('carousel').removeClass(' carousel-slider');
             }
 
-            this.trigger("render", "render done!");
+            this.trigger("render", "Questionnaire ender done!");
             return this;
         },
 

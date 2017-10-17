@@ -234,6 +234,9 @@ main {
 .bold {
     font-weight: bold;
 }
+.upper {
+    text-transform: uppercase;
+}
 
 .no-category-animation {
     display: inline-block;
@@ -364,32 +367,47 @@ label {
     }
 }
 
+.sdg-index {
+    h1 {
+        margin: 10px 0;
+    }
+    p {
+        margin: 10px 0;
+    }
+    .sources-links {
+
+    }
+}
 /* Frame */
 .frame {
     height: 125px;
     line-height: 125px;
     overflow: hidden;
-}
-.frame ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 125px;
-    font-size: 50px;
-}
-.frame ul li {
-    float: left;
-    width: 125px;
-    height: 125px;
-    margin: 0 1px 0 0;
-    padding: 0;
-    //background: #333;
-    //color: #ddd;
-    text-align: center;
-    cursor: pointer;
-}
-.frame ul li.active {
 
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 125px;
+        font-size: 50px;
+
+        li {
+            float: left;
+            width: 125px;
+            height: 125px;
+            margin: 0 1px 0 0;
+            padding: 0;
+            //background: #333;
+            //color: #ddd;
+            text-align: center;
+            cursor: pointer;
+
+            &:hover,
+            &.active {
+                background-color: #dcdcdc;
+            }
+        }
+    }
 }
 
 /* Scrollbar */
@@ -415,9 +433,21 @@ label {
 
 .index-list {
     .names {
-        line-height: 26px;
+        line-height: 22px;
         margin: 0 10px;
     }
+}
+.container .row.back-link-container {
+    margin-left: 0;
+
+    .back-link {
+        .material-icons {
+            font-size: 12px;
+        }
+    }
+}
+.container .row.sdg-slider {
+    margin: 0;
 }
 .wrap {
     position: relative;
@@ -426,14 +456,19 @@ label {
         position: absolute;
         height: 125px;
         padding: 30px 0;
+        border: 0;
         cursor: pointer;
         user-focus-pointer: cursor;
+
+        .disabled {
+            display: none;
+        }
 
         &.left {
             left: 0;
             .chevron_left {
                 right: 30px;
-                top: 20px;
+                top: 0;
                 position: relative;
             }
 
@@ -445,7 +480,7 @@ label {
         }
         &.right {
             right: 0;
-            top: 20px;
+            top: 0;
             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f2f2+0,cccccc+100&0+1,1+100 */
             background: -moz-linear-gradient(left,  rgba(242,242,242,0) 0%, rgba(242,242,242,0) 1%, rgba(204,204,204,1) 100%); /* FF3.6-15 */
             background: -webkit-linear-gradient(left,  rgba(242,242,242,0) 0%,rgba(242,242,242,0) 1%,rgba(204,204,204,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -454,49 +489,10 @@ label {
 
             .chevron_right {
                 right: -30px;
-                top: 20px;
+                top: 0;
                 position: relative;
             }
         }
-    }
-}
-
-#questionnaire {
-    margin: 100px auto;
-
-    label {
-        color: black;
-        text-transform: uppercase;
-    }
-
-    .btn.previous,
-    .btn.next,
-    .btn.submit {
-        margin: auto 20px;
-    }
-
-    .progress-title {
-        margin: auto 20px;
-    }
-
-    .indicators {
-        bottom: -28px;
-    }
-
-    .indicator-item {
-        background-color: $onepebble-primary-color;
-
-        &.active {
-            background-color: $onepebble-secondary-color;
-        }
-    }
-}
-.back-link {
-    .material-icons {
-        font-size: 12px;
-    }
-    .back {
-
     }
 }
 
@@ -525,15 +521,15 @@ label {
 
     }
     .sdg-all {
-        background: green; /* For browsers that do not support gradients */
+        background-color: #245665; /* For browsers that do not support gradients */
             //background: -webkit-linear-gradient(left, #eb1c2d , #d3a029, #279b48, #c31f33, #ef402b, #00aed9, #fdb713, #8f1838, #f36d25, #e11484, #f99d26, #cf8d2a, #48773e, #007dbc, #3eb049, #02558b, #183668); /* For Safari 5.1 to 6.0 */
             //background: -o-linear-gradient(right, #eb1c2d, #d3a029, #279b48, #c31f33, #ef402b, #00aed9 ,#fdb713, #8f1838, #f36d25, #e11484, #f99d26, #cf8d2a, #48773e, #007dbc, #3eb049, #02558b, #183668); /* For Opera 11.1 to 12.0 */
             //background: -moz-linear-gradient(right, #eb1c2d, #d3a029, #279b48, #c31f33, #ef402b, #00aed9, #fdb713, #8f1838, #f36d25, #e11484, #f99d26, #cf8d2a, #48773e, #007dbc, #3eb049, #02558b, #183668); /* For Firefox 3.6 to 15 */
             //background: linear-gradient(to right, #eb1c2d , #d3a029, #279b48, #c31f33, #ef402b, #00aed9, #fdb713, #8f1838, #f36d25, #e11484, #f99d26, #cf8d2a, #48773e, #007dbc, #3eb049, #02558b, #183668); /* Standard syntax (must be last) */
-        background: -webkit-linear-gradient(left, #eb1c2d , #d3a029, #279b48, #c31f33); /* For Safari 5.1 to 6.0 */
-        background: -o-linear-gradient(right, #eb1c2d , #d3a029, #279b48, #c31f33); /* For Opera 11.1 to 12.0 */
-        background: -moz-linear-gradient(right, #eb1c2d , #d3a029, #279b48, #c31f33); /* For Firefox 3.6 to 15 */
-        background: linear-gradient(to right, #eb1c2d , #d3a029, #279b48, #c31f33); /* Standard syntax (must be last) */
+        //background: -webkit-linear-gradient(left, #eb1c2d , #d3a029, #279b48, #c31f33); /* For Safari 5.1 to 6.0 */
+        //background: -o-linear-gradient(right, #eb1c2d , #d3a029, #279b48, #c31f33); /* For Opera 11.1 to 12.0 */
+        //background: -moz-linear-gradient(right, #eb1c2d , #d3a029, #279b48, #c31f33); /* For Firefox 3.6 to 15 */
+        //background: linear-gradient(to right, #eb1c2d , #d3a029, #279b48, #c31f33); /* Standard syntax (must be last) */
     }
     .sdg-01 {
         background-color: #eb1c2d;
@@ -714,10 +710,20 @@ label {
         background-image: url("/images/SDGs/SDG-17-disabled.png");
     }
 }
-.collapsible.popout {
+.collapsible {
 
     li {
         background: white;
+    }
+
+    .col-header {
+        padding: 20px 20px 0 20px;
+
+        h4 {
+            margin: 0;
+            border-bottom: 2px solid #00A5A9;
+            padding-bottom: 20px;
+        }
     }
 
     #spinner {
@@ -742,7 +748,6 @@ label {
         .expand_less {
             display: none;
         }
-
         &.active {
             .expand_more {
                 display: none;
@@ -752,8 +757,18 @@ label {
             }
         }
     }
+
     .collapsible-body {
-        padding: 10px 20px;
+        padding: 10px;
+        margin: 0;
+
+        .ticker {
+            margin: 0;
+        }
+        h5 {
+            padding: 0;
+            margin: 0;
+        }
     }
 
     .company-logo {
@@ -762,10 +777,14 @@ label {
 
     .company-label {
         padding: 0;
+        margin: 10px 0 5px 0;
         font-size: 12px;
         text-transform: uppercase;
     }
-
+}
+.metal-container {
+    width: 26px;
+    height: 26px;
 }
 .exit {
     position: absolute;
@@ -790,7 +809,6 @@ label {
         right: 6px;
         top: 60px;
         color: #225665;
-        font-weight: bold;
     }
 
     &.standard {
@@ -799,6 +817,37 @@ label {
             right: -3px;
             top: 38px;
             font-size: 10px;
+        }
+    }
+}
+
+#questionnaire {
+    margin: 100px auto;
+
+    label {
+        color: black;
+        text-transform: uppercase;
+    }
+
+    .btn.previous,
+    .btn.next,
+    .btn.submit {
+        margin: auto 20px;
+    }
+
+    .progress-title {
+        margin: auto 20px;
+    }
+
+    .indicators {
+        bottom: -28px;
+    }
+
+    .indicator-item {
+        background-color: $onepebble-primary-color;
+
+        &.active {
+            background-color: $onepebble-secondary-color;
         }
     }
 }
@@ -1232,6 +1281,29 @@ $none-bg-color: #f1f1f1;
     width: 200px;
     height: 200px;
     border-radius: 3px;
+    overflow: hidden;
+
+    &.small {
+        width: 150px;
+        height: 150px;
+
+        .fund-name {
+            display: none;
+        }
+        .fund-summary {
+            padding: 20px 0 0 0;
+            display: block;
+
+            .label {
+                font-size: 10px;
+                padding: 0;
+            }
+            .value {
+                font-size: 15px;
+                margin-left: -5px;
+            }
+        }
+    }
 
     .metal {
         margin: 12px 0 0 0;
@@ -1487,14 +1559,63 @@ $none-bg-color: #f1f1f1;
 header {
     border: none !important;
 }
-header, .cards-container, footer {
+header, .cards-container {
     padding-left: 400px;
 
     &.no-padding {
         padding-left: 0;
     }
 }
+footer.page-footer {
+    background-color: #383838;
+    color: white;
 
+    a:hover {
+        color: white !important;
+    }
+
+    .social {
+        padding: 0 0 30px 0;
+        li {
+            padding: 0;
+            margin: 10px;
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+
+            i {
+                width: 40px;
+                height: 40px;
+                display: block;
+            }
+
+            .facebook-icon {
+                background: url('/images/social/facebook-logo-white.png') no-repeat center center;
+
+                &:hover {
+                    background-image: url('/images/social/facebook-logo-colored.png');
+                }
+            }
+            .twitter-icon {
+                background: url('/images/social/twitter-logo-white.png') no-repeat center center;
+
+                &:hover {
+                    background-image: url('/images/social/twitter-logo-colored.png');
+                }
+            }
+            .linkedin-icon {
+                background: url('/images/social/linkedin-logo-white.png') no-repeat center center;
+
+                &:hover {
+                    background-image: url('/images/social/linkedin-logo-colored.png');
+                }
+            }
+        }
+    }
+    .divider {
+        width: 50%;
+    }
+}
 @media only screen and (max-width : 992px) {
     header, .cards-container, footer {
         padding-left: 0;
@@ -1504,10 +1625,6 @@ header, .cards-container, footer {
     overflow: visible;
     top: -115px;
 }
-//.carousel-item:not(.active) .btn{
-//    visibility: hidden;
-//}
-
 
 @-webkit-keyframes fadeIt {
     0%   { background-color: #b71c1c; }
@@ -1539,6 +1656,8 @@ header, .cards-container, footer {
     /* also need animation and -moz-animation */
     -webkit-animation: shake .6s linear;
 }
+
+
 
 /* also need keyframes and -moz-keyframes */
 @-webkit-keyframes shake {
