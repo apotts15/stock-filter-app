@@ -59,25 +59,25 @@ nav {
 
 
 /* COLORS */
-$onepebble-primary-color: #225665;
-$onepebble-primary: (
-    "base":     $onepebble-primary-color
+$stock-filter-primary-color: #225665;
+$stock-filter-primary: (
+    "base":     $stock-filter-primary-color
 );
 
-$onepebble-secondary-color: #00A5A9;
-$onepebble-secondary: (
-    "base":     $onepebble-secondary-color
+$stock-filter-secondary-color: #00A5A9;
+$stock-filter-secondary: (
+    "base":     $stock-filter-secondary-color
 );
 
-$onepebble-highlight-color: #ffaa00;
-$onepebble-highlight: (
-    "base":     $onepebble-highlight-color
+$stock-filter-highlight-color: #ffaa00;
+$stock-filter-highlight: (
+    "base":     $stock-filter-highlight-color
 );
 
 $colors: (
-    "onepebble-primary":    $onepebble-primary,
-    "onepebble-secondary":  $onepebble-secondary,
-    "onepebble-highlight":  $onepebble-highlight
+    "stock-filter-primary":    $stock-filter-primary,
+    "stock-filter-secondary":  $stock-filter-secondary,
+    "stock-filter-highlight":  $stock-filter-highlight
 );
 
 
@@ -171,8 +171,8 @@ nav .input-field label {
     input[type=password]:focus,
     input[type=type]:focus {
         background-color: transparent !important;
-        border-bottom: 1px solid $onepebble-primary-color !important;
-        box-shadow: 0 1px 0 0 $onepebble-primary-color !important;
+        border-bottom: 1px solid $stock-filter-primary-color !important;
+        box-shadow: 0 1px 0 0 $stock-filter-primary-color !important;
     }
     input[type=search]:focus+label i,
     input[type=search]:focus ~ .mdi-navigation-close,
@@ -844,10 +844,10 @@ label {
     }
 
     .indicator-item {
-        background-color: $onepebble-primary-color;
+        background-color: $stock-filter-primary-color;
 
         &.active {
-            background-color: $onepebble-secondary-color;
+            background-color: $stock-filter-secondary-color;
         }
     }
 }

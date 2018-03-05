@@ -1,11 +1,11 @@
-/*global OnePebbleApp, Backbone*/
+/*global StockFilterApp, Backbone*/
 
-OnePebbleApp.Models = OnePebbleApp.Models || {};
+StockFilterApp.Models = StockFilterApp.Models || {};
 
 (function () {
     'use strict';
 
-    OnePebbleApp.Models.Search = Backbone.Model.extend({
+    StockFilterApp.Models.Search = Backbone.Model.extend({
 
         initialize: function () {
         },

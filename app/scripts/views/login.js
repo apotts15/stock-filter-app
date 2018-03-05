@@ -1,10 +1,10 @@
-/*global OnePebbleApp, Backbone, JST*/
+/*global StockFilterApp, Backbone, JST*/
 
-OnePebbleApp.Views = OnePebbleApp.Views || {};
+StockFilterApp.Views = StockFilterApp.Views || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Views.Login = Backbone.View.extend({
+    StockFilterApp.Views.Login = Backbone.View.extend({
         template: JST['app/scripts/templates/login.ejs'],
         tagName: 'form',
         className: '',
@@ -63,7 +63,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
             setTimeout(_.bind(this.timerExpiration, this), time);
             Cookies.set('OPAuth', true, {
                 // uncomment out for prod
-                // domain: 'demo.onepebble.com',
+                // domain: 'demo.website.com',
                 expires: date
             });
         },

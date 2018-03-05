@@ -3,7 +3,7 @@
  */
 {
     "apps" : [{
-        "name"        : "OnePebbleApp",
+        "name"        : "StockFilterApp",
         "script"      : "server_dist/app.js",
         "args"        : ["--toto=coco"],
         "watch"       : false,

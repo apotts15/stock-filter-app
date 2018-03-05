@@ -1,14 +1,14 @@
-/*global OnePebbleApp, Backbone, JST*/
+/*global StockFilterApp, Backbone, JST*/
 
-OnePebbleApp.Views = OnePebbleApp.Views || {};
+StockFilterApp.Views = StockFilterApp.Views || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Views.Index = Backbone.View.extend({
+    StockFilterApp.Views.Index = Backbone.View.extend({
         template: JST['app/scripts/templates/index.ejs'],
         tagName: 'div',
-        model: OnePebbleApp.Models.Index,
-        collection: OnePebbleApp.Collections.Index,
+        model: StockFilterApp.Models.Index,
+        collection: StockFilterApp.Collections.Index,
         className: '',
         events: {},
         slyFrame: null,

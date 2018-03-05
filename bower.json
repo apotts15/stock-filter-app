@@ -1,5 +1,5 @@
 {
-    "name": "OnePebbleApp",
+    "name": "StockFilterApp",
     "version": "0.0.0",
     "dependencies": {
         "animate.css": "^3.3.0",

@@ -1,13 +1,13 @@
-/*global OnePebbleApp, Backbone, JST*/
+/*global StockFilterApp, Backbone, JST*/
 
-OnePebbleApp.Views = OnePebbleApp.Views || {};
+StockFilterApp.Views = StockFilterApp.Views || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Views.Doctor = Backbone.View.extend({
+    StockFilterApp.Views.Doctor = Backbone.View.extend({
         template: JST['app/scripts/templates/doctor.ejs'],
         tagName: 'div',
-        collectionFun: OnePebbleApp.Collections.Doctors,
+        collectionFun: StockFilterApp.Collections.Doctors,
         className: '',
         events: {},
         initialize: function (collection) {

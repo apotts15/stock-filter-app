@@ -1,6 +1,6 @@
-/*global OnePebbleApp, $*/
+/*global StockFilterApp, $*/
 //Backbone.history.start({pushState: true})
-window.OnePebbleApp = {
+window.StockFilterApp = {
     Models: {},
     Collections: {},
     Views: {},
@@ -17,5 +17,5 @@ window.OnePebbleApp = {
 
 $(document).ready(function () {
     'use strict';
-    OnePebbleApp.init();
+    StockFilterApp.init();
 });

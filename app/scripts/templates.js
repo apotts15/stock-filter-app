@@ -132,7 +132,7 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<!-- JST data.enableBrand -->\n';
  if(enableBrand) { ;
-__p += '\n<a href="/" class="brand-logo waves-effect waves-light btn"><img width="120" src="/images/OnePebble_Logo-white-horizontal.png" alt="One Pebble" class="logo"></a>\n';
+__p += '\n<a href="/" class="brand-logo waves-effect waves-light btn"><img width="120" src="/images/logo.png" alt="Stock Filter" class="logo"></a>\n';
  } ;
 __p += '\n<form>\n    <div class="input-field">\n            <input id="search" class="autocomplete" type="search" placeholder="Search for a company or ticker" required>\n            <label class="label-icon" for="search"><i class="material-icons">search</i></label>\n            <i class="material-icons close">close</i>\n    </div>\n</form>\n';
 

@@ -1,8 +1,8 @@
-describe("OnePebbleApp.Collections.Doctors", function () {
+describe("StockFilterApp.Collections.Doctors", function () {
     before(function () {
         // Create a reference for all internal suites/specs.
         // Use internal method to clear out existing data.
-        this.Doctors = new OnePebbleApp.Collections.Doctors();
+        this.Doctors = new StockFilterApp.Collections.Doctors();
     });
     after(function () {
         // Remove the reference.

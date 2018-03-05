@@ -1,10 +1,10 @@
-/*global OnePebbleApp, Backbone*/
+/*global StockFilterApp, Backbone*/
 
-OnePebbleApp.Collections = OnePebbleApp.Collections || {};
+StockFilterApp.Collections = StockFilterApp.Collections || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Collections.Funds = Backbone.Collection.extend({
+    StockFilterApp.Collections.Funds = Backbone.Collection.extend({
         initialize: function(id) {
             this.ticker = id;
         },
@@ -12,6 +12,6 @@ OnePebbleApp.Collections = OnePebbleApp.Collections || {};
             var route = '/funds/';
             return route;
         },
-        model: OnePebbleApp.Models.Fund
+        model: StockFilterApp.Models.Fund
     });
 })();

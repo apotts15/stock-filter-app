@@ -1,12 +1,12 @@
 /**
  * Created by songyangpu on 16/2/23.
  */
-/*global OnePebbleApp, Backbone*/
-OnePebbleApp.Routers = OnePebbleApp.Routers || {};
+/*global StockFilterApp, Backbone*/
+StockFilterApp.Routers = StockFilterApp.Routers || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Routers.All = Backbone.Router.extend({
+    StockFilterApp.Routers.All = Backbone.Router.extend({
         routes: {
             '': 'home',
             '#': 'home',
@@ -38,17 +38,17 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
             }
             console.log('welcome to the SDG Index. Goal: ', sdg);
 
-            var footerView = new OnePebbleApp.Views.Footer({
+            var footerView = new StockFilterApp.Views.Footer({
                 el: $('body')
             });
 
-            var indexColumnView = new OnePebbleApp.Views.IndexColumn({
+            var indexColumnView = new StockFilterApp.Views.IndexColumn({
                 el: 'div',
                 id: sdg
             });
 
             if (!this.IndexView) {
-                this.IndexView = new OnePebbleApp.Views.Index({
+                this.IndexView = new StockFilterApp.Views.Index({
                     el: $('body'),
                     id: sdg,
                     indexColumn: indexColumnView,
@@ -73,7 +73,7 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
         },
 
         home: function() {
-            var loginView = new OnePebbleApp.Views.Login({
+            var loginView = new StockFilterApp.Views.Login({
                 el: $('main')
             });
             loginView.render();
@@ -83,7 +83,7 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
                 Backbone.history.navigate('/', {trigger: true});
             } else {
                 if ($('#questionnaire').length === 0) {
-                    var questionsView = new OnePebbleApp.Views.Questions({
+                    var questionsView = new StockFilterApp.Views.Questions({
                         el: $('main')
                     });
                     questionsView.render();
@@ -97,7 +97,7 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
                 return false;
             }
 
-            var searchView = new OnePebbleApp.Views.Search({
+            var searchView = new StockFilterApp.Views.Search({
                 el: $('.nav-wrapper')
             });
             searchView.render();
@@ -109,7 +109,7 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
                 return false;
             }
 
-            var fund = new OnePebbleApp.Views.Fund({
+            var fund = new StockFilterApp.Views.Fund({
                 id: fundId,
                 el: $('body')
             });
@@ -123,7 +123,7 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
 
             var params = queryString ? this.parseQueryString(queryString) : '';
 
-            var funds = new OnePebbleApp.Views.Funds({
+            var funds = new StockFilterApp.Views.Funds({
                 el: $('body'),
                 id: fundId,
                 params: params
@@ -172,6 +172,6 @@ OnePebbleApp.Routers = OnePebbleApp.Routers || {};
 
     });
 
-    OnePebbleApp.Routers.Router = new OnePebbleApp.Routers.All();
+    StockFilterApp.Routers.Router = new StockFilterApp.Routers.All();
     Backbone.history.start();
 })();

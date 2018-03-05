@@ -1,8 +1,8 @@
-describe("OnePebbleApp.Models.Doctor", function() {
+describe("StockFilterApp.Models.Doctor", function() {
     before(function () {
         // Create a reference for all internal suites/specs.
         // Use internal method to clear out existing data.
-        this.Doctor = new OnePebbleApp.Models.Doctor();
+        this.Doctor = new StockFilterApp.Models.Doctor();
     });
     after(function () {
         // Remove the reference.
@@ -19,7 +19,7 @@ describe("OnePebbleApp.Models.Doctor", function() {
     });
 
     it('should honor passed in attributes', function() {
-        var newDoctor = new OnePebbleApp.Models.Doctor({
+        var newDoctor = new StockFilterApp.Models.Doctor({
             '_id': 1,
             'email': 'test@turingcat.com',
             'name':'test',

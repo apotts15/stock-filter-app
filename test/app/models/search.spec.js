@@ -1,7 +1,7 @@
 
-describe("OnePebbleApp.Models.Search", function() {
+describe("StockFilterApp.Models.Search", function() {
     before(function () {
-        this.Search = new OnePebbleApp.Models.Search();
+        this.Search = new StockFilterApp.Models.Search();
     });
     after(function () {
         this.Search = null;
@@ -13,7 +13,7 @@ describe("OnePebbleApp.Models.Search", function() {
     });
 
     it('should honor passed in attributes', function() {
-        var newSearch = new OnePebbleApp.Models.Search({
+        var newSearch = new StockFilterApp.Models.Search({
             '_id': 1
         });
         expect(newSearch.get('_id')).to.equal(1);

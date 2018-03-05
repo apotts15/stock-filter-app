@@ -1,25 +1,25 @@
 /* COLORS */
-.onepebble-primary {
+.stock-filter-primary {
   background-color: #225665 !important;
 }
 
-.onepebble-primary-text {
+.stock-filter-primary-text {
   color: #225665 !important;
 }
 
-.onepebble-secondary {
+.stock-filter-secondary {
   background-color: #00A5A9 !important;
 }
 
-.onepebble-secondary-text {
+.stock-filter-secondary-text {
   color: #00A5A9 !important;
 }
 
-.onepebble-highlight {
+.stock-filter-highlight {
   background-color: #ffaa00 !important;
 }
 
-.onepebble-highlight-text {
+.stock-filter-highlight-text {
   color: #ffaa00 !important;
 }
 

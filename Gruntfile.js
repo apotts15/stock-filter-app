@@ -300,7 +300,7 @@ module.exports = function (grunt) {
                     'rollback':false,//true(default):backup for rollback;false:don't backup;
                     'autoPublish': true,//true(default):auto run scripts;false:manual run scripts;
                     'wholePackage': true,//false(default):only patch;true:full package(rm the old one);
-                    'production': 'OnePebbleApp',//project name
+                    'production': 'StockFilterApp',//project name
                     'npmUpdated': false,//true:npm install --production;false(default):nothing;
                     "pm2Script":false//true:pm2 startOrRestart pm2.json;false(default):nothing;
                 }

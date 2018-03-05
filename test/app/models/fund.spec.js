@@ -1,7 +1,7 @@
 
-describe("OnePebbleApp.Models.Fund", function() {
+describe("StockFilterApp.Models.Fund", function() {
     before(function () {
-        this.Fund = new OnePebbleApp.Models.Fund();
+        this.Fund = new StockFilterApp.Models.Fund();
     });
     after(function () {
         this.Fund = null;
@@ -13,7 +13,7 @@ describe("OnePebbleApp.Models.Fund", function() {
     });
 
     it('should honor passed in attributes', function() {
-        var newFund = new OnePebbleApp.Models.Fund({
+        var newFund = new StockFilterApp.Models.Fund({
             '_id': 1
         });
         expect(newFund.get('_id')).to.equal(1);

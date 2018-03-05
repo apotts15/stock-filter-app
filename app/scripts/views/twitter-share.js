@@ -1,10 +1,10 @@
-/*global OnePebbleApp, Backbone, JST*/
+/*global StockFilterApp, Backbone, JST*/
 
-OnePebbleApp.Views = OnePebbleApp.Views || {};
+StockFilterApp.Views = StockFilterApp.Views || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Views.TwitterShare = Backbone.View.extend({
+    StockFilterApp.Views.TwitterShare = Backbone.View.extend({
         template: JST['app/scripts/templates/twitter-share.ejs'],
         model: Backbone.Model,
         events: {},

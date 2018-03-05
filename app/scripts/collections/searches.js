@@ -1,11 +1,11 @@
-/*global OnePebbleApp, Backbone*/
+/*global StockFilterApp, Backbone*/
 
-OnePebbleApp.Collections = OnePebbleApp.Collections || {};
+StockFilterApp.Collections = StockFilterApp.Collections || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Collections.Searches = Backbone.Collection.extend({
+    StockFilterApp.Collections.Searches = Backbone.Collection.extend({
         url: '/search/',
-        model: OnePebbleApp.Models.Search
+        model: StockFilterApp.Models.Search
     });
 })();

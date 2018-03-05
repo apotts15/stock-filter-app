@@ -1,10 +1,10 @@
-/*global OnePebbleApp, Backbone, JST*/
+/*global StockFilterApp, Backbone, JST*/
 
-OnePebbleApp.Views = OnePebbleApp.Views || {};
+StockFilterApp.Views = StockFilterApp.Views || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Views.Footer = Backbone.View.extend({
+    StockFilterApp.Views.Footer = Backbone.View.extend({
         template: JST['app/scripts/templates/footer.ejs'],
         events: {
             //'click .twitter': 'twitter'

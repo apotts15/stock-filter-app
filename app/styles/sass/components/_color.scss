@@ -338,25 +338,25 @@ $shades: (
 
 
 /* COLORS */
-$onepebble-primary-color: #225665;
-$onepebble-primary: (
-    "base":     $onepebble-primary-color
+$stock-filter-primary-color: #225665;
+$stock-filter-primary: (
+    "base":     $stock-filter-primary-color
 );
 
-$onepebble-secondary-color: #00A5A9;
-$onepebble-secondary: (
-    "base":     $onepebble-secondary-color
+$stock-filter-secondary-color: #00A5A9;
+$stock-filter-secondary: (
+    "base":     $stock-filter-secondary-color
 );
 
-$onepebble-highlight-color: #ffaa00;
-$onepebble-highlight: (
-    "base":     $onepebble-highlight-color
+$stock-filter-highlight-color: #ffaa00;
+$stock-filter-highlight: (
+    "base":     $stock-filter-highlight-color
 );
 
 $colors: (
-    "onepebble-primary":    $onepebble-primary,
-    "onepebble-secondary":  $onepebble-secondary,
-    "onepebble-highlight":  $onepebble-highlight,
+    "stock-filter-primary":    $stock-filter-primary,
+    "stock-filter-secondary":  $stock-filter-secondary,
+    "stock-filter-highlight":  $stock-filter-highlight,
     "materialize-red": $materialize-red,
     "red": $red,
     "pink": $pink,

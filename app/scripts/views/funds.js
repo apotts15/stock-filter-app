@@ -1,14 +1,14 @@
-/*global OnePebbleApp, Backbone, JST*/
+/*global StockFilterApp, Backbone, JST*/
 
-OnePebbleApp.Views = OnePebbleApp.Views || {};
+StockFilterApp.Views = StockFilterApp.Views || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Views.Funds = Backbone.View.extend({
+    StockFilterApp.Views.Funds = Backbone.View.extend({
         template: JST['app/scripts/templates/funds.ejs'],
         tagName: 'div',
-        model: OnePebbleApp.Models.Fund,
-        collection: OnePebbleApp.Collections.Funds,
+        model: StockFilterApp.Models.Fund,
+        collection: StockFilterApp.Collections.Funds,
         className: '',
         MENU_TOGGLED: false,
         events: {
@@ -637,7 +637,7 @@ OnePebbleApp.Views = OnePebbleApp.Views || {};
         },
 
         typeahead: function() {
-            var searchView = new OnePebbleApp.Views.Search({
+            var searchView = new StockFilterApp.Views.Search({
                 el: $('.nav-wrapper'),
                 enableBrand: false
             });

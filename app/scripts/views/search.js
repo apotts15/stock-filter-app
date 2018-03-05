@@ -1,13 +1,13 @@
-/* global OnePebbleApp, Backbone, JST */
+/* global StockFilterApp, Backbone, JST */
 
-OnePebbleApp.Views = OnePebbleApp.Views || {};
+StockFilterApp.Views = StockFilterApp.Views || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Views.Search = Backbone.View.extend({
+    StockFilterApp.Views.Search = Backbone.View.extend({
         template: JST['app/scripts/templates/search.ejs'],
         tagName: 'form',
-        collection: new OnePebbleApp.Collections.Searches(),
+        collection: new StockFilterApp.Collections.Searches(),
         className: '',
         ENTER_KEY: 13,
         events: {

@@ -14,7 +14,7 @@
 <div class="index-list col s12 m4">
     <ul class="collapsible" data-collapsible="accordion">
         <li class="col-header">
-            <h4 class="onepebble-secondary-text bold">Top 10 Companies</h4>
+            <h4 class="stock-filter-secondary-text bold">Top 10 Companies</h4>
         </li>
         <% _.each(topCompanies, function(topCompany) { %>
         <li class="<%= sdg.goalNumber.toLowerCase() !== 'all' ? 'gold' : topCompany.All %>">
@@ -22,16 +22,16 @@
                 <div class="metal-container center-align">
                     <img class="metal <%= sdg.goalNumber.toLowerCase() !== 'all' ? 'gold' : topCompany.All %>" width="<%= topCompany.All && topCompany.All === 'diamond' ? '26px' : '16px' %>" height="26px" src="/images/metals/<%= sdg.goalNumber.toLowerCase() !== 'all' ? 'gold' : topCompany.All %>-sm.png" alt="<%= sdg.goalNumber.toLowerCase() !== 'all' ? 'gold' : topCompany.All %>" />
                 </div>
-                <h6 class="names onepebble-primary-text"><%= topCompany.nickName %></h6>
+                <h6 class="names stock-filter-primary-text"><%= topCompany.nickName %></h6>
                 <i class="material-icons right-align expand_more">expand_more</i><i class="material-icons right-align expand_less">expand_less</i></div>
-            <div class="collapsible-body row onepebble-primary-text">
+            <div class="collapsible-body row stock-filter-primary-text">
                 <div class="col s12 m6 center-align center">
                     <img class="company-logo" width="125px" src="//logo.clearbit.com/<%= topCompany.url %>" alt="<%= topCompany.companyName %>" />
                 </div>
                 <div class="col s12 m4">
-                    <p class="company-label onepebble-primary-text">Stock ticker:</p>
+                    <p class="company-label stock-filter-primary-text">Stock ticker:</p>
                     <h6 class="names white-text ticker"><%= topCompany.ticker %></h6>
-                    <p class="company-label onepebble-primary-text">Name:</p>
+                    <p class="company-label stock-filter-primary-text">Name:</p>
                     <h5><%= topCompany.nickName %></h5>
                 </div>
                 <div class="col s12">
@@ -44,7 +44,7 @@
 <div class="index-list col s12 m4">
     <ul class="collapsible" data-collapsible="accordion">
         <li class="col-header">
-            <h4 class="onepebble-secondary-text bold">Top 10 Funds</h4>
+            <h4 class="stock-filter-secondary-text bold">Top 10 Funds</h4>
         </li>
         <% if (topFunds.length === 1)  { %>
         <li>
@@ -110,7 +110,7 @@
                 </div>
                 <h6 class="names white-text ticker"><%= topFund.get('ticker') %></h6>
                 <i class="material-icons right-align expand_more">expand_more</i><i class="material-icons right-align expand_less">expand_less</i></div>
-            <div class="collapsible-body row onepebble-primary-text">
+            <div class="collapsible-body row stock-filter-primary-text">
                 <div class="col s12 m6">
                     <div class="card-wrapper">
                         <a href="/#fund/<%= topFund.get('ticker') %>">
@@ -141,9 +141,9 @@
                     </div>
                 </div>
                 <div class="col s12 m6">
-                    <p class="company-label onepebble-primary-text">Name:</p>
+                    <p class="company-label stock-filter-primary-text">Name:</p>
                     <h5><%= topFund.get('fund') %></h5>
-                    <p class="company-label onepebble-primary-text">Category:</p>
+                    <p class="company-label stock-filter-primary-text">Category:</p>
                     <h5><%= topFund.get('fundBasics').segment %></h5>
                 </div>
             </div>

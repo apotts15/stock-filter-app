@@ -1,6 +1,6 @@
 {
   "generator-fullstack-backbone": {
-    "appName": "OnePebbleApp",
+    "appName": "StockFilterApp",
     "entryIndex": "index.html",
     "serverRouteName": "api",
     "includeSequelize": true,

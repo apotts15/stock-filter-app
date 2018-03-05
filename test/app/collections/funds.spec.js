@@ -1,9 +1,9 @@
 
-describe("OnePebbleApp.Collections.Funds", function () {
+describe("StockFilterApp.Collections.Funds", function () {
     before(function () {
         // Create a reference for all internal suites/specs.
         // Use internal method to clear out existing data.
-        this.Funds = new OnePebbleApp.Collections.Funds();
+        this.Funds = new StockFilterApp.Collections.Funds();
     });
     after(function () {
         // Remove the reference.

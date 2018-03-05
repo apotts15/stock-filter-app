@@ -17,8 +17,6 @@ var join = require('path').join;
 
 var redis = require("redis");
 var redisClient = redis.createClient(config.redis.port, config.redis.host, config.redis.options);
-//var redisClient = redis.createClient({host: 'redis-15185.c8.us-east-1-4.ec2.cloud.redislabs.com', port: 15185, detect_buffers: true });
-//var redisClient = redis.createClient({host : 'localhost', port : 6379});
 var redisStore = require('connect-redis')(session);
 
 redisClient.on('ready', function() {

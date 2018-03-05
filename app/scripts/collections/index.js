@@ -1,16 +1,16 @@
-/*global OnePebbleApp, Backbone*/
+/*global StockFilterApp, Backbone*/
 
-OnePebbleApp.Collections = OnePebbleApp.Collections || {};
+StockFilterApp.Collections = StockFilterApp.Collections || {};
 
 (function () {
     'use strict';
-    OnePebbleApp.Collections.Index = Backbone.Collection.extend({
+    StockFilterApp.Collections.Index = Backbone.Collection.extend({
         initialize: function(id) {
             this.sdg = id;
         },
         url: function() {
             return '/funds/index/' + this.sdg;
         },
-        model: OnePebbleApp.Models.Fund
+        model: StockFilterApp.Models.Fund
     });
 })();
